@@ -1,5 +1,6 @@
 package graphics.grids.layers;
 
+import graphics.grids.InputGrid;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.input.KeyCode;
@@ -14,11 +15,15 @@ import javafx.scene.control.TextField;
  */
 public class TextFieldLayer extends GridPane {
 
-
+    int size;
+    Mode mode;
+    InputGrid inputGrid;
     TextField[][] textFields = new TextField[9][9];
 
-    public TextFieldLayer(int size) {
+    public TextFieldLayer(int size, InputGrid inputGrid) {
+        this.inputGrid = inputGrid;
         this.size = size;
+        this.mode = Mode.GIVENS;
         super.setHgap(1);
         super.setVgap(1);
 
@@ -55,16 +60,16 @@ public class TextFieldLayer extends GridPane {
 
                 if (event.getCode().equals(KeyCode.DOWN)) {
                     down.requestFocus();
-                    changeGrid();
+                    changeGrid(x, y);
                 } else if (event.getCode().equals(KeyCode.UP)) {
                     up.requestFocus();
-                    changeGrid();
+                    changeGrid(x, y);
                 } else if (event.getCode().equals(KeyCode.LEFT)) {
                     left.requestFocus();
-                    changeGrid();
+                    changeGrid(x, y);
                 } else if (event.getCode().equals(KeyCode.RIGHT)) {
                     right.requestFocus();
-                    changeGrid();
+                    changeGrid(x, y);
                 }
             }
         });
@@ -77,6 +82,8 @@ public class TextFieldLayer extends GridPane {
             }
         }
     }
+
+
 
     private void setInputHandler(int x, int y) {
         textFields[x][y].setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -104,6 +111,74 @@ public class TextFieldLayer extends GridPane {
         });
     }
 
+    private String changeIrregular(int x, int y) {
+        TextField textField = textFields[x][y];
+        String text = textField.getText();
+
+        String irregular = "";
+        for ( Integer i = 1; i <= 9; i++ ) {
+            if (text.contains(i.toString())) {
+                inputGrid.getIrregularLayer().color(x, y, i);
+                irregular = i.toString();
+            }
+        }
+
+        if (irregular.equals("")) {
+            inputGrid.getIrregularLayer().setBlank(x, y);
+        }
+
+        return irregular;
+    }
+
+    private String changeRegions(int x, int y) {
+        TextField textField = textFields[x][y];
+        String text = textField.getText();
+        String extraRegions = "";
+
+        for (Character c = 'A'; c <= 'D'; c++ ) {
+            if (text.contains(c.toString()) || text.contains(Character.toString(Character.toLowerCase(c)))) {
+                inputGrid.getRegionLayer().color(x, y, c);
+                extraRegions = c.toString();
+            }
+        }
+
+        if (extraRegions.equals("")) {
+            inputGrid.getRegionLayer().setBlank(x, y);
+        }
+
+        return extraRegions;
+    }
+
+    private String changeParity(int x, int y) {
+        TextField textField = textFields[x][y];
+        String text = textField.getText();
+        String parity = "";
+
+        if (text.contains("O") || text.contains("o")) {
+            inputGrid.getParityLayer().color(x, y, 'O');
+            parity = "O";
+        }
+        if (text.contains("E") || text.contains("e")) {
+            inputGrid.getParityLayer().color(x, y, 'E');
+            parity = "E";
+        }
+        if (parity.equals("")) {
+            inputGrid.getParityLayer().setBlank(x, y);
+        }
+
+        return parity;
+    }
+
+    public void changeGrid(int x, int y) {
+        TextField textField = textFields[x][y];
+
+        String irregular = changeIrregular(x, y);
+        String extraRegion = changeRegions(x, y);
+        String parity = changeParity(x, y);
+
+        textField.setText(irregular + extraRegion + parity);
+    }
+
     private void filterText(int x, int y) {
         TextField text = textFields[x][y];
         StringBuffer s = new StringBuffer();
@@ -112,7 +187,7 @@ public class TextFieldLayer extends GridPane {
                 s.append(i.toString());
             }
         }
-        if ((getGrid().start.getMode().equals(Mode.GIVENS)) && (s.length()) > 1){
+        if (this.mode.equals(Mode.GIVENS) && (s.length()) > 1){
             text.setText("");
         } else {
             text.setText(new String(s));
