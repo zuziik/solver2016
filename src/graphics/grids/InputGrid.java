@@ -1,14 +1,20 @@
 package graphics.grids;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import graphics.grids.layers.*;
+
 
 /**
  * Created by Zuzka on 9.1.2016.
  */
 public class InputGrid extends Grid {
 
+    IrregularLayer irregularLayer = new IrregularLayer(size);
+    RegionLayer regionLayer = new RegionLayer(size);
+    ParityLayer parityLayer = new ParityLayer(size);
+    BorderLayer borderLayer = new BorderLayer(3*size);
+    TextFieldLayer textFieldLayer = new TextFieldLayer(size);
+
     public InputGrid() {
-        this.getChildren().add(new Rectangle(100,100, Color.BLUE));
+        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, borderLayer, textFieldLayer);
     }
 }

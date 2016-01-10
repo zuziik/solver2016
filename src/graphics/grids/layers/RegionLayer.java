@@ -5,18 +5,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
-import java.util.Random;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Created by Zuzka on 10.1.2016.
  */
-public class IrregularLayer extends GridPane {
+public class RegionLayer extends GridPane {
 
     int size;
     Rectangle cells[][] = new Rectangle[9][9];
-    HashMap<Integer,Color> color;
+    HashMap<Character,Color> color;
 
-    public IrregularLayer(int size) {
+    public RegionLayer(int size) {
         this.size = size;
 
         for ( int i = 0; i < 9; i++ ) {
@@ -33,23 +32,19 @@ public class IrregularLayer extends GridPane {
     }
 
     private void fillColors() {
-        this.color = new HashMap<>(9);
-        color.put(1, Color.RED);
-        color.put(2, Color.BLUE);
-        color.put(3, Color.PURPLE);
-        color.put(4, Color.YELLOW);
-        color.put(5, Color.BROWN);
-        color.put(6, Color.GREEN);
-        color.put(7, Color.GRAY);
-        color.put(8, Color.PINK);
-        color.put(9, Color.ORANGE);
+        this.color = new HashMap<>(4);
+        color.put('A', Color.RED);
+        color.put('B', Color.BLUE);
+        color.put('C', Color.GREEN);
+        color.put('D', Color.YELLOW);
     }
 
-    public void color(int x, int y, int i) {
-        cells[x][y].setFill(color.get(i));
+    public void color(int x, int y, char c) {
+        cells[x][y].setFill(color.get(Character.toUpperCase(c)));
+        cells[x][y].setOpacity(0.25);
     }
 
     public void setBlank(int x, int y) {
-        cells[x][y].setFill(Color.WHITE);
+        cells[x][y].setOpacity(0);
     }
 }
