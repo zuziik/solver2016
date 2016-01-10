@@ -12,15 +12,20 @@ public class InputGrid extends Grid {
     private RegionLayer regionLayer = new RegionLayer(size);
     private ParityLayer parityLayer = new ParityLayer(size);
     private BorderLayer borderLayer = new BorderLayer(3*size);
+    private DiagonalLayer diagonalLayer = new DiagonalLayer(9*size);
     private TextFieldLayer textFieldLayer = new TextFieldLayer(size, this);
 
     public InputGrid() {
-        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, borderLayer, textFieldLayer);
+        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, borderLayer, diagonalLayer, textFieldLayer);
         this.textFieldLayer.setSettingsHandlers();
     }
 
     public IrregularLayer getIrregularLayer() {
         return this.irregularLayer;
+    }
+
+    public DiagonalLayer getDiagonalLayer() {
+        return this.diagonalLayer;
     }
 
     public RegionLayer getRegionLayer() {

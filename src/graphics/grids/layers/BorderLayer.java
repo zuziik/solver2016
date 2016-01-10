@@ -2,6 +2,7 @@ package graphics.grids.layers;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 /**

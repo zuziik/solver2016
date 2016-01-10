@@ -19,6 +19,7 @@ public class HelpStage {
 
     public HelpStage() {
         this.stage.setScene(scene);
+        this.stage.setTitle("Help");
         Button ok = new Button("GOT IT!");
         ok.setOnAction(new EventHandler<ActionEvent>() {
             @Override

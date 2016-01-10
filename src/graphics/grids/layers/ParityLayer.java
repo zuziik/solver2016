@@ -25,6 +25,7 @@ public class ParityLayer extends GridPane {
             for ( int j = 0; j < 9; j++ ){
                 cells[i][j] = new Circle(radius);
                 cells[i][j].setFill(null);
+                cells[i][j].setStroke(Color.WHITE);
                 setBlank(i, j);
                 super.add(cells[i][j], j, i);
             }
@@ -40,11 +41,12 @@ public class ParityLayer extends GridPane {
     }
 
     public void color(int x, int y, char c) {
+        cells[x][y].setOpacity(1);
         cells[x][y].setStroke(color.get(Character.toUpperCase(c)));
     }
 
     public void setBlank(int x, int y) {
-        cells[x][y].setStroke(null);
+        cells[x][y].setOpacity(0);
     }
 
 }

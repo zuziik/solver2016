@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
@@ -73,6 +74,21 @@ public class TextFieldLayer extends GridPane {
                 }
             }
         });
+
+        textFields[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeGrid();
+            }
+        });
+    }
+
+    public void changeGrid() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                changeGrid(i, j);
+            }
+        }
     }
 
     public void setInputHandlers() {
@@ -82,8 +98,6 @@ public class TextFieldLayer extends GridPane {
             }
         }
     }
-
-
 
     private void setInputHandler(int x, int y) {
         textFields[x][y].setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -109,6 +123,21 @@ public class TextFieldLayer extends GridPane {
                 }
             }
         });
+
+        textFields[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                updateGrid();
+            }
+        });
+    }
+
+    public void updateGrid() {
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                filterText(i,j);
+            }
+        }
     }
 
     private String changeIrregular(int x, int y) {
