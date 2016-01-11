@@ -1,11 +1,12 @@
 package graphics.stages;
 
+import generators.Generator;
+import generators.RowColGenerator;
 import graphics.grids.InputGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -21,12 +22,12 @@ public class SettingsStage {
     Stage stage = new Stage();
     InputGrid inputGrid;
     VBox radioButtons = new VBox();
-    RadioButton b1;
-    RadioButton b2;
-    RadioButton b3;
-    RadioButton b4;
-    RadioButton b5;
-    RadioButton b6;
+    RadioButton b1_classic;
+    RadioButton b2_diagonal;
+    RadioButton b3_untouchable;
+    RadioButton b4_nonconsecutive;
+    RadioButton b5_disjoint;
+    RadioButton b6_antiknight;
     Button create;
 
     public SettingsStage() {
@@ -48,25 +49,25 @@ public class SettingsStage {
     }
 
     private void createRadioButtons() {
-        b1 = new RadioButton("Classic");
-        b1.setSelected(true);
-        b2 = new RadioButton("Diagonal");
-        b3 = new RadioButton("Untouchable");
-        b4 = new RadioButton("Nonconsecutive");
-        b5 = new RadioButton("Disjoint Groups");
-        b6 = new RadioButton("Antiknight");
+        b1_classic = new RadioButton("Classic");
+        b1_classic.setSelected(true);
+        b2_diagonal = new RadioButton("Diagonal");
+        b3_untouchable = new RadioButton("Untouchable");
+        b4_nonconsecutive = new RadioButton("Nonconsecutive");
+        b5_disjoint = new RadioButton("Disjoint Groups");
+        b6_antiknight = new RadioButton("Antiknight");
 
-        setUpdateActions(b1);
-        setUpdateActions(b2);
-        setUpdateActions(b3);
-        setUpdateActions(b4);
-        setUpdateActions(b5);
-        setUpdateActions(b6);
+        setUpdateActions(b1_classic);
+        setUpdateActions(b2_diagonal);
+        setUpdateActions(b3_untouchable);
+        setUpdateActions(b4_nonconsecutive);
+        setUpdateActions(b5_disjoint);
+        setUpdateActions(b6_antiknight);
 
-        b1.setOnAction(new EventHandler<ActionEvent>() {
+        b1_classic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (b1.isSelected()) {
+                if (b1_classic.isSelected()) {
                     inputGrid.getBorderLayer().showBorders();
                 } else {
                     inputGrid.getBorderLayer().hideBorders();
@@ -74,10 +75,10 @@ public class SettingsStage {
             }
         });
 
-        b2.setOnAction(new EventHandler<ActionEvent>() {
+        b2_diagonal.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (b2.isSelected()) {
+                if (b2_diagonal.isSelected()) {
                     inputGrid.getDiagonalLayer().showDiagonals();
                 } else {
                     inputGrid.getDiagonalLayer().hideDiagonals();
@@ -85,7 +86,7 @@ public class SettingsStage {
             }
         });
 
-        radioButtons.getChildren().addAll(b1, b2, b3, b4, b5, b6);
+        radioButtons.getChildren().addAll(b1_classic, b2_diagonal, b3_untouchable, b4_nonconsecutive, b5_disjoint, b6_antiknight);
     }
 
     private void setUpdateActions(RadioButton b) {
@@ -98,7 +99,13 @@ public class SettingsStage {
     }
 
     private void addCreateHandlers() {
-        //TODO
+        create.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                inputGrid.getTextFieldLayer().changeGrid();
+                inputGrid.getTextFieldLayer().setInputHandlers();   //uz sa to ma spravat ako sudoku, nie grafika
+            }
+        });
     }
 
     public void show() {

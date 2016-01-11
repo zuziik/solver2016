@@ -28,4 +28,15 @@ public class DiagonalLayer extends Pane {
         l1.setOpacity(0);
         l2.setOpacity(0);
     }
+
+    @Override
+    public DiagonalLayer clone() {
+        DiagonalLayer cloned = new DiagonalLayer(this.size);
+        Line cl1 = new Line(l1.getStartX(), l1.getStartY(), l1.getEndX(), l1.getEndY());
+        Line cl2 = new Line(l2.getStartX(), l2.getStartY(), l2.getEndX(), l2.getEndY());
+        cl1.setOpacity(l1.getOpacity());
+        cl2.setOpacity(l2.getOpacity());
+        cloned.getChildren().addAll(cl1, cl2);
+        return cloned;
+    }
 }
