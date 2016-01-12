@@ -1,6 +1,7 @@
 package generators;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zuzka on 9.1.2016.
@@ -8,9 +9,9 @@ import java.util.ArrayList;
 public class RegionGenerator extends SuperGenerator {
 
     //zoznam regionov (teda zoznamov policok - dvojic suradnic)
-    ArrayList<ArrayList<ArrayList<Integer>>> regions;
+    List<List<List<Integer>>> regions;
 
-    public RegionGenerator(Generator wrapped, ArrayList<ArrayList<ArrayList<Integer>>> regions) {
+    public RegionGenerator(Generator wrapped, List<List<List<Integer>>> regions) {
         super(wrapped);
         this.regions = regions;
     }

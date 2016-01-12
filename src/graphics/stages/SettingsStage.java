@@ -1,8 +1,8 @@
 package graphics.stages;
 
-import generators.Generator;
-import generators.RowColGenerator;
+import generators.*;
 import graphics.grids.InputGrid;
+import graphics.grids.OutputGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,6 +12,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.Sudoku;
+
+import java.util.List;
 
 /**
  * Created by Zuzka on 9.1.2016.
@@ -104,8 +107,54 @@ public class SettingsStage {
             public void handle(ActionEvent event) {
                 inputGrid.getTextFieldLayer().changeGrid();
                 inputGrid.getTextFieldLayer().setInputHandlers();   //uz sa to ma spravat ako sudoku, nie grafika
+                OutputGrid outputGrid = new OutputGrid(inputGrid);
+                Sudoku sudoku = new Sudoku();
+                sudoku.setInputGrid(inputGrid);
+                sudoku.setOutputGrid(outputGrid);
+                Generator generator = createGenerator(sudoku);
+                sudoku.setGenerator(generator);
             }
         });
+    }
+
+    private Generator createGenerator(Sudoku sudoku) {
+        Generator generator = new RowColGenerator(sudoku);
+
+        if (b1_classic.isSelected()) {
+            generator = new ClassicGenerator(generator);
+        }
+        if (b2_diagonal.isSelected()) {
+            generator = new DiagonalGenerator(generator);
+        }
+        if (b3_untouchable.isSelected()) {
+            generator = new UntouchableGenerator(generator);
+        }
+        if (b4_nonconsecutive.isSelected()) {
+            generator = new NonconsecutiveGenerator(generator);
+        }
+        if (b5_disjoint.isSelected()) {
+            generator = new DisjointGroupsGenerator(generator);
+        }
+        if (b6_antiknight.isSelected()) {
+            generator = new DisjointGroupsGenerator(generator);
+        }
+
+        List<List<Integer>> evens = inputGrid.getEven();
+        if (evens.size() > 0) {
+            generator = new EvenGenerator(generator, evens);
+        }
+
+        List<List<Integer>> odds = inputGrid.getOdd();
+        if (odds.size() > 0) {
+            generator = new OddGenerator(generator, odds);
+        }
+
+        List<List<List<Integer>>> regions = inputGrid.getRegions();
+        if (regions.size() > 0) {
+            generator = new RegionGenerator(generator, regions);
+        }
+
+        return generator;
     }
 
     public void show() {

@@ -13,13 +13,12 @@ public class OutputGrid extends Grid {
     private DiagonalLayer diagonalLayer;
     private LabelLayer labelLayer;
 
-    public OutputGrid(IrregularLayer irregularLayer, RegionLayer regionLayer, ParityLayer parityLayer,
-                      BorderLayer borderLayer, DiagonalLayer diagonalLayer) {
-        this.irregularLayer = irregularLayer.clone();
-        this.regionLayer = regionLayer.clone();
-        this.parityLayer = parityLayer.clone();
-        this.borderLayer = borderLayer.clone();
-        this.diagonalLayer = diagonalLayer.clone();
+    public OutputGrid(InputGrid inputGrid) {
+        this.irregularLayer = inputGrid.getIrregularLayer().clone();
+        this.regionLayer = inputGrid.getRegionLayer().clone();
+        this.parityLayer = inputGrid.getParityLayer().clone();
+        this.borderLayer = inputGrid.getBorderLayer().clone();
+        this.diagonalLayer = inputGrid.getDiagonalLayer().clone();
         this.labelLayer = new LabelLayer(size);
     }
 }

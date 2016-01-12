@@ -10,9 +10,9 @@ import java.util.HashMap;
  */
 public class RowColGenerator extends Generator {
 
-    Sudoku sudoku;
+    private Sudoku sudoku;
 
-    RowColGenerator(Sudoku sudoku) {
+    public RowColGenerator(Sudoku sudoku) {
         this.sudoku = sudoku;
     }
 

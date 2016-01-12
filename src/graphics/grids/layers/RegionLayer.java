@@ -47,4 +47,27 @@ public class RegionLayer extends GridPane {
     public void setBlank(int x, int y) {
         cells[x][y].setOpacity(0);
     }
+
+    public boolean isRegion(int x, int y, char c) {
+        return cells[x][y].getFill().equals(color.get(c));
+    }
+
+    @Override
+    public RegionLayer clone() {
+        RegionLayer cloned = new RegionLayer(size);
+        Rectangle[][] cloned_cells = new Rectangle[9][9];
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                Rectangle c = new Rectangle(size, size);
+                Rectangle old = cells[i][j];
+                c.setFill(old.getFill());
+                c.setStroke(old.getStroke());
+                c.setOpacity(old.getOpacity());
+                c.setStrokeWidth(old.getStrokeWidth());
+                cloned.add(c, j, i);
+                cloned_cells[i][j] = c;
+            }
+        }
+        return cloned;
+    }
 }
