@@ -1,13 +1,20 @@
 package graphics;
 
+import commands.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import main.Sudoku;
 
 /**
  * Created by Zuzka on 9.1.2016.
  */
 public class ToolBar extends VBox {
+    Stage root;
+    Sudoku sudoku;
     Label infoBox = new Label("#Solutions: ???");
     Button update = new Button("Update Output");
     Button switchMode = new Button("Show Pencilmarks");
@@ -15,7 +22,54 @@ public class ToolBar extends VBox {
     Button showSolution = new Button("ShowSolution");
     Button showProgress = new Button("ShowProgress");
 
-    public ToolBar() {
+    public ToolBar( Stage root, Sudoku sudoku ) {
         this.getChildren().addAll(infoBox, update, switchMode, countSolutions, showSolution, showProgress);
+        this.sudoku = sudoku;
+        this.root = root;
+        setActions();
+
+    }
+
+    private void setActions() {
+        update.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new UpdateCommand(sudoku);
+                command.execute();
+            }
+        });
+
+        switchMode.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                SwitchModeCommand command = new SwitchModeCommand(sudoku);
+                command.execute();
+                switchMode.setText(command.getText());
+            }
+        });
+
+        countSolutions.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new CountSolutionsCommand(sudoku, infoBox);
+                command.execute();
+            }
+        });
+
+        showProgress.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new ShowProgressCommand(sudoku);
+                command.execute();
+            }
+        });
+
+        showSolution.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new ShowSolutionCommand(sudoku);
+                command.execute();
+            }
+        });
     }
 }

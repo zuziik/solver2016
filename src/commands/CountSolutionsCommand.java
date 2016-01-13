@@ -21,6 +21,16 @@ public class CountSolutionsCommand implements Command {
      */
     @Override
     public void execute() {
+        Command command = new UpdateInSudokuCommand(sudoku);
+        command.execute();
+
+        int count = sudoku.getGenerator().countSolutions();
+        if (count > 0) {
+            this.infoBox.setText("#Solutions: "+count);
+        }
+        else {
+            this.infoBox.setText("#Solutions: ???");
+        }
 
     }
 }

@@ -19,15 +19,22 @@ public class MainStage {
     Sudoku sudoku;
     UpperMenu menu;
     BorderPane pane = new BorderPane();
-    ToolBar toolBar = new ToolBar();
-    InputGrid inputGrid = new InputGrid();
-    OutputGrid outputGrid = new OutputGrid();
+    ToolBar toolBar;
+    InputGrid inputGrid;
+    OutputGrid outputGrid;
     Stage stage = new Stage();
     Scene scene = new Scene(pane);
 
     public MainStage(Sudoku sudoku){
         this.sudoku = sudoku;
-        this.menu = new UpperMenu(stage, sudoku);
+        this.menu = new UpperMenu(stage, this.sudoku);
+        this.toolBar = new ToolBar(stage, this.sudoku);
+        this.inputGrid = sudoku.getInputGrid();
+        this.outputGrid = sudoku.getOutputGrid();
+        this.pane.setLeft(inputGrid);
+        this.pane.setRight(outputGrid);
+        this.pane.setCenter(toolBar);
+        this.pane.setTop(menu);
     }
 
     public void start(){

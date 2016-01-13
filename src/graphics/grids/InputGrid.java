@@ -4,6 +4,7 @@ import graphics.grids.layers.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -114,5 +115,13 @@ public class InputGrid extends Grid {
         }
 
         return regions;
+    }
+
+    public void clear() {
+        this.textFieldLayer.clear();
+    }
+
+    public Set<Integer> getOptions(int x, int y) {
+        return this.textFieldLayer.getOptions(x,y);
     }
 }

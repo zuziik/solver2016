@@ -10,6 +10,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 
 /**
  * Created by Zuzka on 10.1.2016.
@@ -39,6 +42,14 @@ public class TextFieldLayer extends GridPane {
                 super.add(t, j, i);
             }
         }
+    }
+
+    public Mode getMode() {
+        return this.mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
     }
 
     public void setSettingsHandlers() {
@@ -220,6 +231,49 @@ public class TextFieldLayer extends GridPane {
             text.setText("");
         } else {
             text.setText(new String(s));
+        }
+    }
+
+    public void clear() {
+        for ( TextField[] row : textFields ) {
+            for ( TextField t : row ) {
+                t.setText("");
+            }
+        }
+    }
+
+    public Set<Integer> getOptions(int x, int y) {
+        Set<Integer> options = new TreeSet<>();
+        String text = textFields[x][y].getText();
+        if ( this.mode.equals(Mode.GIVENS)) {
+            if (text.equals("")) {
+                for ( Integer i = 0; i < 9; i++ ) {
+                    options.add(i);
+                }
+            }
+            else {
+                options.add(Integer.parseInt(text));
+            }
+        }
+        else {
+            for ( Integer i = 0; i < 9; i++ ) {
+                if (text.contains(i.toString())) {
+                    options.add(i);
+                }
+            }
+        }
+        return options;
+    }
+
+    public TextField[][] getTextFields() {
+        return this.textFields;
+    }
+
+    public void showPencilmarks() {
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+
+            }
         }
     }
 }

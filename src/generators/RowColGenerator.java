@@ -4,6 +4,8 @@ import main.Sudoku;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Zuzka on 9.1.2016.
@@ -30,21 +32,17 @@ public class RowColGenerator extends Generator {
 
     /** Funkcia prida formuly pre kazde policko podla vpisiek, ktore obsahuje */
     private void generateGivens(){
-//        ArrayList<ArrayList<HashMap<Integer,Boolean>>> notes = this.sudoku.getPossibles();
-//        System.out.println(notes.size()+" "+notes.get(0).get(0).size());
-//        for ( int x = 0; x < 9; x++ ){
-//            for ( int y = 0; y < 9; y++ ) {
-//                HashMap<Integer,Boolean> map = notes.get(x).get(y);
-//                ArrayList<Integer> list = new ArrayList<>();
-//                for ( Integer k : map.keySet() ) {
-//                    if (map.get(k)){
-//                        list.add(variableNo(x, y, k));
-//                    }
-//                }
-//                System.out.println("*"+list);
-//                if (list.size() > 0) formulas.add(list);
-//            }
-//        }
+        List<List<Set<Integer>>> options = this.sudoku.getOptions();
+        for ( int x = 0; x < 9; x++ ){
+            for ( int y = 0; y < 9; y++ ) {
+                Set<Integer> set = options.get(x).get(y);
+                ArrayList<Integer> list = new ArrayList<>();
+                for ( Integer k : set ) {
+                    list.add(variableNo(x, y, k));
+                }
+                if (list.size() > 0) formulas.add(list);
+            }
+        }
     }
 
     /** Funkcia zabezpeci, ze cisla v riadkoch sa nebudu opakovat*/

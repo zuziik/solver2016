@@ -62,4 +62,39 @@ public class LabelLayer extends GridPane {
             labels[x][y].setText(new String(s));
         }
     }
+
+    public Label[][] getLabels() {
+        return this.labels;
+    }
+
+    public Mode getMode() {
+        return this.mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
+
+    public void updateGrid() {
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                filterText(i,j);
+            }
+        }
+    }
+
+    private void filterText(int x, int y) {
+        Label text = labels[x][y];
+        StringBuffer s = new StringBuffer();
+        for (Integer i = 1; i <= 9; i++) {
+            if (text.getText().contains(i.toString())) {
+                s.append(i.toString());
+            }
+        }
+        if (this.mode.equals(Mode.GIVENS) && (s.length()) > 1){
+            text.setText("");
+        } else {
+            text.setText(new String(s));
+        }
+    }
 }

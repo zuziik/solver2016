@@ -8,11 +8,11 @@ import java.util.TreeSet;
 /**
  * Created by Zuzka on 9.1.2016.
  */
-public class UpdateCommand implements Command {
+public class UpdateInSudokuCommand implements Command {
 
     Sudoku sudoku;
 
-    public UpdateCommand(Sudoku sudoku) {
+    public UpdateInSudokuCommand(Sudoku sudoku) {
         this.sudoku = sudoku;
     }
 
@@ -29,8 +29,6 @@ public class UpdateCommand implements Command {
                 for ( Integer x : new_options ) {
                     options.add(x);
                 }
-                sudoku.getOutputGrid().getLabelLayer().getLabels()[i][j].setText(
-                        sudoku.getInputGrid().getTextFieldLayer().getTextFields()[i][j].getText());
             }
         }
 

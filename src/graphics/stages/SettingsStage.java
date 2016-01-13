@@ -107,12 +107,16 @@ public class SettingsStage {
             public void handle(ActionEvent event) {
                 inputGrid.getTextFieldLayer().changeGrid();
                 inputGrid.getTextFieldLayer().setInputHandlers();   //uz sa to ma spravat ako sudoku, nie grafika
+                inputGrid.clear();
                 OutputGrid outputGrid = new OutputGrid(inputGrid);
                 Sudoku sudoku = new Sudoku();
                 sudoku.setInputGrid(inputGrid);
                 sudoku.setOutputGrid(outputGrid);
                 Generator generator = createGenerator(sudoku);
                 sudoku.setGenerator(generator);
+                MainStage mainStage = new MainStage(sudoku);
+                mainStage.start();
+                stage.close();
             }
         });
     }
@@ -136,7 +140,7 @@ public class SettingsStage {
             generator = new DisjointGroupsGenerator(generator);
         }
         if (b6_antiknight.isSelected()) {
-            generator = new DisjointGroupsGenerator(generator);
+            generator = new AntiknightGenerator(generator);
         }
 
         List<List<Integer>> evens = inputGrid.getEven();

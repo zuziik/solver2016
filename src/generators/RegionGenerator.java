@@ -17,7 +17,9 @@ public class RegionGenerator extends SuperGenerator {
     }
 
     private void generateRegions() {
-        //TODO
+        for ( List<List<Integer>> region : regions ) {
+            super.generateRegion(region);
+        }
     }
 
     /**

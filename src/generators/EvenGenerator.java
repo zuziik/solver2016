@@ -15,8 +15,16 @@ public class EvenGenerator extends SuperGenerator {
         this.cells = cells;
     }
 
-    private void generateEven() {
-        //TODO
+    /** Funkcia vygeneruje CNF pre parne sudoku: pre kazde policko zo zoznamu cells zabezpeci, ze moze obsahovat
+     * len parne cisla */
+    private void generateEven(){
+        for (List<Integer> cell : cells){
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 1; i < 9; i += 2 ) {
+                list.add(variableNo(cell.get(0),cell.get(1),i));
+            }
+            formulas.add(list);
+        }
     }
 
     /**

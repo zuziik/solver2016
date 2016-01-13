@@ -20,7 +20,6 @@ public abstract class Generator {
     private char mode = '1'; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
     //TODO pouzivatel si moze sam nastavit svoj casovy limit (kolko je ochotny cakat na vystup generatora)
     private ArrayList<String> SAToutput = new ArrayList<>();    // cely vystup generatora
-    private boolean timeLimitExpired;
 
     public Generator() {
     }
@@ -75,7 +74,7 @@ public abstract class Generator {
         System.out.println("CNF generated");
     }
 
-    private void generate() {
+    private boolean generate() {
         try {
             /** Vytvorenie a spustenie procesu pre generovanie CNF pomocou SAT solvera relsat */
             Process p = Runtime.getRuntime().exec("cmd /C relsat.exe" + " -#" + mode + " -t" + timeLimit + " " + inputFile);
@@ -90,9 +89,10 @@ public abstract class Generator {
                     SAToutput.add(line);
                 }
             }
-            this.timeLimitExpired = SAToutput.get(SAToutput.size()-1).equals("TIME LIMIT EXPIRED");
+            return SAToutput.get(SAToutput.size()-1).equals("TIME LIMIT EXPIRED");
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -106,6 +106,32 @@ public abstract class Generator {
             out.close();
         } catch (FileNotFoundException e) {
             System.err.println("Could not export CNF formulas: File not found!");
+        }
+    }
+
+    public void generateOneSolution() {
+
+    }
+
+    public void generateAllSolutions() {
+
+    }
+
+    public int countSolutions() {
+        this.mode = 'c';
+        try {
+            createFileWithCNF();
+        } catch (IOException e) {
+            System.err.println("Error while writing into file");
+        }
+        boolean timeLimitExpired = generate();
+        if (timeLimitExpired) {
+            return -1;
+        }
+        else {
+            String s = SAToutput.get(SAToutput.size()-2);
+            int index = s.indexOf(":");
+            return Integer.parseInt(s.substring(index+2));
         }
     }
 }
