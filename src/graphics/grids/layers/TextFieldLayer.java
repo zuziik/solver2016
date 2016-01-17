@@ -226,14 +226,6 @@ public class TextFieldLayer extends GridPane {
         text.setText(s);
     }
 
-    public void clear() {
-        for ( TextField[] row : textFields ) {
-            for ( TextField t : row ) {
-                t.setText("");
-            }
-        }
-    }
-
     public Set<Integer> getOptions(int x, int y) {
         Set<Integer> options = new TreeSet<>();
         String text = textFields[x][y].getText();
@@ -246,6 +238,10 @@ public class TextFieldLayer extends GridPane {
             options.add(Integer.parseInt(text));
         }
         return options;
+    }
+
+    public String getText(int x, int y) {
+        return textFields[x][y].getText();
     }
 
     public TextField[][] getTextFields() {

@@ -1,15 +1,13 @@
 package graphics.stages;
 
-import generators.Generator;
 import graphics.ToolBar;
 import graphics.UpperMenu;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.Sudoku;
+import sudoku.Sudoku;
 
 /**
  * Created by Zuzka on 9.1.2016.

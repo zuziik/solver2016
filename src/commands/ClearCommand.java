@@ -2,7 +2,7 @@ package commands;
 
 import graphics.grids.InputGrid;
 import graphics.grids.layers.TextFieldLayer;
-import main.Sudoku;
+import sudoku.Sudoku;
 import javafx.scene.control.TextField;
 
 /**

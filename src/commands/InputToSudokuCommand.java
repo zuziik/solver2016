@@ -1,9 +1,8 @@
 package commands;
 
-import main.Sudoku;
+import sudoku.Sudoku;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by Zuzka on 9.1.2016.

@@ -7,8 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
-import main.Sudoku;
+import sudoku.Sudoku;
 
 /**
  * Trieda reprezentujuca vrchne menu v hlavnom okne
@@ -27,11 +30,12 @@ public class UpperMenu extends MenuBar {
     Menu file = new Menu("File");
     Menu generate = new Menu("Generate");
     Menu settings = new Menu("Settings");
-    MenuItem loadSudoku = new MenuItem("Load Sudoku");
-    MenuItem saveSudoku = new MenuItem("Save Sudoku");
-    MenuItem newSudoku = new MenuItem("New Sudoku");
+    MenuItem loadSudoku = new MenuItem("Open");
+    MenuItem saveSudokuAs = new MenuItem("Save As");
+    MenuItem saveSudoku = new MenuItem("Save");
+    MenuItem newSudoku = new MenuItem("New");
     MenuItem quit = new MenuItem("Quit");
-    MenuItem showSolution = new MenuItem("Show Solution");
+    MenuItem showSolution = new MenuItem("Show Any Solution");
     MenuItem showProgress = new MenuItem("Show Progress");
     MenuItem countSolutions = new MenuItem("Count Solutions");
     MenuItem clear = new MenuItem("Clear");
@@ -50,7 +54,7 @@ public class UpperMenu extends MenuBar {
     }
 
     private void configureFileMenu() {
-        file.getItems().addAll(newSudoku, loadSudoku, saveSudoku, quit);
+        file.getItems().addAll(newSudoku, clear, loadSudoku, saveSudoku, saveSudokuAs, quit);
 
         newSudoku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -59,14 +63,16 @@ public class UpperMenu extends MenuBar {
                 command.execute();
             }
         });
+        newSudoku.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
 
         loadSudoku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new LoadCommand(root);
+                Command command = new OpenCommand(root);
                 command.execute();
             }
         });
+        loadSudoku.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
 
         saveSudoku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -75,42 +81,16 @@ public class UpperMenu extends MenuBar {
                 command.execute();
             }
         });
+        saveSudoku.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
-        quit.setOnAction(new EventHandler<ActionEvent>() {
+        saveSudokuAs.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new QuitCommand(root);
+                Command command = new SaveAsCommand(sudoku, root);
                 command.execute();
             }
         });
-    }
-
-    private void configureGenerateMenu() {
-        generate.getItems().addAll(countSolutions,showSolution,showProgress, clear);
-
-        countSolutions.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Command command = new CountSolutionsCommand(sudoku, infoBox);
-                command.execute();
-            }
-        });
-
-        showSolution.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Command command = new ShowSolutionCommand(sudoku);
-                command.execute();
-            }
-        });
-
-        showProgress.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Command command = new ShowProgressCommand(sudoku);
-                command.execute();
-            }
-        });
+        saveSudokuAs.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
 
         clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -119,6 +99,47 @@ public class UpperMenu extends MenuBar {
                 command.execute();
             }
         });
+        clear.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
+
+        quit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new QuitCommand(root);
+                command.execute();
+            }
+        });
+        quit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
+    }
+
+    private void configureGenerateMenu() {
+        generate.getItems().addAll(countSolutions, showSolution, showProgress);
+
+        countSolutions.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new CountSolutionsCommand(sudoku, infoBox);
+                command.execute();
+            }
+        });
+        countSolutions.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
+
+        showSolution.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new ShowSolutionCommand(sudoku);
+                command.execute();
+            }
+        });
+        showSolution.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
+
+        showProgress.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Command command = new ShowProgressCommand(sudoku);
+                command.execute();
+            }
+        });
+        showProgress.setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN));
     }
 
     private void configureSettingsMenu() {
@@ -131,5 +152,6 @@ public class UpperMenu extends MenuBar {
                 command.execute();
             }
         });
+        setTimeout.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN));
     }
 }

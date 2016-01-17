@@ -1,7 +1,7 @@
 package commands;
 
 import javafx.scene.control.Label;
-import main.Sudoku;
+import sudoku.Sudoku;
 
 /**
  * Created by Zuzka on 9.1.2016.

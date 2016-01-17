@@ -1,5 +1,7 @@
 package graphics.stages;
 
+import commands.ClearCommand;
+import commands.Command;
 import generators.*;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
@@ -8,13 +10,19 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.Sudoku;
+import sudoku.Sudoku;
+import sudoku.Type;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Zuzka on 9.1.2016.
@@ -47,6 +55,14 @@ public class SettingsStage {
             @Override
             public void handle(MouseEvent event) {
                 inputGrid.getTextFieldLayer().changeGrid();
+            }
+        });
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    create.fire();
+                }
             }
         });
     }
@@ -107,11 +123,12 @@ public class SettingsStage {
             public void handle(ActionEvent event) {
                 inputGrid.getTextFieldLayer().changeGrid();
                 inputGrid.getTextFieldLayer().setInputHandlers();   //uz sa to ma spravat ako sudoku, nie grafika
-                inputGrid.clear();
                 OutputGrid outputGrid = new OutputGrid(inputGrid);
                 Sudoku sudoku = new Sudoku();
                 sudoku.setInputGrid(inputGrid);
                 sudoku.setOutputGrid(outputGrid);
+                Command command = new ClearCommand(sudoku);
+                command.execute();
                 Generator generator = createGenerator(sudoku);
                 sudoku.setGenerator(generator);
                 MainStage mainStage = new MainStage(sudoku);
@@ -123,40 +140,55 @@ public class SettingsStage {
 
     private Generator createGenerator(Sudoku sudoku) {
         Generator generator = new RowColGenerator(sudoku);
+        Set<Type> types = new HashSet<>();
 
         if (b1_classic.isSelected()) {
             generator = new ClassicGenerator(generator);
+            types.add(Type.CLASSIC);
         }
         if (b2_diagonal.isSelected()) {
             generator = new DiagonalGenerator(generator);
+            types.add(Type.DIAGONAL);
         }
         if (b3_untouchable.isSelected()) {
             generator = new UntouchableGenerator(generator);
+            types.add(Type.UNTOUCHABLE);
         }
         if (b4_nonconsecutive.isSelected()) {
             generator = new NonconsecutiveGenerator(generator);
+            types.add(Type.NONCONSECUTIVE);
         }
         if (b5_disjoint.isSelected()) {
             generator = new DisjointGroupsGenerator(generator);
+            types.add(Type.DISJOINT_GROUPS);
         }
         if (b6_antiknight.isSelected()) {
             generator = new AntiknightGenerator(generator);
+            types.add(Type.ANTIKNIGHT);
         }
 
         List<List<Integer>> evens = inputGrid.getEven();
         if (evens.size() > 0) {
             generator = new EvenGenerator(generator, evens);
+            types.add(Type.EVEN);
+            sudoku.setEvens(evens);
         }
 
         List<List<Integer>> odds = inputGrid.getOdd();
         if (odds.size() > 0) {
             generator = new OddGenerator(generator, odds);
+            types.add(Type.ODD);
+            sudoku.setOdds(odds);
         }
 
         List<List<List<Integer>>> regions = inputGrid.getRegions();
         if (regions.size() > 0) {
             generator = new RegionGenerator(generator, regions);
+            types.add(Type.REGION);
+            sudoku.setRegions(regions);
         }
+
+        sudoku.setTypes(types);
 
         return generator;
     }

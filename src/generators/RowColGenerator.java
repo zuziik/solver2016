@@ -1,9 +1,8 @@
 package generators;
 
-import main.Sudoku;
+import sudoku.Sudoku;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 

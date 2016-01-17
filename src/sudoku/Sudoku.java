@@ -1,10 +1,11 @@
-package main;
+package sudoku;
 
 import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
 import generators.Generator;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -13,10 +14,14 @@ import java.util.*;
 public class Sudoku {
     // pre kazdy riadok 0-8, stlpec 0-8 a cislo 0-8 si udrziavame informaciu, ci toto cislo moze byt v policku
     private List<List<Set<Integer>>> options;
-    private List<String> types;
+    private Set<Type> types;
     private Generator generator;
     private InputGrid inputGrid;
     private OutputGrid outputGrid;
+    private File file;
+    private List<List<List<Integer>>> regions;
+    private List<List<Integer>> odds;
+    private List<List<Integer>> evens;
 
     public Sudoku(){
         options = new ArrayList<>();
@@ -35,6 +40,7 @@ public class Sudoku {
                 }
             }
         }
+        this.file = new File("files/sudoku/default.txt");
     }
 
     public List<List<Set<Integer>>> getOptions() {
@@ -65,10 +71,45 @@ public class Sudoku {
         return this.generator;
     }
 
-    public void setTypes(List<String> types) {
+    public File getFile() {
+        return this.file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public void setTypes(Set<Type> types) {
         this.types = types;
     }
 
+    public Set<Type> getTypes() {
+        return this.types;
+    }
+
+    public List<List<Integer>> getEvens() {
+        return this.evens;
+    }
+
+    public void setEvens(List<List<Integer>> evens) {
+        this.evens = evens;
+    }
+
+    public List<List<Integer>> getOdds() {
+        return this.odds;
+    }
+
+    public void setOdds(List<List<Integer>> odds) {
+        this.odds = odds;
+    }
+
+    public List<List<List<Integer>>> getRegions() {
+        return this.regions;
+    }
+
+    public void setRegions(List<List<List<Integer>>> regions) {
+        this.regions = regions;
+    }
 
 
 }

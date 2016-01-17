@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.Sudoku;
+import sudoku.Sudoku;
 
 /**
  * Created by Zuzka on 9.1.2016.

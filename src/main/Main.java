@@ -73,7 +73,7 @@ public class Main extends Application {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new LoadCommand(stage);
+                Command command = new OpenCommand(stage);
                 command.execute();
             }
         });

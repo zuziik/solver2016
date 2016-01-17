@@ -1,6 +1,6 @@
 package commands;
 
-import main.Sudoku;
+import sudoku.Sudoku;
 
 /**
  * Created by Zuzka on 9.1.2016.
