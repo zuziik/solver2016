@@ -21,7 +21,7 @@ public class CountSolutionsCommand implements Command {
      */
     @Override
     public void execute() {
-        Command command = new UpdateInSudokuCommand(sudoku);
+        Command command = new InputToSudokuCommand(sudoku);
         command.execute();
 
         int count = sudoku.getGenerator().countSolutions();

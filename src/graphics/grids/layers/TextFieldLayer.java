@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -20,14 +21,12 @@ import java.util.TreeSet;
 public class TextFieldLayer extends GridPane {
 
     int size;
-    Mode mode;
     InputGrid inputGrid;
     TextField[][] textFields = new TextField[9][9];
 
     public TextFieldLayer(int size, InputGrid inputGrid) {
         this.inputGrid = inputGrid;
         this.size = size;
-        this.mode = Mode.GIVENS;
         super.setHgap(1);
         super.setVgap(1);
 
@@ -42,14 +41,6 @@ public class TextFieldLayer extends GridPane {
                 super.add(t, j, i);
             }
         }
-    }
-
-    public Mode getMode() {
-        return this.mode;
-    }
-
-    public void setMode(Mode mode) {
-        this.mode = mode;
     }
 
     public void setSettingsHandlers() {
@@ -94,6 +85,8 @@ public class TextFieldLayer extends GridPane {
         });
     }
 
+    /** Funkcia sa pouziva pri nastavovani variant pre sudoku. Zabezpeci adekvatnu zmenu policok, napriklad zmenu farby,
+     * pridanie diagonal, kruzkov... */
     public void changeGrid() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -102,9 +95,20 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
+    public void changeGrid(int x, int y) {
+        TextField textField = textFields[x][y];
+
+        String irregular = changeIrregular(x, y);
+        String extraRegion = changeRegions(x, y);
+        String parity = changeParity(x, y);
+
+        textField.setText(irregular + extraRegion + parity);
+    }
+
     public void setInputHandlers() {
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
+                textFields[i][j].setFont(new Font(16));
                 setInputHandler(i, j);
             }
         }
@@ -209,29 +213,17 @@ public class TextFieldLayer extends GridPane {
         return parity;
     }
 
-    public void changeGrid(int x, int y) {
-        TextField textField = textFields[x][y];
 
-        String irregular = changeIrregular(x, y);
-        String extraRegion = changeRegions(x, y);
-        String parity = changeParity(x, y);
-
-        textField.setText(irregular + extraRegion + parity);
-    }
 
     private void filterText(int x, int y) {
         TextField text = textFields[x][y];
-        StringBuffer s = new StringBuffer();
+        String s = "";
         for (Integer i = 1; i <= 9; i++) {
             if (text.getText().contains(i.toString())) {
-                s.append(i.toString());
+                s = i.toString();
             }
         }
-        if (this.mode.equals(Mode.GIVENS) && (s.length()) > 1){
-            text.setText("");
-        } else {
-            text.setText(new String(s));
-        }
+        text.setText(s);
     }
 
     public void clear() {
@@ -245,22 +237,13 @@ public class TextFieldLayer extends GridPane {
     public Set<Integer> getOptions(int x, int y) {
         Set<Integer> options = new TreeSet<>();
         String text = textFields[x][y].getText();
-        if ( this.mode.equals(Mode.GIVENS)) {
-            if (text.equals("")) {
-                for ( Integer i = 0; i < 9; i++ ) {
-                    options.add(i);
-                }
-            }
-            else {
-                options.add(Integer.parseInt(text));
+        if (text.equals("")) {
+            for ( Integer i = 0; i < 9; i++ ) {
+                options.add(i);
             }
         }
         else {
-            for ( Integer i = 0; i < 9; i++ ) {
-                if (text.contains(i.toString())) {
-                    options.add(i);
-                }
-            }
+            options.add(Integer.parseInt(text));
         }
         return options;
     }
@@ -269,11 +252,4 @@ public class TextFieldLayer extends GridPane {
         return this.textFields;
     }
 
-    public void showPencilmarks() {
-        for ( int i = 0; i < 9; i++ ) {
-            for ( int j = 0; j < 9; j++ ) {
-
-            }
-        }
-    }
 }

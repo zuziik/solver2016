@@ -16,14 +16,13 @@ public class ToolBar extends VBox {
     Stage root;
     Sudoku sudoku;
     Label infoBox = new Label("#Solutions: ???");
-    Button update = new Button("Update Output");
-    Button switchMode = new Button("Show Pencilmarks");
+    Button clear = new Button("Clear");
     Button countSolutions = new Button("Count Solutions");
     Button showSolution = new Button("ShowSolution");
     Button showProgress = new Button("ShowProgress");
 
     public ToolBar( Stage root, Sudoku sudoku ) {
-        this.getChildren().addAll(infoBox, update, switchMode, countSolutions, showSolution, showProgress);
+        this.getChildren().addAll(infoBox, clear, countSolutions, showSolution, showProgress);
         this.sudoku = sudoku;
         this.root = root;
         setActions();
@@ -31,20 +30,11 @@ public class ToolBar extends VBox {
     }
 
     private void setActions() {
-        update.setOnAction(new EventHandler<ActionEvent>() {
+        clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new UpdateCommand(sudoku);
+                Command command = new ClearCommand(sudoku);
                 command.execute();
-            }
-        });
-
-        switchMode.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                SwitchModeCommand command = new SwitchModeCommand(sudoku);
-                command.execute();
-                switchMode.setText(command.getText());
             }
         });
 

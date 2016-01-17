@@ -8,11 +8,11 @@ import java.util.TreeSet;
 /**
  * Created by Zuzka on 9.1.2016.
  */
-public class UpdateInSudokuCommand implements Command {
+public class InputToSudokuCommand implements Command {
 
     Sudoku sudoku;
 
-    public UpdateInSudokuCommand(Sudoku sudoku) {
+    public InputToSudokuCommand(Sudoku sudoku) {
         this.sudoku = sudoku;
     }
 

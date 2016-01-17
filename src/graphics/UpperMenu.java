@@ -34,7 +34,7 @@ public class UpperMenu extends MenuBar {
     MenuItem showSolution = new MenuItem("Show Solution");
     MenuItem showProgress = new MenuItem("Show Progress");
     MenuItem countSolutions = new MenuItem("Count Solutions");
-    MenuItem update = new MenuItem("Update Output");
+    MenuItem clear = new MenuItem("Clear");
     /** Polozka menu na prepinanie medzi modmi s a bez vpisiek - initial je bez nich, ale text sa bude menit podla
      * aktualneho modu*/
     MenuItem switchMode = new MenuItem("Show Pencilmarks");
@@ -86,7 +86,7 @@ public class UpperMenu extends MenuBar {
     }
 
     private void configureGenerateMenu() {
-        generate.getItems().addAll(countSolutions,showSolution,showProgress,update);
+        generate.getItems().addAll(countSolutions,showSolution,showProgress, clear);
 
         countSolutions.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -112,26 +112,17 @@ public class UpperMenu extends MenuBar {
             }
         });
 
-        update.setOnAction(new EventHandler<ActionEvent>() {
+        clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new UpdateCommand(sudoku);
+                Command command = new ClearCommand(sudoku);
                 command.execute();
             }
         });
     }
 
     private void configureSettingsMenu() {
-        settings.getItems().addAll(switchMode,setTimeout);
-
-        switchMode.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                SwitchModeCommand command = new SwitchModeCommand(sudoku);
-                command.execute();
-                switchMode.setText(command.getText());
-            }
-        });
+        settings.getItems().addAll(setTimeout);
 
         setTimeout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
