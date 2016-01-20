@@ -39,16 +39,16 @@ public class SaveCommand implements Command {
         Set<Type> types = sudoku.getTypes();
         for ( Type type : types ) {
             t += type+"\n";
-            if ( type.equals(Type.EVEN) ) {
+            if ( type.equals(Type.Even) ) {
                 t += sudoku.getEvens() + "\n";
             }
-            else if ( type.equals(Type.ODD) ) {
+            else if ( type.equals(Type.Odd) ) {
                 t += sudoku.getOdds() + "\n";
             }
-            else if ( type.equals(Type.IRREGULAR) ) {
+            else if ( type.equals(Type.Irregular) ) {
                 t += sudoku.getIrregulars() + "\n";
             }
-            else if ( type.equals(Type.EXTRA_REGION) ) {
+            else if ( type.equals(Type.ExtraRegion) ) {
                 t += sudoku.getExtras() + "\n";
             }
         }

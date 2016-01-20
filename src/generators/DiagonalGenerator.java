@@ -13,7 +13,7 @@ public class DiagonalGenerator extends SuperGenerator {
         super(wrapped);
     }
 
-    /** Funkcia prida do formul podmienku Diagonalneho sudoku: Kazda z hlavnych diagonal obsahuje cisla 1-9 presne raz*/
+    /** Funkcia prida do formul podmienku Diagonalneho sudoku: Kazda z hlavnych Diagonal obsahuje cisla 1-9 presne raz*/
     private void generateDiagonals(){
         List<List<Integer>> region = new ArrayList<>();
         for (int i=0; i<9; i++){

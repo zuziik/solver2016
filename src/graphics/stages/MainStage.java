@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
+import sudoku.Type;
+
+import java.util.Set;
 
 /**
  * Created by Zuzka on 9.1.2016.
@@ -24,6 +27,7 @@ public class MainStage {
     Stage stage = new Stage();
     Scene scene = new Scene(pane);
     Label infoBox;
+    Label types;
 
     public MainStage(Sudoku sudoku){
         this.sudoku = sudoku;
@@ -36,6 +40,16 @@ public class MainStage {
         this.pane.setRight(outputGrid);
         this.pane.setCenter(toolBar);
         this.pane.setTop(menu);
+        this.types = new Label();
+        Set<Type> typeSet = sudoku.getTypes();
+        String text = "SUDOKU TYPES";
+        String div = ": ";
+        for (Type type : typeSet) {
+            text += div+type;
+            div = ", ";
+        }
+        this.types.setText(text);
+        this.pane.setBottom(types);
     }
 
     public void start(){

@@ -41,41 +41,41 @@ public class CreateCommand implements Command {
     private Generator createGenerator(Sudoku sudoku) {
         Generator generator = new RowColGenerator(sudoku);
 
-        if (types.contains(Type.CLASSIC)) {
+        if (types.contains(Type.Classic)) {
             generator = new ClassicGenerator(generator);
         }
-        if (types.contains(Type.DIAGONAL)) {
+        if (types.contains(Type.Diagonal)) {
             generator = new DiagonalGenerator(generator);
         }
-        if (types.contains(Type.UNTOUCHABLE)) {
+        if (types.contains(Type.Untouchable)) {
             generator = new UntouchableGenerator(generator);
         }
-        if (types.contains(Type.NONCONSECUTIVE)) {
+        if (types.contains(Type.NonConsecutive)) {
             generator = new NonconsecutiveGenerator(generator);
         }
-        if (types.contains(Type.DISJOINT_GROUPS)) {
+        if (types.contains(Type.DisjointGroups)) {
             generator = new DisjointGroupsGenerator(generator);
         }
-        if (types.contains(Type.ANTIKNIGHT)) {
+        if (types.contains(Type.Antiknight)) {
             generator = new AntiknightGenerator(generator);
         }
 
-        if (types.contains(Type.EVEN) && evens.size() > 0) {
+        if (types.contains(Type.Even) && evens.size() > 0) {
             generator = new EvenGenerator(generator, evens);
             sudoku.setEvens(evens);
         }
 
-        if (types.contains(Type.ODD) && odds.size() > 0) {
+        if (types.contains(Type.Odd) && odds.size() > 0) {
             generator = new OddGenerator(generator, odds);
             sudoku.setOdds(odds);
         }
 
-        if (types.contains(Type.IRREGULAR) && irregulars.size() > 0) {
+        if (types.contains(Type.Irregular) && irregulars.size() > 0) {
             generator = new RegionGenerator(generator, irregulars);
             sudoku.setIrregulars(irregulars);
         }
 
-        if (types.contains(Type.EXTRA_REGION) && extras.size() > 0) {
+        if (types.contains(Type.ExtraRegion) && extras.size() > 0) {
             generator = new RegionGenerator(generator, extras);
             sudoku.setExtras(extras);
         }
@@ -86,31 +86,31 @@ public class CreateCommand implements Command {
     private InputGrid createInputGrid() {
         InputGrid inputGrid = new InputGrid();
 
-        if (types.contains(Type.CLASSIC)) {
+        if (types.contains(Type.Classic)) {
             inputGrid.getBorderLayer().showBorders();
         } else {
             inputGrid.getBorderLayer().hideBorders();
         }
 
-        if (types.contains(Type.DIAGONAL)) {
+        if (types.contains(Type.Diagonal)) {
             inputGrid.getDiagonalLayer().showDiagonals();
         }
 
-        if (types.contains(Type.EVEN)) {
+        if (types.contains(Type.Even)) {
             ParityLayer parityLayer = inputGrid.getParityLayer();
             for ( List<Integer> cell : evens ) {
                 parityLayer.color(cell.get(0),cell.get(1),'E');
             }
         }
 
-        if (types.contains(Type.ODD)) {
+        if (types.contains(Type.Odd)) {
             ParityLayer parityLayer = inputGrid.getParityLayer();
             for ( List<Integer> cell : odds ) {
                 parityLayer.color(cell.get(0),cell.get(1),'O');
             }
         }
 
-        if (types.contains(Type.IRREGULAR)) {
+        if (types.contains(Type.Irregular)) {
             IrregularLayer irregularLayer = inputGrid.getIrregularLayer();
             int c = 1;
             for (List<List<Integer>> region : irregulars) {
@@ -121,7 +121,7 @@ public class CreateCommand implements Command {
             }
         }
 
-        if (types.contains(Type.EXTRA_REGION)) {
+        if (types.contains(Type.ExtraRegion)) {
             RegionLayer regionLayer = inputGrid.getRegionLayer();
             char c = 'A';
             for (List<List<Integer>> region : extras) {

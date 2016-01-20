@@ -89,7 +89,7 @@ public class TextFieldLayer extends GridPane {
     }
 
     /** Funkcia sa pouziva pri nastavovani variant pre sudoku. Zabezpeci adekvatnu zmenu policok, napriklad zmenu farby,
-     * pridanie diagonal, kruzkov... */
+     * pridanie Diagonal, kruzkov... */
     public void changeGrid() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

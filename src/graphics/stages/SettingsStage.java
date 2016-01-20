@@ -1,11 +1,8 @@
 package graphics.stages;
 
-import commands.ClearCommand;
 import commands.Command;
 import commands.CreateCommand;
-import generators.*;
 import graphics.grids.InputGrid;
-import graphics.grids.OutputGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -17,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sudoku.Sudoku;
 import sudoku.Type;
 
 import java.util.HashSet;
@@ -138,45 +134,45 @@ public class SettingsStage {
         this.types = new HashSet<>();
 
         if (b1_classic.isSelected()) {
-            types.add(Type.CLASSIC);
+            types.add(Type.Classic);
         }
         if (b2_diagonal.isSelected()) {
-            types.add(Type.DIAGONAL);
+            types.add(Type.Diagonal);
         }
         if (b3_untouchable.isSelected()) {
-            types.add(Type.UNTOUCHABLE);
+            types.add(Type.Untouchable);
         }
         if (b4_nonconsecutive.isSelected()) {
-            types.add(Type.NONCONSECUTIVE);
+            types.add(Type.NonConsecutive);
         }
         if (b5_disjoint.isSelected()) {
-            types.add(Type.DISJOINT_GROUPS);
+            types.add(Type.DisjointGroups);
         }
         if (b6_antiknight.isSelected()) {
-            types.add(Type.ANTIKNIGHT);
+            types.add(Type.Antiknight);
         }
 
         List<List<Integer>> evens = inputGrid.getEven();
         if (evens.size() > 0) {
-            types.add(Type.EVEN);
+            types.add(Type.Even);
             this.evens = evens;
         }
 
         List<List<Integer>> odds = inputGrid.getOdd();
         if (odds.size() > 0) {
-            types.add(Type.ODD);
+            types.add(Type.Odd);
             this.odds = odds;
         }
 
         List<List<List<Integer>>> irregulars = inputGrid.getIrregulars();
         if (irregulars.size() > 0) {
-            types.add(Type.IRREGULAR);
+            types.add(Type.Irregular);
             this.irregulars = irregulars;
         }
 
         List<List<List<Integer>>> extras = inputGrid.getExtras();
         if (extras.size() > 0) {
-            types.add(Type.EXTRA_REGION);
+            types.add(Type.ExtraRegion);
             this.extras = extras;
         }
 

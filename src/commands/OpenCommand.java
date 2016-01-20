@@ -51,9 +51,9 @@ public class OpenCommand implements Command {
 
             String row = br.readLine();
             while ( row != null ) {
-                if ( row.equals(Type.EVEN.toString()) ) {
+                if ( row.equals(Type.Even.toString()) ) {
                     row = br.readLine();
-                    this.types.add(Type.EVEN);
+                    this.types.add(Type.Even);
                     String[] arrays = row.substring(1,row.length()-1).split(", ");
                     for ( int i = 0; i < arrays.length; i += 2) {
                         List<Integer> cell = new ArrayList<>();
@@ -62,9 +62,9 @@ public class OpenCommand implements Command {
                         evens.add(cell);
                     }
                 }
-                else if ( row.equals(Type.ODD.toString()) ) {
+                else if ( row.equals(Type.Odd.toString()) ) {
                     row = br.readLine();
-                    this.types.add(Type.ODD);
+                    this.types.add(Type.Odd);
                     String[] arrays = row.substring(1,row.length()-1).split(", ");
                     for ( int i = 0; i < arrays.length; i += 2) {
                         List<Integer> cell = new ArrayList<>();
@@ -73,9 +73,9 @@ public class OpenCommand implements Command {
                         odds.add(cell);
                     }
                 }
-                else if ( row.equals(Type.IRREGULAR.toString()) ) {
+                else if ( row.equals(Type.Irregular.toString()) ) {
                     row = br.readLine();
-                    this.types.add(Type.IRREGULAR);
+                    this.types.add(Type.Irregular);
                     String r = row.substring(1,row.length()-1);
                     int diff = 0;
                     List<Integer> cell = new ArrayList<>();
@@ -109,9 +109,9 @@ public class OpenCommand implements Command {
                         }
                     }
                 }
-                else if ( row.equals(Type.EXTRA_REGION.toString()) ) {
+                else if ( row.equals(Type.ExtraRegion.toString()) ) {
                     row = br.readLine();
-                    this.types.add(Type.EXTRA_REGION);
+                    this.types.add(Type.ExtraRegion);
                     String r = row.substring(1,row.length()-1);
                     int diff = 0;
                     List<Integer> cell = new ArrayList<>();
@@ -145,23 +145,23 @@ public class OpenCommand implements Command {
                         }
                     }
                 }
-                else if ( row.equals(Type.CLASSIC.toString()) ) {
-                    this.types.add(Type.CLASSIC);
+                else if ( row.equals(Type.Classic.toString()) ) {
+                    this.types.add(Type.Classic);
                 }
-                else if ( row.equals(Type.DIAGONAL.toString()) ) {
-                    this.types.add(Type.DIAGONAL);
+                else if ( row.equals(Type.Diagonal.toString()) ) {
+                    this.types.add(Type.Diagonal);
                 }
-                else if ( row.equals(Type.ANTIKNIGHT.toString())) {
-                    this.types.add(Type.ANTIKNIGHT);
+                else if ( row.equals(Type.Antiknight.toString())) {
+                    this.types.add(Type.Antiknight);
                 }
-                else if ( row.equals(Type.DISJOINT_GROUPS.toString()) ) {
-                    this.types.add(Type.DISJOINT_GROUPS);
+                else if ( row.equals(Type.DisjointGroups.toString()) ) {
+                    this.types.add(Type.DisjointGroups);
                 }
-                else if ( row.equals(Type.NONCONSECUTIVE.toString()) ) {
-                    this.types.add(Type.NONCONSECUTIVE);
+                else if ( row.equals(Type.NonConsecutive.toString()) ) {
+                    this.types.add(Type.NonConsecutive);
                 }
-                else if ( row.equals(Type.UNTOUCHABLE.toString()) ) {
-                    this.types.add(Type.UNTOUCHABLE);
+                else if ( row.equals(Type.Untouchable.toString()) ) {
+                    this.types.add(Type.Untouchable);
                 }
                 row = br.readLine();
             }
