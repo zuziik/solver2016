@@ -41,12 +41,15 @@ public class TextFieldLayer extends GridPane {
                 super.add(t, j, i);
             }
         }
+
+        this.setInputHandlers();
     }
 
     public void setSettingsHandlers() {
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
                 setSettingsHandler(i, j);
+                textFields[i][j].setFont(new Font(10));
             }
         }
     }
@@ -242,6 +245,10 @@ public class TextFieldLayer extends GridPane {
 
     public String getText(int x, int y) {
         return textFields[x][y].getText();
+    }
+
+    public void setText(int x, int y, String text) {
+        this.textFields[x][y].setText(text);
     }
 
     public TextField[][] getTextFields() {

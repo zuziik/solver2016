@@ -13,6 +13,7 @@ public enum Type {
     EVEN,
     NONCONSECUTIVE,
     ODD,
-    REGION,
+    IRREGULAR,
+    EXTRA_REGION,
     UNTOUCHABLE
 }

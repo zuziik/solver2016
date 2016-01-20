@@ -1,6 +1,5 @@
 package sudoku;
 
-import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
 import generators.Generator;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
@@ -19,7 +18,8 @@ public class Sudoku {
     private InputGrid inputGrid;
     private OutputGrid outputGrid;
     private File file;
-    private List<List<List<Integer>>> regions;
+    private List<List<List<Integer>>> irregulars;
+    private List<List<List<Integer>>> extras;
     private List<List<Integer>> odds;
     private List<List<Integer>> evens;
 
@@ -103,13 +103,35 @@ public class Sudoku {
         this.odds = odds;
     }
 
-    public List<List<List<Integer>>> getRegions() {
-        return this.regions;
+    public List<List<List<Integer>>> getIrregulars() {
+        return this.irregulars;
     }
 
-    public void setRegions(List<List<List<Integer>>> regions) {
-        this.regions = regions;
+    public void setIrregulars(List<List<List<Integer>>> irregulars) {
+        this.irregulars = irregulars;
     }
 
+    public List<List<List<Integer>>> getExtras() {
+        return this.extras;
+    }
 
+    public void setExtras(List<List<List<Integer>>> extras) {
+        this.extras = extras;
+    }
+
+    public void setNumbers(List<List<Integer>> numbers) {
+        int i = 0;
+        for (List<Integer> row : numbers) {
+            int j = 0;
+            for (Integer num : row) {
+                String text = "";
+                if (num != 0) {
+                    text = num.toString();
+                }
+                this.inputGrid.getTextFieldLayer().setText(i,j,text);
+                j++;
+            }
+            i++;
+        }
+    }
 }

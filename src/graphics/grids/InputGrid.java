@@ -52,7 +52,7 @@ public class InputGrid extends Grid {
         List<List<Integer>> evens = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
-                if (this.parityLayer.isEven(i,j)) {
+                if (this.parityLayer.isEven(i, j)) {
                     List<Integer> pair = new ArrayList<>();
                     pair.add(i);
                     pair.add(j);
@@ -79,8 +79,9 @@ public class InputGrid extends Grid {
     }
 
     //zahrna irregularne aj extra regiony
-    public List<List<List<Integer>>> getRegions() {
+    public List<List<List<Integer>>> getIrregulars() {
         List<List<List<Integer>>> regions = new ArrayList<>();
+        boolean empty = true;
         for ( int x = 1; x <= 9; x++ ) {
             List<List<Integer>> region = new ArrayList<>();
             for ( int i = 0; i < 9; i++ ) {
@@ -90,13 +91,21 @@ public class InputGrid extends Grid {
                         pair.add(i);
                         pair.add(j);
                         region.add(pair);
+                        empty = false;
                     }
                 }
             }
-            if (region.size() > 0) {
-                regions.add(region);
-            }
+            regions.add(region);
         }
+        if (empty) {
+            regions.clear();
+        }
+        return regions;
+    }
+
+    public List<List<List<Integer>>> getExtras() {
+        List<List<List<Integer>>> regions = new ArrayList<>();
+        boolean empty = true;
         for ( char x = 'A'; x <= 'D'; x++ ) {
             List<List<Integer>> region = new ArrayList<>();
             for ( int i = 0; i < 9; i++ ) {
@@ -106,14 +115,15 @@ public class InputGrid extends Grid {
                         pair.add(i);
                         pair.add(j);
                         region.add(pair);
+                        empty = false;
                     }
                 }
             }
-            if (region.size() > 0) {
-                regions.add(region);
-            }
+            regions.add(region);
         }
-
+        if (empty) {
+            regions.clear();
+        }
         return regions;
     }
 

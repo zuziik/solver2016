@@ -20,7 +20,10 @@ public class OutputGrid extends Grid {
         this.borderLayer = inputGrid.getBorderLayer().clone();
         this.diagonalLayer = inputGrid.getDiagonalLayer().clone();
         this.labelLayer = new LabelLayer(size);
-        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, borderLayer, diagonalLayer, labelLayer);
+        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, diagonalLayer, labelLayer);
+        if (borderLayer != null){
+            super.getChildren().add(borderLayer);
+        }
     }
 
     public LabelLayer getLabelLayer() {

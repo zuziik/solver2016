@@ -5,7 +5,6 @@ import sudoku.Type;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,8 +45,11 @@ public class SaveCommand implements Command {
             else if ( type.equals(Type.ODD) ) {
                 t += sudoku.getOdds() + "\n";
             }
-            else if ( type.equals(Type.REGION) ) {
-                t += sudoku.getRegions() + "\n";
+            else if ( type.equals(Type.IRREGULAR) ) {
+                t += sudoku.getIrregulars() + "\n";
+            }
+            else if ( type.equals(Type.EXTRA_REGION) ) {
+                t += sudoku.getExtras() + "\n";
             }
         }
         return t;
@@ -62,7 +64,6 @@ public class SaveCommand implements Command {
         try{
             PrintWriter out = new PrintWriter(sudoku.getFile());
             String text = sudokuToFile()+typesToString();
-            System.out.println(text);
             out.print(text);
             out.close();
         }

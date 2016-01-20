@@ -2,6 +2,7 @@ package graphics.stages;
 
 import commands.ClearCommand;
 import commands.Command;
+import commands.CreateCommand;
 import generators.*;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
@@ -19,7 +20,6 @@ import javafx.stage.Stage;
 import sudoku.Sudoku;
 import sudoku.Type;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +40,11 @@ public class SettingsStage {
     RadioButton b5_disjoint;
     RadioButton b6_antiknight;
     Button create;
+    List<List<List<Integer>>> irregulars;
+    List<List<List<Integer>>> extras;
+    List<List<Integer>> odds;
+    List<List<Integer>> evens;
+    Set<Type> types;
 
     public SettingsStage() {
         stage.setScene(scene);
@@ -122,75 +127,59 @@ public class SettingsStage {
             @Override
             public void handle(ActionEvent event) {
                 inputGrid.getTextFieldLayer().changeGrid();
-                inputGrid.getTextFieldLayer().setInputHandlers();   //uz sa to ma spravat ako sudoku, nie grafika
-                OutputGrid outputGrid = new OutputGrid(inputGrid);
-                Sudoku sudoku = new Sudoku();
-                sudoku.setInputGrid(inputGrid);
-                sudoku.setOutputGrid(outputGrid);
-                Command command = new ClearCommand(sudoku);
+                updateLists();
+                Command command = new CreateCommand(null, stage, types, irregulars, extras, evens, odds);
                 command.execute();
-                Generator generator = createGenerator(sudoku);
-                sudoku.setGenerator(generator);
-                MainStage mainStage = new MainStage(sudoku);
-                mainStage.start();
-                stage.close();
             }
         });
     }
 
-    private Generator createGenerator(Sudoku sudoku) {
-        Generator generator = new RowColGenerator(sudoku);
-        Set<Type> types = new HashSet<>();
+    private void updateLists() {
+        this.types = new HashSet<>();
 
         if (b1_classic.isSelected()) {
-            generator = new ClassicGenerator(generator);
             types.add(Type.CLASSIC);
         }
         if (b2_diagonal.isSelected()) {
-            generator = new DiagonalGenerator(generator);
             types.add(Type.DIAGONAL);
         }
         if (b3_untouchable.isSelected()) {
-            generator = new UntouchableGenerator(generator);
             types.add(Type.UNTOUCHABLE);
         }
         if (b4_nonconsecutive.isSelected()) {
-            generator = new NonconsecutiveGenerator(generator);
             types.add(Type.NONCONSECUTIVE);
         }
         if (b5_disjoint.isSelected()) {
-            generator = new DisjointGroupsGenerator(generator);
             types.add(Type.DISJOINT_GROUPS);
         }
         if (b6_antiknight.isSelected()) {
-            generator = new AntiknightGenerator(generator);
             types.add(Type.ANTIKNIGHT);
         }
 
         List<List<Integer>> evens = inputGrid.getEven();
         if (evens.size() > 0) {
-            generator = new EvenGenerator(generator, evens);
             types.add(Type.EVEN);
-            sudoku.setEvens(evens);
+            this.evens = evens;
         }
 
         List<List<Integer>> odds = inputGrid.getOdd();
         if (odds.size() > 0) {
-            generator = new OddGenerator(generator, odds);
             types.add(Type.ODD);
-            sudoku.setOdds(odds);
+            this.odds = odds;
         }
 
-        List<List<List<Integer>>> regions = inputGrid.getRegions();
-        if (regions.size() > 0) {
-            generator = new RegionGenerator(generator, regions);
-            types.add(Type.REGION);
-            sudoku.setRegions(regions);
+        List<List<List<Integer>>> irregulars = inputGrid.getIrregulars();
+        if (irregulars.size() > 0) {
+            types.add(Type.IRREGULAR);
+            this.irregulars = irregulars;
         }
 
-        sudoku.setTypes(types);
+        List<List<List<Integer>>> extras = inputGrid.getExtras();
+        if (extras.size() > 0) {
+            types.add(Type.EXTRA_REGION);
+            this.extras = extras;
+        }
 
-        return generator;
     }
 
     public void show() {

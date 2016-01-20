@@ -45,6 +45,9 @@ public class BorderLayer extends GridPane {
 
     @Override
     public BorderLayer clone() {
+        if (borders[0][0].getOpacity() == 0) {
+            return null;
+        }
         BorderLayer cloned = new BorderLayer(this.size);
         Rectangle[][] cloned_borders = new Rectangle[3][3];
         for ( int i = 0; i < 3; i++ ) {
@@ -54,7 +57,6 @@ public class BorderLayer extends GridPane {
                 c.setFill(old.getFill());
                 c.setStroke(old.getStroke());
                 c.setStrokeWidth(old.getStrokeWidth());
-                c.setOpacity(old.getOpacity());
                 cloned.add(c, j, i);
                 cloned_borders[i][j] = c;
             }
