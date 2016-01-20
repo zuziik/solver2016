@@ -30,5 +30,9 @@ public class OutputGrid extends Grid {
         return this.labelLayer;
     }
 
+    public void setText(int x, int y, String text) {
+        this.labelLayer.setText(x,y,text);
+    }
+
 
 }

@@ -44,6 +44,7 @@ public class LabelLayer extends GridPane {
         }
         else {
             label.setFont(new Font(10));
+            label.setWrapText(true);
         }
     }
 

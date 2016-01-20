@@ -1,5 +1,6 @@
 package graphics.stages;
 
+import graphics.InfoBox;
 import graphics.ToolBar;
 import graphics.UpperMenu;
 import graphics.grids.InputGrid;
@@ -26,12 +27,12 @@ public class MainStage {
     OutputGrid outputGrid;
     Stage stage = new Stage();
     Scene scene = new Scene(pane);
-    Label infoBox;
+    InfoBox infoBox;
     Label types;
 
     public MainStage(Sudoku sudoku){
         this.sudoku = sudoku;
-        this.infoBox = new Label("#Solutions: ???");
+        this.infoBox = new InfoBox();
         this.toolBar = new ToolBar(stage, this.sudoku, infoBox);
         this.menu = new UpperMenu(stage, this.sudoku, infoBox);
         this.inputGrid = sudoku.getInputGrid();

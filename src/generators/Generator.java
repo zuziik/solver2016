@@ -17,7 +17,7 @@ public class Generator {
     /** Nastavenia pred generovanim */
     private String inputFile = "files/formulas.txt";               // vstupny subor s CNF vo formate DIMACS
     private int timeLimit = 5;                  // casovy limit, ako dlho ma SAT solver bezat
-    private char mode = '1'; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
+    private String mode = "1"; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
     //TODO pouzivatel si moze sam nastavit svoj casovy limit (kolko je ochotny cakat na vystup generatora)
     private ArrayList<String> SAToutput;    // cely vystup generatora
 
@@ -109,8 +109,22 @@ public class Generator {
         }
     }
 
-    public void generateOneSolution() {
-
+    public String generateOneSolution() {
+        this.SAToutput = new ArrayList<>();
+        this.mode = "#1";
+        try {
+            createFileWithCNF();
+        } catch (IOException e) {
+            System.err.println("Error while writing into file");
+        }
+        boolean timeLimitExpired = generate();
+        if (timeLimitExpired) {
+            return "TLE";
+        }
+        if (SAToutput.get(0).equals("UNSAT")) {
+            return "UNSAT";
+        }
+        return SAToutput.get(0);
     }
 
     public void generateAllSolutions() {
@@ -119,7 +133,7 @@ public class Generator {
 
     public int countSolutions() {
         this.SAToutput = new ArrayList<>();
-        this.mode = 'c';
+        this.mode = "c";
         try {
             createFileWithCNF();
         } catch (IOException e) {
@@ -129,14 +143,12 @@ public class Generator {
         if (timeLimitExpired) {
             return -1;
         }
-        else {
-            System.out.println(SAToutput);
-            if (SAToutput.get(0).equals("UNSAT")) {
-                return 0;
-            }
-            String s = SAToutput.get(SAToutput.size()-2);
-            int index = s.indexOf(":");
-            return Integer.parseInt(s.substring(index+2));
+        System.out.println(SAToutput);
+        if (SAToutput.get(0).equals("UNSAT")) {
+            return 0;
         }
+        String s = SAToutput.get(SAToutput.size()-2);
+        int index = s.indexOf(":");
+        return Integer.parseInt(s.substring(index+2));
     }
 }

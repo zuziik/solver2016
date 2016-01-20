@@ -15,14 +15,14 @@ import sudoku.Sudoku;
 public class ToolBar extends VBox {
     Stage root;
     Sudoku sudoku;
-    Label infoBox;
+    InfoBox infoBox;
     Button clear = new Button("Clear");
     Button countSolutions = new Button("Count Solutions");
     Button showSolution = new Button("ShowSolution");
     Button showProgress = new Button("ShowProgress");
 
-    public ToolBar( Stage root, Sudoku sudoku, Label infoBox ) {
-        this.getChildren().addAll(infoBox, clear, countSolutions, showSolution, showProgress);
+    public ToolBar( Stage root, Sudoku sudoku, InfoBox infoBox ) {
+        this.getChildren().addAll(clear, countSolutions, showSolution, showProgress, infoBox);
         this.sudoku = sudoku;
         this.root = root;
         this.infoBox = infoBox;
@@ -50,7 +50,7 @@ public class ToolBar extends VBox {
         showProgress.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new ShowProgressCommand(sudoku);
+                Command command = new ShowProgressCommand(sudoku, infoBox);
                 command.execute();
             }
         });
@@ -58,7 +58,7 @@ public class ToolBar extends VBox {
         showSolution.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new ShowSolutionCommand(sudoku);
+                Command command = new ShowSolutionCommand(sudoku, infoBox);
                 command.execute();
             }
         });

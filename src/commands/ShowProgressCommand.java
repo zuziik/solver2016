@@ -1,5 +1,7 @@
 package commands;
 
+import graphics.InfoBox;
+import javafx.scene.control.Label;
 import sudoku.Sudoku;
 
 /**
@@ -8,9 +10,11 @@ import sudoku.Sudoku;
 public class ShowProgressCommand implements Command {
 
     Sudoku sudoku;
+    InfoBox infoBox;
 
-    public ShowProgressCommand(Sudoku sudoku) {
+    public ShowProgressCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
+        this.infoBox = infoBox;
     }
 
     /**

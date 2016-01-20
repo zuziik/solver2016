@@ -13,6 +13,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
 
+import javax.sound.midi.MidiDevice;
+
 /**
  * Trieda reprezentujuca vrchne menu v hlavnom okne
  */
@@ -25,7 +27,7 @@ public class UpperMenu extends MenuBar {
     Stage root;
     /** Odkaz na textove pole, do ktoreho sa vypisuje pocet rieseni - potrebny ako vystup pre prikaz, ktory pocita
      * riesenia*/
-    Label infoBox;
+    InfoBox infoBox;
 
     Menu file = new Menu("File");
     Menu generate = new Menu("Generate");
@@ -44,7 +46,7 @@ public class UpperMenu extends MenuBar {
     MenuItem switchMode = new MenuItem("Show Pencilmarks");
     MenuItem setTimeout = new MenuItem("Set Timeout");
 
-    public UpperMenu( Stage root, Sudoku sudoku, Label infoBox ) {
+    public UpperMenu( Stage root, Sudoku sudoku, InfoBox infoBox ) {
         this.root = root;
         this.sudoku = sudoku;
         this.infoBox = infoBox;
@@ -127,7 +129,7 @@ public class UpperMenu extends MenuBar {
         showSolution.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new ShowSolutionCommand(sudoku);
+                Command command = new ShowSolutionCommand(sudoku, infoBox);
                 command.execute();
             }
         });
@@ -136,7 +138,7 @@ public class UpperMenu extends MenuBar {
         showProgress.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Command command = new ShowProgressCommand(sudoku);
+                Command command = new ShowProgressCommand(sudoku, infoBox);
                 command.execute();
             }
         });

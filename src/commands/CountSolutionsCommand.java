@@ -1,17 +1,20 @@
 package commands;
 
+import graphics.InfoBox;
 import javafx.scene.control.Label;
 import sudoku.Sudoku;
+
+import java.util.Date;
 
 /**
  * Created by Zuzka on 9.1.2016.
  */
 public class CountSolutionsCommand implements Command {
 
-    Label infoBox;
+    InfoBox infoBox;
     Sudoku sudoku;
 
-    public CountSolutionsCommand(Sudoku sudoku, Label infoBox) {
+    public CountSolutionsCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
     }
@@ -24,13 +27,15 @@ public class CountSolutionsCommand implements Command {
         Command command = new InputToSudokuCommand(sudoku);
         command.execute();
 
+        Date date = new Date();
         int count = sudoku.getGenerator().countSolutions();
+        String text = date.toString().substring(11,19)+'\n';
         if (count >= 0) {
-            this.infoBox.setText("#Solutions: "+count);
+            text += "#Solutions: "+count+'\n';
         }
         else {
-            this.infoBox.setText("#Solutions: ???");
+            text += "Time Limit Expired\n";
         }
-
+        this.infoBox.addInfo(text);
     }
 }
