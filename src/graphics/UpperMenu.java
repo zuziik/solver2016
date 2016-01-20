@@ -44,9 +44,10 @@ public class UpperMenu extends MenuBar {
     MenuItem switchMode = new MenuItem("Show Pencilmarks");
     MenuItem setTimeout = new MenuItem("Set Timeout");
 
-    public UpperMenu( Stage root, Sudoku sudoku ) {
+    public UpperMenu( Stage root, Sudoku sudoku, Label infoBox ) {
         this.root = root;
         this.sudoku = sudoku;
+        this.infoBox = infoBox;
         this.getMenus().addAll(file, generate, settings);
         configureFileMenu();
         configureGenerateMenu();

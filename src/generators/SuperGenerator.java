@@ -16,6 +16,7 @@ public abstract class SuperGenerator extends Generator {
 
     /** Funkcia vygeneruje CNF zabalenej varianty a prida svoje podmienky */
     public void generateCNF(){
+        this.formulas = new ArrayList<>();
         wrapped.generateCNF();
         this.formulas.addAll(wrapped.getCNFFormulas());
     }

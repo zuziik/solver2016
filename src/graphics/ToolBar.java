@@ -15,16 +15,17 @@ import sudoku.Sudoku;
 public class ToolBar extends VBox {
     Stage root;
     Sudoku sudoku;
-    Label infoBox = new Label("#Solutions: ???");
+    Label infoBox;
     Button clear = new Button("Clear");
     Button countSolutions = new Button("Count Solutions");
     Button showSolution = new Button("ShowSolution");
     Button showProgress = new Button("ShowProgress");
 
-    public ToolBar( Stage root, Sudoku sudoku ) {
+    public ToolBar( Stage root, Sudoku sudoku, Label infoBox ) {
         this.getChildren().addAll(infoBox, clear, countSolutions, showSolution, showProgress);
         this.sudoku = sudoku;
         this.root = root;
+        this.infoBox = infoBox;
         setActions();
 
     }

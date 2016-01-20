@@ -5,6 +5,7 @@ import graphics.UpperMenu;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
@@ -22,11 +23,13 @@ public class MainStage {
     OutputGrid outputGrid;
     Stage stage = new Stage();
     Scene scene = new Scene(pane);
+    Label infoBox;
 
     public MainStage(Sudoku sudoku){
         this.sudoku = sudoku;
-        this.menu = new UpperMenu(stage, this.sudoku);
-        this.toolBar = new ToolBar(stage, this.sudoku);
+        this.infoBox = new Label("#Solutions: ???");
+        this.toolBar = new ToolBar(stage, this.sudoku, infoBox);
+        this.menu = new UpperMenu(stage, this.sudoku, infoBox);
         this.inputGrid = sudoku.getInputGrid();
         this.outputGrid = sudoku.getOutputGrid();
         this.pane.setLeft(inputGrid);

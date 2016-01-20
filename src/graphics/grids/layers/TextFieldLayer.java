@@ -238,7 +238,11 @@ public class TextFieldLayer extends GridPane {
             }
         }
         else {
-            options.add(Integer.parseInt(text));
+            for ( Integer i = 1; i <= 9; i++ ) {
+                if (text.contains(i.toString())) {
+                    options.add(i-1);
+                }
+            }
         }
         return options;
     }

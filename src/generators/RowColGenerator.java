@@ -22,6 +22,7 @@ public class RowColGenerator extends Generator {
      */
     @Override
     public void generateCNF() {
+        super.generateCNF();
         this.min1Number();
         this.max1Number();
         this.noRowRepetition();
@@ -39,7 +40,7 @@ public class RowColGenerator extends Generator {
                 for ( Integer k : set ) {
                     list.add(variableNo(x, y, k));
                 }
-                if (list.size() > 0) formulas.add(list);
+                if (list.size() > 0) super.formulas.add(list);
             }
         }
     }
@@ -54,7 +55,7 @@ public class RowColGenerator extends Generator {
                         ArrayList<Integer> list = new ArrayList<>();
                         list.add(-variableNo(x, y1, z));
                         list.add(-variableNo(x, y2, z));
-                        formulas.add(list);
+                        super.formulas.add(list);
                     }
                 }
 
@@ -72,7 +73,7 @@ public class RowColGenerator extends Generator {
                         ArrayList<Integer> list = new ArrayList<>();
                         list.add(-variableNo(x1, y, z));
                         list.add(-variableNo(x2, y, z));
-                        formulas.add(list);
+                        super.formulas.add(list);
                     }
                 }
 
@@ -89,7 +90,7 @@ public class RowColGenerator extends Generator {
                 for ( int z = 0; z < 9; z++ ) {
                     list.add(variableNo(x, y, z));
                 }
-                formulas.add(list);
+                super.formulas.add(list);
             }
         }
     }
@@ -104,7 +105,7 @@ public class RowColGenerator extends Generator {
                         ArrayList<Integer> list = new ArrayList<>();
                         list.add(-variableNo(x, y, z1));
                         list.add(-variableNo(x, y, z2));
-                        formulas.add(list);
+                        super.formulas.add(list);
                     }
                 }
 

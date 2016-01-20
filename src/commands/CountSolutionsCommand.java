@@ -25,7 +25,7 @@ public class CountSolutionsCommand implements Command {
         command.execute();
 
         int count = sudoku.getGenerator().countSolutions();
-        if (count > 0) {
+        if (count >= 0) {
             this.infoBox.setText("#Solutions: "+count);
         }
         else {

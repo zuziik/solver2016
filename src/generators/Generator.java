@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by Zuzka on 9.1.2016.
  */
-public abstract class Generator {
+public class Generator {
     String outputFile = "files/formulas.txt";
     //formula obsahuje true alebo false pre kazdu z 729 premennych
     //formulas[i] == true prave vtedy, ked sudoku[i/81][(i % 81)/9] == i % 9
@@ -19,13 +19,15 @@ public abstract class Generator {
     private int timeLimit = 5;                  // casovy limit, ako dlho ma SAT solver bezat
     private char mode = '1'; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
     //TODO pouzivatel si moze sam nastavit svoj casovy limit (kolko je ochotny cakat na vystup generatora)
-    private ArrayList<String> SAToutput = new ArrayList<>();    // cely vystup generatora
+    private ArrayList<String> SAToutput;    // cely vystup generatora
 
     public Generator() {
     }
 
     /** Funkcia vygeneruje CNF podla typu sudoku - generatora a prida ich do zoznamu formulas */
-    public abstract void generateCNF();
+    public void generateCNF() {
+        this.formulas = new ArrayList<>();
+    }
 
     /** Funkcia vrati poziciu policka v zozname 729 premennych (1-729) pre CNF
      * Pozor, pri indexacii do pola (napriklad possibles) by sme chceli cislo o 1 mensie*/
@@ -70,8 +72,6 @@ public abstract class Generator {
     public void createFileWithCNF() throws IOException{
         this.generateCNF();
         this.printToFile();
-        // len docasna ladiaca hlaska
-        System.out.println("CNF generated");
     }
 
     private boolean generate() {
@@ -118,6 +118,7 @@ public abstract class Generator {
     }
 
     public int countSolutions() {
+        this.SAToutput = new ArrayList<>();
         this.mode = 'c';
         try {
             createFileWithCNF();
@@ -129,6 +130,10 @@ public abstract class Generator {
             return -1;
         }
         else {
+            System.out.println(SAToutput);
+            if (SAToutput.get(0).equals("UNSAT")) {
+                return 0;
+            }
             String s = SAToutput.get(SAToutput.size()-2);
             int index = s.indexOf(":");
             return Integer.parseInt(s.substring(index+2));

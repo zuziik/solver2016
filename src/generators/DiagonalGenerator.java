@@ -20,6 +20,12 @@ public class DiagonalGenerator extends SuperGenerator {
             region.add(new ArrayList<>(Arrays.asList(i, i)));
         }
         super.generateRegion(region);
+
+        region = new ArrayList<>();
+        for (int i=0; i<9; i++){
+            region.add(new ArrayList<>(Arrays.asList(i, 8-i)));
+        }
+        super.generateRegion(region);
     }
 
     /**
