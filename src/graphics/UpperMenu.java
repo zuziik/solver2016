@@ -40,7 +40,7 @@ public class UpperMenu extends MenuBar {
     MenuItem showSolution = new MenuItem("Show Any Solution");
     MenuItem showProgress = new MenuItem("Show Progress");
     MenuItem countSolutions = new MenuItem("Count Solutions");
-    MenuItem clear = new MenuItem("Clear");
+    MenuItem clear = new MenuItem("Clear Input");
     /** Polozka menu na prepinanie medzi modmi s a bez vpisiek - initial je bez nich, ale text sa bude menit podla
      * aktualneho modu*/
     MenuItem switchMode = new MenuItem("Show Pencilmarks");

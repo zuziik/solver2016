@@ -16,10 +16,10 @@ public class ToolBar extends VBox {
     Stage root;
     Sudoku sudoku;
     InfoBox infoBox;
-    Button clear = new Button("Clear");
+    Button clear = new Button("Clear Input");
     Button countSolutions = new Button("Count Solutions");
-    Button showSolution = new Button("ShowSolution");
-    Button showProgress = new Button("ShowProgress");
+    Button showSolution = new Button("Show Any Solution");
+    Button showProgress = new Button("Show Progress");
 
     public ToolBar( Stage root, Sudoku sudoku, InfoBox infoBox ) {
         this.getChildren().addAll(clear, countSolutions, showSolution, showProgress, infoBox);

@@ -2,6 +2,7 @@ package generators;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zuzka on 9.1.2016.
@@ -127,8 +128,19 @@ public class Generator {
         return SAToutput.get(0);
     }
 
-    public void generateAllSolutions() {
-
+    public List<String> generateAllSolutions() {
+        this.SAToutput = new ArrayList<>();
+        this.mode = "#5000";
+        try {
+            createFileWithCNF();
+        } catch (IOException e) {
+            System.err.println("Error while writing into file");
+        }
+        boolean timeLimitExpired = generate();
+        if (timeLimitExpired) {
+            return null;
+        }
+        return SAToutput;
     }
 
     public int countSolutions() {

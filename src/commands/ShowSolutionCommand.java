@@ -47,7 +47,7 @@ public class ShowSolutionCommand implements Command {
             text += "Time Limit Expired\n";
         }
         else if (solution.equals("UNSAT")) {
-            text += "No Solutions Exist\n";
+            text += "No Solutions Found\n";
         }
         else {
             int index = solution.indexOf(":");
