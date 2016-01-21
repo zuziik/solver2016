@@ -5,16 +5,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  * Created by Zuzka on 9.1.2016.
  */
 public class IrregularLayer extends GridPane {
 
-    int size;
-    Rectangle cells[][] = new Rectangle[9][9];
-    HashMap<Integer,Color> color;
+    private final int size;
+    private final Rectangle cells[][] = new Rectangle[9][9];
+    private HashMap<Integer,Color> color;
 
     public IrregularLayer(int size) {
         this.size = size;

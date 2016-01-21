@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Sudoku {
     // pre kazdy riadok 0-8, stlpec 0-8 a cislo 0-8 si udrziavame informaciu, ci toto cislo moze byt v policku
-    private List<List<Set<Integer>>> options;
+    private final List<List<Set<Integer>>> options;
     private Set<Type> types;
     private Generator generator;
     private InputGrid inputGrid;
@@ -34,7 +34,7 @@ public class Sudoku {
             }
         }
         for ( List<Set<Integer>> row : options ) {
-            for ( Set cell : row ) {
+            for ( Set<Integer> cell : row ) {
                 for ( int i = 0; i < 9; i++ ) {
                     cell.add(i);
                 }
@@ -76,7 +76,9 @@ public class Sudoku {
     }
 
     public void setFile(File file) {
-        this.file = file;
+        if (file != null) {
+            this.file = file;
+        }
     }
 
     public void setTypes(Set<Type> types) {

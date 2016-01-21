@@ -11,7 +11,8 @@ import java.util.Set;
  * Created by Zuzka on 17.1.2016.
  */
 public class SaveCommand implements Command {
-    Sudoku sudoku;
+
+    private final Sudoku sudoku;
 
     public SaveCommand(Sudoku sudoku) {
         this.sudoku = sudoku;

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class EvenGenerator extends SuperGenerator {
 
-    List<List<Integer>> cells;
+    private final List<List<Integer>> cells;
 
     public EvenGenerator(Generator wrapped, List<List<Integer>> cells) {
         super(wrapped);

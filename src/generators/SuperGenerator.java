@@ -8,9 +8,9 @@ import java.util.List;
  */
 public abstract class SuperGenerator extends Generator {
 
-    Generator wrapped;
+    private final Generator wrapped;
 
-    public SuperGenerator(Generator wrapped) {
+    SuperGenerator(Generator wrapped) {
         this.wrapped = wrapped;
     }
 

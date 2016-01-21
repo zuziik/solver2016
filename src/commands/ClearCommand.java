@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
  * Created by Zuzka on 17.1.2016.
  */
 public class ClearCommand implements Command {
-    Sudoku sudoku;
+    private final Sudoku sudoku;
 
     public ClearCommand(Sudoku sudoku) {
         this.sudoku = sudoku;

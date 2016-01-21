@@ -2,18 +2,20 @@ package graphics.stages;
 
 import commands.Command;
 import commands.CreateCommand;
+import graphics.Style;
 import graphics.grids.InputGrid;
 import graphics.grids.layers.TextFieldLayer;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sudoku.Type;
 
@@ -26,52 +28,73 @@ import java.util.Set;
  * Created by Zuzka on 9.1.2016.
  */
 public class ConfigurationStage {
-    BorderPane pane = new BorderPane();
-    Scene scene = new Scene(pane);
-    Stage stage = new Stage();
-    InputGrid inputGrid;
-    VBox radioButtons = new VBox();
-    RadioButton b1_classic;
-    RadioButton b2_diagonal;
-    RadioButton b3_untouchable;
-    RadioButton b4_nonconsecutive;
-    RadioButton b5_disjoint;
-    RadioButton b6_antiknight;
-    List<RadioButton> rButtons;
-    Button create;
-    Button restart;
-    List<List<List<Integer>>> irregulars;
-    List<List<List<Integer>>> extras;
-    List<List<Integer>> odds;
-    List<List<Integer>> evens;
-    Set<Type> types;
+    private final BorderPane pane = new BorderPane();
+    private final Scene scene = new Scene(pane);
+    private final Stage stage = new Stage();
+    private final InputGrid inputGrid;
+    private final VBox functionBox = new VBox();
+    private RadioButton b1_classic;
+    private RadioButton b2_diagonal;
+    private RadioButton b3_untouchable;
+    private RadioButton b4_nonconsecutive;
+    private RadioButton b5_disjoint;
+    private RadioButton b6_antiknight;
+    private List<RadioButton> rButtons;
+    private final Button create;
+    private final Button restart;
+    private final Label info;
+    private final Button help;
+    private List<List<List<Integer>>> irregulars;
+    private List<List<List<Integer>>> extras;
+    private List<List<Integer>> odds;
+    private List<List<Integer>> evens;
+    private Set<Type> types;
+    private final int width = 250;
 
     public ConfigurationStage() {
         stage.setScene(scene);
         stage.setTitle("Settings");
+        stage.setResizable(false);
         inputGrid = new InputGrid();
         pane.setLeft(inputGrid);
         createRadioButtons();
-        restart = new Button("Restart");
+        this.restart = new Button("Restart");
         addClearHandlers();
-        create = new Button("Create");
-        addCreateHandlers();
-        radioButtons.getChildren().addAll(restart, create);
-        pane.setRight(radioButtons);
-        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                inputGrid.getTextFieldLayer().changeGrid();
+        Style.setButtonStyle(restart, width);
+        this.create = new Button("Create");
+        addRestartHandlers();
+        Style.setButtonStyle(create, width);
+        this.info = new Label();
+        setInfo();
+        this.help = new Button("Show Info");
+        Style.setHelpButtonStyle(help, info);
+        functionBox.getChildren().addAll(restart, create, help);
+        functionBox.getChildren().addAll(rButtons);
+        functionBox.getChildren().add(info);
+        pane.setRight(functionBox);
+        scene.setOnMouseClicked(event -> inputGrid.getTextFieldLayer().changeGrid());
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                create.fire();
             }
         });
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    create.fire();
-                }
-            }
-        });
+    }
+
+    private void setInfo() {
+        this.info.setText("IRREGULAR\n" +
+                "Mark cells with numbers 1-9 to create irregular regions. " +
+                "Same numbers belong to the same region. " +
+                "Regions 1-9 may not overlap each other.\n" +
+                "EXTRA REGIONS\n" +
+                "Mark cells with letters A-D to create extra regions. " +
+                "Same letters belong to the same region. " +
+                "Regions A-D may not overlap each other but they can overlap regions 1-9.\n" +
+                "EVEN/ODD\n" +
+                "Write E/O into a cell to mark it EVEN/ODD.");
+        this.info.setBackground(new Background(new BackgroundFill(Color.color(0.9062, 0.9297, 0.9453), null, null)));
+        this.info.setWrapText(true);
+        this.info.setOpacity(0);
+        this.info.setPrefWidth(250);
     }
 
     private void createRadioButtons() {
@@ -90,6 +113,9 @@ public class ConfigurationStage {
         rButtons.add(b4_nonconsecutive);
         rButtons.add(b5_disjoint);
         rButtons.add(b6_antiknight);
+        for (RadioButton radioButton : rButtons) {
+            Style.setRadioButtonStyle(radioButton);
+        }
 
         setUpdateActions(b1_classic);
         setUpdateActions(b2_diagonal);
@@ -114,18 +140,17 @@ public class ConfigurationStage {
             }
         });
 
-        radioButtons.getChildren().addAll(b1_classic, b2_diagonal, b3_untouchable, b4_nonconsecutive, b5_disjoint, b6_antiknight);
     }
 
     private void setUpdateActions(RadioButton b) {
         b.setOnMouseClicked(event -> inputGrid.getTextFieldLayer().changeGrid());
     }
 
-    private void addCreateHandlers() {
+    private void addRestartHandlers() {
         create.setOnAction(event -> {
             inputGrid.getTextFieldLayer().changeGrid();
             updateLists();
-            Command command = new CreateCommand(null, stage, types, irregulars, extras, evens, odds);
+            Command command = new CreateCommand(null, stage, types, irregulars, extras, evens, odds, null);
             command.execute();
         });
     }

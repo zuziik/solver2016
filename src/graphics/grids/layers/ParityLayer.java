@@ -1,10 +1,8 @@
 package graphics.grids.layers;
 
-import graphics.grids.Grid;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
 
@@ -13,10 +11,10 @@ import java.util.HashMap;
  */
 public class ParityLayer extends GridPane {
 
-    int radius;
-    int size;
-    Circle cells[][] = new Circle[9][9];
-    HashMap<Character,Color> color;
+    private final int radius;
+    private final int size;
+    private final Circle cells[][] = new Circle[9][9];
+    private HashMap<Character,Color> color;
 
     public ParityLayer(int size) {
         this.size = size;

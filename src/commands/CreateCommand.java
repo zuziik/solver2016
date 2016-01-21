@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import sudoku.Sudoku;
 import sudoku.Type;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -19,16 +20,17 @@ import java.util.Set;
  */
 public class CreateCommand implements Command {
 
-    List<List<List<Integer>>> irregulars;
-    List<List<List<Integer>>> extras;
-    List<List<Integer>> evens;
-    List<List<Integer>> odds;
-    Set<Type> types;
-    Stage stage;
-    List<List<Integer>> numbers;
+    private final List<List<List<Integer>>> irregulars;
+    private final List<List<List<Integer>>> extras;
+    private final List<List<Integer>> evens;
+    private final List<List<Integer>> odds;
+    private final Set<Type> types;
+    private final Stage stage;
+    private final List<List<Integer>> numbers;
+    private final File file;
 
     public CreateCommand(List<List<Integer>> numbers, Stage stage, Set<Type> types, List<List<List<Integer>>> irregulars,
-                         List<List<List<Integer>>> extras, List<List<Integer>> evens, List<List<Integer>> odds) {
+                         List<List<List<Integer>>> extras, List<List<Integer>> evens, List<List<Integer>> odds, File file) {
         this.stage = stage;
         this.irregulars = irregulars;
         this.extras = extras;
@@ -36,6 +38,7 @@ public class CreateCommand implements Command {
         this.odds = odds;
         this.types = types;
         this.numbers = numbers;
+        this.file = file;
     }
 
     private Generator createGenerator(Sudoku sudoku) {
@@ -148,6 +151,7 @@ public class CreateCommand implements Command {
         sudoku.setInputGrid(inputGrid);
         sudoku.setOutputGrid(outputGrid);
         sudoku.setGenerator(generator);
+        sudoku.setFile(file);
         sudoku.setTypes(types);
         if (numbers != null) sudoku.setNumbers(numbers);
 

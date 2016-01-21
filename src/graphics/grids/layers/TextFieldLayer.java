@@ -20,9 +20,9 @@ import java.util.TreeSet;
  */
 public class TextFieldLayer extends GridPane {
 
-    int size;
-    InputGrid inputGrid;
-    TextField[][] textFields = new TextField[9][9];
+    private final int size;
+    private final InputGrid inputGrid;
+    private final TextField[][] textFields = new TextField[9][9];
 
     public TextFieldLayer(int size, InputGrid inputGrid) {
         this.inputGrid = inputGrid;
@@ -56,36 +56,28 @@ public class TextFieldLayer extends GridPane {
 
     private void setSettingsHandler(int x, int y) {
 
-        textFields[x][y].setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                TextField up = textFields[(x + 8) % 9][y];
-                TextField down = textFields[(x + 1) % 9][y];
-                TextField left = textFields[x][(y + 8) % 9];
-                TextField right = textFields[x][(y + 1) % 9];
+        textFields[x][y].setOnKeyPressed(event -> {
+            TextField up = textFields[(x + 8) % 9][y];
+            TextField down = textFields[(x + 1) % 9][y];
+            TextField left = textFields[x][(y + 8) % 9];
+            TextField right = textFields[x][(y + 1) % 9];
 
-                if (event.getCode().equals(KeyCode.DOWN)) {
-                    down.requestFocus();
-                    changeGrid(x, y);
-                } else if (event.getCode().equals(KeyCode.UP)) {
-                    up.requestFocus();
-                    changeGrid(x, y);
-                } else if (event.getCode().equals(KeyCode.LEFT)) {
-                    left.requestFocus();
-                    changeGrid(x, y);
-                } else if (event.getCode().equals(KeyCode.RIGHT)) {
-                    right.requestFocus();
-                    changeGrid(x, y);
-                }
+            if (event.getCode().equals(KeyCode.DOWN)) {
+                down.requestFocus();
+                changeGrid(x, y);
+            } else if (event.getCode().equals(KeyCode.UP)) {
+                up.requestFocus();
+                changeGrid(x, y);
+            } else if (event.getCode().equals(KeyCode.LEFT)) {
+                left.requestFocus();
+                changeGrid(x, y);
+            } else if (event.getCode().equals(KeyCode.RIGHT)) {
+                right.requestFocus();
+                changeGrid(x, y);
             }
         });
 
-        textFields[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                changeGrid();
-            }
-        });
+        textFields[x][y].setOnMouseClicked(event -> changeGrid());
     }
 
     /** Funkcia sa pouziva pri nastavovani variant pre sudoku. Zabezpeci adekvatnu zmenu policok, napriklad zmenu farby,
@@ -98,7 +90,7 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
-    public void changeGrid(int x, int y) {
+    private void changeGrid(int x, int y) {
         TextField textField = textFields[x][y];
 
         String irregular = changeIrregular(x, y);
@@ -118,36 +110,28 @@ public class TextFieldLayer extends GridPane {
     }
 
     private void setInputHandler(int x, int y) {
-        textFields[x][y].setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                TextField up = textFields[(x+8)%9][y];
-                TextField down = textFields[(x+1)%9][y];
-                TextField left = textFields[x][(y+8)%9];
-                TextField right = textFields[x][(y+1)%9];
+        textFields[x][y].setOnKeyPressed(event -> {
+            TextField up = textFields[(x+8)%9][y];
+            TextField down = textFields[(x+1)%9][y];
+            TextField left = textFields[x][(y+8)%9];
+            TextField right = textFields[x][(y+1)%9];
 
-                if (event.getCode().equals(KeyCode.DOWN)) {
-                    down.requestFocus();
-                    filterText(x, y);
-                } else if (event.getCode().equals(KeyCode.UP)) {
-                    up.requestFocus();
-                    filterText(x, y);
-                } else if (event.getCode().equals(KeyCode.LEFT)) {
-                    left.requestFocus();
-                    filterText(x, y);
-                } else if (event.getCode().equals(KeyCode.RIGHT)) {
-                    right.requestFocus();
-                    filterText(x, y);
-                }
+            if (event.getCode().equals(KeyCode.DOWN)) {
+                down.requestFocus();
+                filterText(x, y);
+            } else if (event.getCode().equals(KeyCode.UP)) {
+                up.requestFocus();
+                filterText(x, y);
+            } else if (event.getCode().equals(KeyCode.LEFT)) {
+                left.requestFocus();
+                filterText(x, y);
+            } else if (event.getCode().equals(KeyCode.RIGHT)) {
+                right.requestFocus();
+                filterText(x, y);
             }
         });
 
-        textFields[x][y].setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                updateGrid();
-            }
-        });
+        textFields[x][y].setOnMouseClicked(event -> updateGrid());
     }
 
     public void updateGrid() {

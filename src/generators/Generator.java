@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Zuzka on 9.1.2016.
  */
 public class Generator {
-    private String outputFile;
+    private final String outputFile;
     //formula obsahuje true alebo false pre kazdu z 729 premennych
     //formulas[i] == true prave vtedy, ked sudoku[i/81][(i % 81)/9] == i % 9
     //interne ide o sudoku s R0-8, C0-8, cislami 0-8, len pri vypise sa prida +1
@@ -16,12 +16,12 @@ public class Generator {
     ArrayList<ArrayList<Integer>> formulas = new ArrayList<>();
 
     /** Nastavenia pred generovanim */
-    private String inputFile;            // vstupny subor s CNF vo formate DIMACS
+    private final String inputFile;            // vstupny subor s CNF vo formate DIMACS
     private double timeLimit;                  // casovy limit, ako dlho ma SAT solver bezat
     private String mode; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
     private ArrayList<String> SAToutput;    // cely vystup generatora
 
-    public Generator() {
+    Generator() {
         this.inputFile = "files/formulas.txt";
         this.outputFile = this.inputFile;
         this.timeLimit = 5;
@@ -37,7 +37,7 @@ public class Generator {
 
 
     /** Funkcia vygeneruje CNF podla typu sudoku - generatora a prida ich do zoznamu formulas */
-    public void generateCNF() {
+    void generateCNF() {
         this.formulas = new ArrayList<>();
     }
 
@@ -48,14 +48,14 @@ public class Generator {
     }
 
     /** Funkcia vrati zoznam formul pre aktualne sudoku */
-    public ArrayList<ArrayList<Integer>> getCNFFormulas() {
+    ArrayList<ArrayList<Integer>> getCNFFormulas() {
         return this.formulas;
     }
 
     /** Funkcia vrati textovu reprezentaciu jednej formuly v normovanom tvare: pre kazdu z premennych vypise kladne
      * alebo zaporne cislo podla toho, ci sa premenna vo formule nachadza v pozitivnom alebo negovanom zmysle a na
      * koniec formuly zapise 0 */
-    String printFormula(ArrayList<Integer> f){
+    private String printFormula(ArrayList<Integer> f){
         StringBuffer s = new StringBuffer();
         for ( Integer i : f ) {
             s.append(i);
@@ -66,7 +66,7 @@ public class Generator {
     }
 
     /** Funkcia vypise vsetky formuly do suboru, ktory je vstupom pre SAT solver */
-    public void printToFile() throws IOException {
+    private void printToFile() {
         try{
             PrintWriter out = new PrintWriter(new File(outputFile));
             out.println("p cnf 729 " + formulas.size());
@@ -81,7 +81,7 @@ public class Generator {
     }
 
     /** Funkcia vygeneruje CNF pre aktualne sudoku a vytvori subor, do ktoreho ich vypise */
-    public void createFileWithCNF() throws IOException{
+    private void createFileWithCNF() throws IOException{
         this.generateCNF();
         this.printToFile();
     }
@@ -94,7 +94,7 @@ public class Generator {
                     new InputStreamReader(p.getInputStream()));
 
             /** Vypis vystupu SAT solvera na vystup a ulozenie do premennej SAToutput*/
-            String line = null;
+            String line;
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
                 if (line.charAt(0) != 'c'){
@@ -112,9 +112,7 @@ public class Generator {
     public void printToFile(String outputFile){
         try{
             PrintWriter out = new PrintWriter(new FileOutputStream(new File(outputFile)));
-            for (String line : SAToutput){
-                out.println(line);
-            }
+            SAToutput.forEach(out::println);
             out.close();
         } catch (FileNotFoundException e) {
             System.err.println("Could not export CNF formulas: File not found!");

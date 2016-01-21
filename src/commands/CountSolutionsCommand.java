@@ -1,7 +1,6 @@
 package commands;
 
 import graphics.InfoBox;
-import javafx.scene.control.Label;
 import sudoku.Sudoku;
 
 import java.util.Date;
@@ -11,8 +10,8 @@ import java.util.Date;
  */
 public class CountSolutionsCommand implements Command {
 
-    InfoBox infoBox;
-    Sudoku sudoku;
+    private final InfoBox infoBox;
+    private final Sudoku sudoku;
 
     public CountSolutionsCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;

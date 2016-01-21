@@ -12,12 +12,12 @@ import java.util.Set;
  */
 public class InputGrid extends Grid {
 
-    private IrregularLayer irregularLayer = new IrregularLayer(size);
-    private RegionLayer regionLayer = new RegionLayer(size);
-    private ParityLayer parityLayer = new ParityLayer(size);
-    private BorderLayer borderLayer = new BorderLayer(3*size);
-    private DiagonalLayer diagonalLayer = new DiagonalLayer(9*size);
-    private TextFieldLayer textFieldLayer = new TextFieldLayer(size, this);
+    private final IrregularLayer irregularLayer = new IrregularLayer(size);
+    private final RegionLayer regionLayer = new RegionLayer(size);
+    private final ParityLayer parityLayer = new ParityLayer(size);
+    private final BorderLayer borderLayer = new BorderLayer(3*size);
+    private final DiagonalLayer diagonalLayer = new DiagonalLayer(9*size);
+    private final TextFieldLayer textFieldLayer = new TextFieldLayer(size, this);
 
     public InputGrid() {
         super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, borderLayer, diagonalLayer, textFieldLayer);

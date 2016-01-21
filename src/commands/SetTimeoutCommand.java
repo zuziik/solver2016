@@ -8,7 +8,7 @@ import sudoku.Sudoku;
  */
 public class SetTimeoutCommand implements Command{
 
-    Sudoku sudoku;
+    private final Sudoku sudoku;
 
     public SetTimeoutCommand(Sudoku sudoku) {
         this.sudoku = sudoku;

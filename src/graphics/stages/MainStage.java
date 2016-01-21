@@ -7,8 +7,11 @@ import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
 import sudoku.Type;
@@ -20,16 +23,16 @@ import java.util.Set;
  */
 public class MainStage {
 
-    Sudoku sudoku;
-    UpperMenu menu;
-    BorderPane pane = new BorderPane();
-    ToolBar toolBar;
-    InputGrid inputGrid;
-    OutputGrid outputGrid;
-    Stage stage = new Stage();
-    Scene scene = new Scene(pane);
-    InfoBox infoBox;
-    Label types;
+    private final Sudoku sudoku;
+    private final UpperMenu menu;
+    private final BorderPane pane = new BorderPane();
+    private final ToolBar toolBar;
+    private final InputGrid inputGrid;
+    private final OutputGrid outputGrid;
+    private final Stage stage = new Stage();
+    private final Scene scene = new Scene(pane);
+    private final InfoBox infoBox;
+    private final Label types;
 
     public MainStage(Sudoku sudoku){
         this.sudoku = sudoku;
@@ -51,6 +54,7 @@ public class MainStage {
             div = ", ";
         }
         this.types.setText(text);
+        this.types.setTextFill(Color.BLUE);
         this.pane.setBottom(types);
     }
 

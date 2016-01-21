@@ -3,13 +3,14 @@ package commands;
 import sudoku.Sudoku;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Zuzka on 9.1.2016.
  */
 public class UpdateCommand implements Command {
 
-    Sudoku sudoku;
+    private final Sudoku sudoku;
 
     public UpdateCommand(Sudoku sudoku) {
         this.sudoku = sudoku;
@@ -25,9 +26,7 @@ public class UpdateCommand implements Command {
                 Set<Integer> options = sudoku.getOptions().get(i).get(j);
                 options.clear();
                 Set<Integer> new_options = sudoku.getInputGrid().getOptions(i,j);
-                for ( Integer x : new_options ) {
-                    options.add(x);
-                }
+                options.addAll(new_options.stream().collect(Collectors.toList()));
                 sudoku.getOutputGrid().getLabelLayer().getLabels()[i][j].setText(
                         sudoku.getInputGrid().getTextFieldLayer().getTextFields()[i][j].getText());
             }

@@ -13,20 +13,18 @@ import javafx.stage.Stage;
  * Created by Zuzka on 9.1.2016.
  */
 public class HelpStage {
-    BorderPane pane = new BorderPane();
-    Scene scene = new Scene(pane);
-    Stage stage = new Stage();
+    private final BorderPane pane = new BorderPane();
+    private final Scene scene = new Scene(pane);
+    private final Stage stage = new Stage();
 
     public HelpStage() {
         this.stage.setScene(scene);
         this.stage.setTitle("Help");
+        stage.setResizable(false);
         Button ok = new Button("GOT IT!");
-        ok.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Command command = new QuitCommand(stage);
-                command.execute();
-            }
+        ok.setOnAction( event -> {
+            Command command = new QuitCommand(stage);
+            command.execute();
         });
         pane.setBottom(ok);
     }

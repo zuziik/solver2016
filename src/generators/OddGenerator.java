@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class OddGenerator extends SuperGenerator {
 
-    List<List<Integer>> cells;
+    private final List<List<Integer>> cells;
 
     public OddGenerator(Generator wrapped, List<List<Integer>> cells) {
         super(wrapped);

@@ -11,9 +11,9 @@ import java.util.HashMap;
  */
 public class RegionLayer extends GridPane {
 
-    int size;
-    Rectangle cells[][] = new Rectangle[9][9];
-    HashMap<Character,Color> color;
+    private final int size;
+    private final Rectangle cells[][] = new Rectangle[9][9];
+    private HashMap<Character,Color> color;
 
     public RegionLayer(int size) {
         this.size = size;

@@ -7,7 +7,7 @@ import javafx.stage.Stage;
  */
 public class QuitCommand implements Command {
 
-    Stage oldStage;
+    private final Stage oldStage;
 
     public QuitCommand(Stage stage) {
         this.oldStage = stage;

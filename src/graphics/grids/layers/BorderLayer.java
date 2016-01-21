@@ -2,17 +2,15 @@ package graphics.grids.layers;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import org.w3c.dom.css.Rect;
 
 /**
  * Created by Zuzka on 10.1.2016.
  */
 public class BorderLayer extends GridPane {
 
-    int size;
-    Rectangle[][] borders = new Rectangle[3][3];
+    private final int size;
+    private final Rectangle[][] borders = new Rectangle[3][3];
 
     public BorderLayer(int size) {
         this.size = size;

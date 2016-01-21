@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  */
 public class NewSudokuCommand implements Command {
 
-    Stage oldStage;
+    private final Stage oldStage;
 
     public NewSudokuCommand(Stage stage) {
         this.oldStage = stage;

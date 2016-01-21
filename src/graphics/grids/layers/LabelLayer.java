@@ -2,20 +2,18 @@ package graphics.grids.layers;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
-import java.util.TreeSet;
 
 /**
  * Created by Zuzka on 11.1.2016.
  */
 public class LabelLayer extends GridPane {
 
-    int size;
-    Label[][] labels = new Label[9][9];
+    private final int size;
+    private final Label[][] labels = new Label[9][9];
 
     public LabelLayer(int size) {
         this.size = size;

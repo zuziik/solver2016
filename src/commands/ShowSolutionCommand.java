@@ -2,18 +2,15 @@ package commands;
 
 import graphics.InfoBox;
 import sudoku.Sudoku;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Zuzka on 9.1.2016.
  */
 public class ShowSolutionCommand implements Command {
 
-    Sudoku sudoku;
-    InfoBox infoBox;
+    private final Sudoku sudoku;
+    private final InfoBox infoBox;
 
     public ShowSolutionCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
@@ -43,23 +40,25 @@ public class ShowSolutionCommand implements Command {
 
         String solution = sudoku.getGenerator().generateOneSolution();
 
-        if (solution.equals("TLE")) {
-            text += "Time Limit Expired\n";
-        }
-        else if (solution.equals("UNSAT")) {
-            text += "No Solutions Found\n";
-        }
-        else {
-            int index = solution.indexOf(":");
-            solution = solution.substring(index + 1);
-            String[] numbers = solution.split(" ");
-            System.out.println(solution);
-            for ( String s : numbers ) {
-                if (!s.equals("")) {
-                    setNumber(s);
+        switch (solution) {
+            case "TLE":
+                text += "Time Limit Expired\n";
+                break;
+            case "UNSAT":
+                text += "No Solutions Found\n";
+                break;
+            default:
+                int index = solution.indexOf(":");
+                solution = solution.substring(index + 1);
+                String[] numbers = solution.split(" ");
+                System.out.println(solution);
+                for (String s : numbers) {
+                    if (!s.equals("")) {
+                        setNumber(s);
+                    }
                 }
-            }
-            text += "Solution Displayed\n";
+                text += "Solution Displayed\n";
+                break;
         }
 
         this.infoBox.addInfo(text);

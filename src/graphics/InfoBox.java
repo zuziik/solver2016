@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Zuzka on 20.1.2016.
  */
 public class InfoBox extends Label {
-    List<String> info;
+    private final List<String> info;
 
     public InfoBox() {
         this.info = new ArrayList<>();

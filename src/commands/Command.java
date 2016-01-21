@@ -6,6 +6,6 @@ package commands;
 public interface Command {
 
     /** Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou*/
-    public void execute();
+    void execute();
 
 }

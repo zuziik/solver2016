@@ -11,8 +11,8 @@ import java.io.File;
  */
 public class SaveAsCommand implements Command {
 
-    Sudoku sudoku;
-    Stage stage;
+    private final Sudoku sudoku;
+    private final Stage stage;
 
     public SaveAsCommand(Sudoku sudoku, Stage stage) {
         this.sudoku = sudoku;

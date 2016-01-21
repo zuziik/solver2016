@@ -7,9 +7,9 @@ import javafx.scene.shape.Line;
  * Created by Zuzka on 10.1.2016.
  */
 public class DiagonalLayer extends Pane {
-    int size;
-    Line l1;
-    Line l2;
+    private final int size;
+    private final Line l1;
+    private final Line l2;
 
     public DiagonalLayer(int size) {
         this.size = size;

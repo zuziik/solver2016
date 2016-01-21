@@ -1,7 +1,5 @@
 package sudoku;
 
-import generators.EvenGenerator;
-
 /**
  * Created by Zuzka on 17.1.2016.
  */

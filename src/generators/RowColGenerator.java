@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class RowColGenerator extends Generator {
 
-    private Sudoku sudoku;
+    private final Sudoku sudoku;
 
     public RowColGenerator(Sudoku sudoku) {
         this.sudoku = sudoku;
