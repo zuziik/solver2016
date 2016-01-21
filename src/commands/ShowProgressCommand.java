@@ -43,9 +43,28 @@ public class ShowProgressCommand implements Command {
         for ( int x = 0; x < 9; x++ ) {
             for ( int y = 0; y < 9; y++ ) {
                 String text = "";
-                for ( Integer n = 1; n <= 9; n++ ) {
-                    if (numbers.get(x).get(y).contains(n)) {
-                        text += n.toString();
+                Set set = numbers.get(x).get(y);
+                if (set.size() == 1) {
+                    for ( Integer n = 1; n <= 9; n++ ) {
+                        if (set.contains(n)) {
+                            text += n.toString();
+                        }
+                    }
+                }
+                else {
+                    for ( Integer n = 1; n <= 9; n++ ) {
+                        if (set.contains(n)) {
+                            text += n.toString();
+                        }
+                        else {
+                            text += " ";
+                        }
+                        if ( n % 3 == 0) {
+                            text += "\n";
+                        }
+                        else {
+                            text += " ";
+                        }
                     }
                 }
                 sudoku.getOutputGrid().setText(x, y, text);

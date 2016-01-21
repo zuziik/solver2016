@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Zuzka on 9.1.2016.
  */
 public class Generator {
-    String outputFile = "files/formulas.txt";
+    private String outputFile;
     //formula obsahuje true alebo false pre kazdu z 729 premennych
     //formulas[i] == true prave vtedy, ked sudoku[i/81][(i % 81)/9] == i % 9
     //interne ide o sudoku s R0-8, C0-8, cislami 0-8, len pri vypise sa prida +1
@@ -16,14 +16,25 @@ public class Generator {
     ArrayList<ArrayList<Integer>> formulas = new ArrayList<>();
 
     /** Nastavenia pred generovanim */
-    private String inputFile = "files/formulas.txt";               // vstupny subor s CNF vo formate DIMACS
-    private int timeLimit = 5;                  // casovy limit, ako dlho ma SAT solver bezat
-    private String mode = "1"; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
-    //TODO pouzivatel si moze sam nastavit svoj casovy limit (kolko je ochotny cakat na vystup generatora)
+    private String inputFile;            // vstupny subor s CNF vo formate DIMACS
+    private double timeLimit;                  // casovy limit, ako dlho ma SAT solver bezat
+    private String mode; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
     private ArrayList<String> SAToutput;    // cely vystup generatora
 
     public Generator() {
+        this.inputFile = "files/formulas.txt";
+        this.outputFile = this.inputFile;
+        this.timeLimit = 5;
     }
+
+    public double getTimeLimit() {
+        return this.timeLimit;
+    }
+
+    public void setTimeLimit(double timeLimit) {
+        this.timeLimit = timeLimit;
+    }
+
 
     /** Funkcia vygeneruje CNF podla typu sudoku - generatora a prida ich do zoznamu formulas */
     public void generateCNF() {

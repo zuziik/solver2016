@@ -111,7 +111,7 @@ public class TextFieldLayer extends GridPane {
     public void setInputHandlers() {
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
-                textFields[i][j].setFont(new Font(16));
+                textFields[i][j].setFont(new Font("Arial",20));
                 setInputHandler(i, j);
             }
         }

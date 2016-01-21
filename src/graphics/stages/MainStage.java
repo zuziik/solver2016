@@ -7,6 +7,7 @@ import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sudoku.Sudoku;

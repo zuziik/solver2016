@@ -1,6 +1,6 @@
 package commands;
 
-import graphics.stages.SettingsStage;
+import graphics.stages.ConfigurationStage;
 import javafx.stage.Stage;
 
 /**
@@ -20,7 +20,7 @@ public class NewSudokuCommand implements Command {
     @Override
     public void execute() {
         oldStage.close();
-        SettingsStage settingsStage = new SettingsStage();
-        settingsStage.show();
+        ConfigurationStage configurationStage = new ConfigurationStage();
+        configurationStage.show();
     }
 }

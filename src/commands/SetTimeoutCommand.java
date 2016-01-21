@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.stages.SettingsStage;
 import sudoku.Sudoku;
 
 /**
@@ -18,6 +19,7 @@ public class SetTimeoutCommand implements Command{
      */
     @Override
     public void execute() {
-
+        SettingsStage settingsStage = new SettingsStage(sudoku);
+        settingsStage.show();
     }
 }

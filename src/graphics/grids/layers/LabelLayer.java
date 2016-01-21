@@ -40,10 +40,10 @@ public class LabelLayer extends GridPane {
         Label label = labels[x][y];
         label.setText(text);
         if ( text.length() == 1 ) {
-            label.setFont(new Font(16));
+            label.setFont(new Font("Arial", 20));
         }
         else {
-            label.setFont(new Font(10));
+            label.setFont(new Font("Courier New", 10));
             label.setWrapText(true);
         }
     }
