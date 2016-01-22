@@ -4,12 +4,10 @@ import commands.Command;
 import commands.CreateCommand;
 import graphics.Style;
 import graphics.grids.InputGrid;
-import graphics.grids.layers.TextFieldLayer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -44,10 +42,10 @@ public class ConfigurationStage {
     private final Button restart;
     private final Label info;
     private final Button help;
-    private List<List<List<Integer>>> irregulars;
-    private List<List<List<Integer>>> extras;
-    private List<List<Integer>> odds;
-    private List<List<Integer>> evens;
+    private List<List<List<Integer>>> irregulars = new ArrayList<>();
+    private List<List<List<Integer>>> extras = new ArrayList<>();
+    private List<List<Integer>> odds = new ArrayList<>();
+    private List<List<Integer>> evens = new ArrayList<>();
     private Set<Type> types;
     private final int width = 250;
 
@@ -59,9 +57,9 @@ public class ConfigurationStage {
         pane.setLeft(inputGrid);
         createRadioButtons();
         this.restart = new Button("Restart");
-        addClearHandlers();
-        Style.setButtonStyle(restart, width);
         this.create = new Button("Create");
+        addCreateHandlers();
+        Style.setButtonStyle(restart, width);
         addRestartHandlers();
         Style.setButtonStyle(create, width);
         this.info = new Label();
@@ -146,29 +144,46 @@ public class ConfigurationStage {
         b.setOnMouseClicked(event -> inputGrid.getTextFieldLayer().changeGrid());
     }
 
-    private void addRestartHandlers() {
+    private String findWrongRegion() {
+        Integer i = 1;
+        for ( List<List<Integer>> region : this.irregulars ) {
+            if ( region.size() > 9 ) {
+                return i.toString();
+            }
+            i++;
+        }
+
+        Character c = 'A';
+        for ( List<List<Integer>> region : this.extras ) {
+            if ( region.size() > 9 ) {
+                return c.toString();
+            }
+            c++;
+        }
+
+        return "";
+    }
+
+    private void addCreateHandlers() {
         create.setOnAction(event -> {
             inputGrid.getTextFieldLayer().changeGrid();
             updateLists();
-            Command command = new CreateCommand(null, stage, types, irregulars, extras, evens, odds, null);
-            command.execute();
+            String wrongRegion = findWrongRegion();
+            if (wrongRegion.equals("")) {
+                Command command = new CreateCommand(null, stage, types, irregulars, extras, evens, odds, null);
+                command.execute();
+            }
+            else {
+                System.out.println("This region is wrong: "+wrongRegion);
+            }
         });
     }
 
-    private void addClearHandlers() {
+    private void addRestartHandlers() {
         restart.setOnAction(event -> {
-            TextFieldLayer textFieldLayer = inputGrid.getTextFieldLayer();
-            TextField[][] textFields = textFieldLayer.getTextFields();
-            for (TextField[] row : textFields) {
-                for (TextField text : row) {
-                    text.setText("");
-                }
-            }
-            for (RadioButton rb : rButtons) {
-                rb.setSelected(false);
-            }
-            b1_classic.setSelected(true);
-            inputGrid.getTextFieldLayer().changeGrid();
+            ConfigurationStage configurationStage = new ConfigurationStage();
+            configurationStage.show();
+            stage.close();
         });
     }
 
@@ -194,28 +209,32 @@ public class ConfigurationStage {
             types.add(Type.Antiknight);
         }
 
-        List<List<Integer>> evens = inputGrid.getEven();
-        if (evens.size() > 0) {
+        this.evens.clear();
+        List<List<Integer>> evens1 = inputGrid.getEven();
+        if (evens1.size() > 0) {
             types.add(Type.Even);
-            this.evens = evens;
+            this.evens.addAll(evens1);
         }
 
-        List<List<Integer>> odds = inputGrid.getOdd();
-        if (odds.size() > 0) {
+        this.odds.clear();
+        List<List<Integer>> odds1 = inputGrid.getOdd();
+        if (odds1.size() > 0) {
             types.add(Type.Odd);
-            this.odds = odds;
+            this.odds.addAll(odds1);
         }
 
-        List<List<List<Integer>>> irregulars = inputGrid.getIrregulars();
-        if (irregulars.size() > 0) {
+        this.irregulars.clear();
+        List<List<List<Integer>>> irregulars1 = inputGrid.getIrregulars();
+        if (irregulars1.size() > 0) {
             types.add(Type.Irregular);
-            this.irregulars = irregulars;
+            this.irregulars.addAll(irregulars1);
         }
 
-        List<List<List<Integer>>> extras = inputGrid.getExtras();
-        if (extras.size() > 0) {
+        this.extras.clear();
+        List<List<List<Integer>>> extras1 = inputGrid.getExtras();
+        if (extras1.size() > 0) {
             types.add(Type.ExtraRegion);
-            this.extras = extras;
+            this.extras.addAll(extras1);
         }
 
     }

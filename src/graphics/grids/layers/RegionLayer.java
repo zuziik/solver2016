@@ -48,8 +48,16 @@ public class RegionLayer extends GridPane {
         cells[x][y].setOpacity(0);
     }
 
+    public void hideAll() {
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                setBlank(i,j);
+            }
+        }
+    }
+
     public boolean isRegion(int x, int y, char c) {
-        return cells[x][y].getFill().equals(color.get(c));
+        return cells[x][y].getFill().equals(color.get(c)) && cells[x][y].getOpacity() == 0.25;
     }
 
     @Override

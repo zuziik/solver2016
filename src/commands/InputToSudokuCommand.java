@@ -21,6 +21,7 @@ public class InputToSudokuCommand implements Command {
      */
     @Override
     public void execute() {
+        sudoku.getInputGrid().getTextFieldLayer().updateGrid();
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
                 Set<Integer> options = sudoku.getOptions().get(i).get(j);

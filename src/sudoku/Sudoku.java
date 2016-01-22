@@ -1,6 +1,7 @@
 package sudoku;
 
 import generators.Generator;
+import graphics.InfoBox;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 
@@ -22,6 +23,7 @@ public class Sudoku {
     private List<List<List<Integer>>> extras;
     private List<List<Integer>> odds;
     private List<List<Integer>> evens;
+    private InfoBox infoBox;
 
     public Sudoku(){
         options = new ArrayList<>();
@@ -41,6 +43,11 @@ public class Sudoku {
             }
         }
         this.file = new File("files/sudoku/default.txt");
+    }
+
+    public void setInfoBox(InfoBox infoBox) {
+        this.infoBox = infoBox;
+        this.inputGrid.getTextFieldLayer().setInfoBox(infoBox);
     }
 
     public List<List<Set<Integer>>> getOptions() {

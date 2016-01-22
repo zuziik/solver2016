@@ -50,11 +50,19 @@ public class ParityLayer extends GridPane {
     }
 
     public boolean isEven(int x, int y) {
-        return cells[x][y].getStroke().equals(color.get('E'));
+        return cells[x][y].getStroke().equals(color.get('E')) && cells[x][y].getOpacity() == 1;
     }
 
     public boolean isOdd(int x, int y) {
-        return cells[x][y].getStroke().equals(color.get('O'));
+        return cells[x][y].getStroke().equals(color.get('O')) && cells[x][y].getOpacity() == 1;
+    }
+
+    public void hideAll() {
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                setBlank(i,j);
+            }
+        }
     }
 
     @Override

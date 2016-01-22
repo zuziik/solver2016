@@ -1,5 +1,6 @@
 package graphics.grids.layers;
 
+import graphics.InfoBox;
 import graphics.grids.InputGrid;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
@@ -23,6 +24,8 @@ public class TextFieldLayer extends GridPane {
     private final int size;
     private final InputGrid inputGrid;
     private final TextField[][] textFields = new TextField[9][9];
+    private int givens;
+    private InfoBox infoBox;
 
     public TextFieldLayer(int size, InputGrid inputGrid) {
         this.inputGrid = inputGrid;
@@ -52,6 +55,10 @@ public class TextFieldLayer extends GridPane {
                 textFields[i][j].setFont(new Font(10));
             }
         }
+    }
+
+    public void setInfoBox(InfoBox infoBox) {
+        this.infoBox = infoBox;
     }
 
     private void setSettingsHandler(int x, int y) {
@@ -90,6 +97,10 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
+    public int getGivens() {
+        return this.givens;
+    }
+
     private void changeGrid(int x, int y) {
         TextField textField = textFields[x][y];
 
@@ -118,16 +129,20 @@ public class TextFieldLayer extends GridPane {
 
             if (event.getCode().equals(KeyCode.DOWN)) {
                 down.requestFocus();
-                filterText(x, y);
+                updateGrid();
+                //filterText(x, y);
             } else if (event.getCode().equals(KeyCode.UP)) {
                 up.requestFocus();
-                filterText(x, y);
+                updateGrid();
+                //filterText(x, y);
             } else if (event.getCode().equals(KeyCode.LEFT)) {
                 left.requestFocus();
-                filterText(x, y);
+                updateGrid();
+                //filterText(x, y);
             } else if (event.getCode().equals(KeyCode.RIGHT)) {
                 right.requestFocus();
-                filterText(x, y);
+                updateGrid();
+                //filterText(x, y);
             }
         });
 
@@ -135,11 +150,16 @@ public class TextFieldLayer extends GridPane {
     }
 
     public void updateGrid() {
+        this.givens = 0;
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
                 filterText(i,j);
+                if (!textFields[i][j].getText().equals("")) {
+                    givens++;
+                }
             }
         }
+        this.infoBox.changeGivens(givens);
     }
 
     private String changeIrregular(int x, int y) {

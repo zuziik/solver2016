@@ -168,6 +168,7 @@ public class ReloadCommand implements Command {
                 row = br.readLine();
             }
             createSudoku();
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error occured while loading sudoku from file: File in a wrong format!");

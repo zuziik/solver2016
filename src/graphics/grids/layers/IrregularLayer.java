@@ -33,15 +33,15 @@ public class IrregularLayer extends GridPane {
 
     private void fillColors() {
         this.color = new HashMap<>(9);
-        color.put(1, Color.RED);
-        color.put(2, Color.BLUE);
-        color.put(3, Color.PURPLE);
-        color.put(4, Color.YELLOW);
-        color.put(5, Color.BROWN);
-        color.put(6, Color.GREEN);
-        color.put(7, Color.GRAY);
-        color.put(8, Color.PINK);
-        color.put(9, Color.ORANGE);
+        color.put(1, Color.rgb(253,253,150));
+        color.put(2, Color.rgb(255,193,204));
+        color.put(3, Color.rgb(255,179,71));
+        color.put(4, Color.rgb(255,105,97));
+        color.put(5, Color.rgb(160,120,90));
+        color.put(6, Color.rgb(207,207,196));
+        color.put(7, Color.rgb(119,158,203));
+        color.put(8, Color.rgb(69,206,162));
+        color.put(9, Color.rgb(223, 255, 0));
     }
 
     public void color(int x, int y, int i) {
@@ -50,6 +50,14 @@ public class IrregularLayer extends GridPane {
 
     public void setBlank(int x, int y) {
         cells[x][y].setFill(Color.WHITE);
+    }
+
+    public void hideAll() {
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                setBlank(i,j);
+            }
+        }
     }
 
     public boolean isRegion(int x, int y, int number) {

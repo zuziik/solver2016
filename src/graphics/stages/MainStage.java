@@ -7,11 +7,8 @@ import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
 import sudoku.Type;
@@ -37,6 +34,7 @@ public class MainStage {
     public MainStage(Sudoku sudoku){
         this.sudoku = sudoku;
         this.infoBox = new InfoBox();
+        this.sudoku.setInfoBox(infoBox);
         this.toolBar = new ToolBar(stage, this.sudoku, infoBox);
         this.menu = new UpperMenu(stage, this.sudoku, infoBox);
         this.inputGrid = sudoku.getInputGrid();
@@ -61,6 +59,7 @@ public class MainStage {
     public void start(){
         this.stage.setScene(scene);
         this.stage.setTitle("SUDOKU Solution Checker");
+        this.inputGrid.getTextFieldLayer().updateGrid();
         this.stage.show();
     }
 }
