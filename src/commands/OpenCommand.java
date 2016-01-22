@@ -12,7 +12,8 @@ import java.io.FileReader;
 import java.util.*;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci otvorenie sudoku z pouzivatelom vybraneho
+ * suboru
  */
 public class OpenCommand implements Command {
 

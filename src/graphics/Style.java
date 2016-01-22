@@ -9,10 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
- * Created by Zuzka on 21.1.2016.
+ * Trieda obsahuje metody na nastavenie stylu
  */
 public class Style {
 
+    /** Funkcia nastavi styl tlacidlu z uvodneho menu */
     public static void setHelloButtonStyle(Button btn) {
         String buttonStyle =
                 "-fx-background-color: white;"
@@ -38,6 +39,7 @@ public class Style {
         });
     }
 
+    /** Funkcia nastavi styl tlacidla v aplikacii so zadanou sirkou */
     public static void setButtonStyle(Button btn, int width) {
         btn.setPrefWidth(width);
         String buttonFocusStyle =
@@ -64,12 +66,14 @@ public class Style {
         });
     }
 
+    /** Funkcia nastavi styl radioButtonov */
     public static void setRadioButtonStyle(RadioButton radioButton) {
         radioButton.setFont(new Font("Arial", 12));
         radioButton.setPrefWidth(250);
         radioButton.setBackground(new Background(new BackgroundFill(Color.color(0.7695, 0.8281, 0.875), null, null)));
     }
 
+    /** Funkcia nastavi styl tlacidla na zobrazenie alebo skrytie informacii (Settings stage) */
     public static void setHelpButtonStyle(Button btn, Label info) {
         btn.setPrefWidth(250);
         String buttonFocusStyle =

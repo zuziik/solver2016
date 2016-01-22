@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje vstupnu mriezku na zadavanie sudoku
  */
 public class InputGrid extends Grid {
 
@@ -24,30 +24,37 @@ public class InputGrid extends Grid {
         this.textFieldLayer.setSettingsHandlers();
     }
 
+    /** Funkcia vrati vrstvu nepravidelnych regionov */
     public IrregularLayer getIrregularLayer() {
         return this.irregularLayer;
     }
 
+    /** Funkcia vrati vrstvu hlavnych diagonal */
     public DiagonalLayer getDiagonalLayer() {
         return this.diagonalLayer;
     }
 
+    /** Funkcia vrati vrstvu extra regionov */
     public RegionLayer getRegionLayer() {
         return this.regionLayer;
     }
 
+    /** Funkcia vrati paritnu vrstvu */
     public ParityLayer getParityLayer() {
         return this.parityLayer;
     }
 
+    /** Funkcia vrati vrstvu okrajov 3x3 stvorcov */
     public BorderLayer getBorderLayer() {
         return this.borderLayer;
     }
 
+    /** Funkcia vrati vrstvu textovych poli */
     public TextFieldLayer getTextFieldLayer() {
         return this.textFieldLayer;
     }
 
+    /** Funkcia vrati zoznam policok s parnymi cislami */
     public List<List<Integer>> getEven() {
         List<List<Integer>> evens = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
@@ -63,6 +70,7 @@ public class InputGrid extends Grid {
         return evens;
     }
 
+    /** Funkcia vrati zoznam policok s neparnymi cislami */
     public List<List<Integer>> getOdd() {
         List<List<Integer>> odds = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
@@ -78,7 +86,7 @@ public class InputGrid extends Grid {
         return odds;
     }
 
-    //zahrna irregularne aj extra regiony
+    /** Funkcia vrati zoznam nepravidelnych regionov */
     public List<List<List<Integer>>> getIrregulars() {
         List<List<List<Integer>>> regions = new ArrayList<>();
         boolean empty = true;
@@ -103,6 +111,7 @@ public class InputGrid extends Grid {
         return regions;
     }
 
+    /** Funkcia vrati zoznam extra regionov */
     public List<List<List<Integer>>> getExtras() {
         List<List<List<Integer>>> regions = new ArrayList<>();
         boolean empty = true;
@@ -127,14 +136,17 @@ public class InputGrid extends Grid {
         return regions;
     }
 
+    /** Funkcia vrati moznosti pre policko na pozicii x, y */
     public Set<Integer> getOptions(int x, int y) {
         return this.textFieldLayer.getOptions(x, y);
     }
 
+    /** Funkcia vrati text policka na pozicii x, y */
     public String getText(int x, int y) {
         return this.textFieldLayer.getText(x, y);
     }
 
+    /** Funkcia aktualizuje obsah mriezky */
     public void updateGrid() {
         this.textFieldLayer.updateGrid();
     }

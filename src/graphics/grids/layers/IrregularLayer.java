@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.HashMap;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje vrstvu s nepravidelnymi obrazcami
  */
 public class IrregularLayer extends GridPane {
 
@@ -31,6 +31,7 @@ public class IrregularLayer extends GridPane {
         fillColors();
     }
 
+    /** Funkcia zabezpeci definovanie farieb pre jednotlive regiony */
     private void fillColors() {
         this.color = new HashMap<>(9);
         color.put(1, Color.rgb(253,253,150));
@@ -44,26 +45,22 @@ public class IrregularLayer extends GridPane {
         color.put(9, Color.rgb(223, 255, 0));
     }
 
+    /** Funkcia zafarbi policko na pozicii x, y farbou regionu i */
     public void color(int x, int y, int i) {
         cells[x][y].setFill(color.get(i));
     }
 
+    /** Funkcia zrusi policku na pozicii x, y akukolvek prislusnost k regionu */
     public void setBlank(int x, int y) {
         cells[x][y].setFill(Color.WHITE);
     }
 
-    public void hideAll() {
-        for ( int i = 0; i < 9; i++ ) {
-            for ( int j = 0; j < 9; j++ ) {
-                setBlank(i,j);
-            }
-        }
-    }
-
+    /** Funkcia vrati true, ak je policko na pozicii x, y sucastou regionu s cislom number */
     public boolean isRegion(int x, int y, int number) {
         return cells[x][y].getFill().equals(color.get(number));
     }
 
+    /** Funkcia vrati klon vrstvy s nepravidelnymi regionmi */
     @Override
     public IrregularLayer clone() {
         IrregularLayer cloned = new IrregularLayer(size);

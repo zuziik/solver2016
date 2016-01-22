@@ -1,9 +1,7 @@
 package commands;
 
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sudoku.Type;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 21.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci nacitanie sudoku zo zadaneho suboru
  */
 public class ReloadCommand implements Command {
 
@@ -31,6 +29,8 @@ public class ReloadCommand implements Command {
         this.selectedFile = selectedFile;
     }
 
+    /** Funkcia nacita informacie o typoch sudoku a cisel v nom a ulozi ich do samostatnych
+     * zoznamov */
     private void createLists(File selectedFile) {
 
         try {
@@ -175,6 +175,7 @@ public class ReloadCommand implements Command {
         }
     }
 
+    /** Funkcia vytvori nove sudoku na zaklade informacii precitanych zo suboru */
     private void createSudoku() {
         Command command = new CreateCommand(numbers, stage, types, irregulars, extras, evens, odds, selectedFile);
         command.execute();

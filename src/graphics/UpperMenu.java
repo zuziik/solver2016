@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import sudoku.Sudoku;
 
 /**
- * Trieda reprezentujuca vrchne menu v hlavnom okne
+ * Trieda reprezentuje vrchne menu v hlavnom okne
  */
 public class UpperMenu extends MenuBar {
     /** Sudoku je hlavna trieda, na ktorej sa budu vykonavat zmeny, preto musi mat menu na nu referenciu, aby ju dalej
@@ -53,6 +53,7 @@ public class UpperMenu extends MenuBar {
         configureSettingsMenu();
     }
 
+    /** Funkcia nastavi spravanie polozkam menu File */
     private void configureFileMenu() {
         file.getItems().addAll(newSudoku, clear, reloadSudoku, loadSudoku, saveSudoku, saveSudokuAs, quit);
 
@@ -99,6 +100,7 @@ public class UpperMenu extends MenuBar {
         quit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
     }
 
+    /** Funkcia nastavi spravanie polozkam menu Generate */
     private void configureGenerateMenu() {
         generate.getItems().addAll(countSolutions, showSolution, showProgress);
 
@@ -121,6 +123,7 @@ public class UpperMenu extends MenuBar {
         showProgress.setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN));
     }
 
+    /** Funkcia nastavi spravanie polozkam menu Settings */
     private void configureSettingsMenu() {
         settings.getItems().addAll(setTimeout);
 

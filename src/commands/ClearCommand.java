@@ -6,7 +6,7 @@ import sudoku.Sudoku;
 import javafx.scene.control.TextField;
 
 /**
- * Created by Zuzka on 17.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci vymazanie cisel zo sudoku
  */
 public class ClearCommand implements Command {
     private final Sudoku sudoku;

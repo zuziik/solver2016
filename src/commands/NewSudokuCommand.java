@@ -4,7 +4,7 @@ import graphics.stages.ConfigurationStage;
 import javafx.stage.Stage;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci otvorenie okna na nakonfigurovanie sudoku
  */
 public class NewSudokuCommand implements Command {
 

@@ -6,7 +6,8 @@ import sudoku.Sudoku;
 import java.util.*;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci vypisanie vsetkych moznosti pre policka
+ * aktualneho sudoku (vsetky cisla na istotu a vpisky do ostatnych policok)
  */
 public class ShowProgressCommand implements Command {
 
@@ -28,6 +29,8 @@ public class ShowProgressCommand implements Command {
         }
     }
 
+    /** Funkcia prevedie cislo premennej pre SAT solver na trojicu riadok, stlpec, cislo
+     * a toto cislo prida do zoznamu moznosti pre dany riadok a stlpec */
     private void addNumber(String s) {
         int n = Integer.parseInt(s) - 1;
         Integer z = n % 9 + 1;
@@ -38,6 +41,7 @@ public class ShowProgressCommand implements Command {
         this.numbers.get(x).get(y).add(z);
     }
 
+    /** Funkcia vypise zoznam moznosti pre kazde policko do vystupnej mriezky */
     private void updateOutput() {
         for ( int x = 0; x < 9; x++ ) {
             for ( int y = 0; y < 9; y++ ) {
@@ -71,6 +75,8 @@ public class ShowProgressCommand implements Command {
         }
     }
 
+    /** Funkcia spracuje vsetky mozne riesenia konkretneho sudoku na zaklade vystupu
+     * SAT solvera */
     private void process(List<String> solutions) {
         for (String solution : solutions) {
             if (! solution.equals("SAT")) {

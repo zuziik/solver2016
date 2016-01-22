@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Created by Zuzka on 10.1.2016.
+ * Trieda reprezentuje vrstvu mriezky s okrajmi stvorcov 3x3 v mriezke
  */
 public class BorderLayer extends GridPane {
 
@@ -25,6 +25,7 @@ public class BorderLayer extends GridPane {
         }
     }
 
+    /** Funkcia zobrazi okraje stvorcov 3x3 */
     public void showBorders() {
         for (Rectangle[] row : borders) {
             for (Rectangle r : row) {
@@ -33,6 +34,7 @@ public class BorderLayer extends GridPane {
         }
     }
 
+    /** Funkcia skryje okraje stvorcov 3x3 */
     public void hideBorders() {
         for (Rectangle[] row : borders) {
             for (Rectangle r : row) {
@@ -41,6 +43,7 @@ public class BorderLayer extends GridPane {
         }
     }
 
+    /** Funkcia vrati klon vrstvy s okrajmi mriezky */
     @Override
     public BorderLayer clone() {
         if (borders[0][0].getOpacity() == 0) {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje generator pre Parne sudoku
  */
 public class EvenGenerator extends SuperGenerator {
 

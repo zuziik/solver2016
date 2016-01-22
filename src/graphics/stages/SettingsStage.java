@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import sudoku.Sudoku;
 
 /**
- * Created by Zuzka on 21.1.2016.
+ * Trieda reprezentuje okno s dalsimi nastaveniami
  */
 public class SettingsStage {
     private final BorderPane pane = new BorderPane();
@@ -53,6 +53,7 @@ public class SettingsStage {
         pane.setBottom(ok);
     }
 
+    /** Funkcia zabezpeci zobrazenie okna s dalsimi nastaveniami */
     public void show() {
         this.stage.show();
     }

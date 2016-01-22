@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje GENERATOR na pocitanie rieseni sudoku
  */
 public class Generator {
     private final String outputFile;
@@ -27,10 +27,12 @@ public class Generator {
         this.timeLimit = 5;
     }
 
+    /** Funkcia vrati casovy limit generatora */
     public double getTimeLimit() {
         return this.timeLimit;
     }
 
+    /** Funkcia nastavi casovy limit generatora */
     public void setTimeLimit(double timeLimit) {
         this.timeLimit = timeLimit;
     }
@@ -119,6 +121,8 @@ public class Generator {
         }
     }
 
+    /** Funkcia vrati retazec reprezentujuci lubovolne riesenie prislusneho sudoku alebo UNSAT, ak ziadne riesenie
+     * neexistuje, alebo TLE, ak casovy limit generatora vyprsal */
     public String generateOneSolution() {
         this.SAToutput = new ArrayList<>();
         this.mode = "#1";
@@ -137,6 +141,7 @@ public class Generator {
         return SAToutput.get(0);
     }
 
+    /** Funkcia vrati zoznam vsetkych rieseni sudoku. Tato funkcia je volana len v pripade, ze pocet rieseni je 1-5000*/
     public List<String> generateAllSolutions() {
         this.SAToutput = new ArrayList<>();
         this.mode = "#5000";
@@ -152,6 +157,7 @@ public class Generator {
         return SAToutput;
     }
 
+    /** Funkcia vrati pocet rieseni prislusneho sudoku alebo -1, ak pocas vypoctu vyprsal casovy limit generatora */
     public int countSolutions() {
         this.SAToutput = new ArrayList<>();
         this.mode = "c";

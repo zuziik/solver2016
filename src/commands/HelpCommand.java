@@ -3,7 +3,7 @@ package commands;
 import graphics.stages.HelpStage;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci zobrazenie okna s informaciami o aplikacii
  */
 public class HelpCommand implements Command {
     /**

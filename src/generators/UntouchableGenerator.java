@@ -3,7 +3,7 @@ package generators;
 import java.util.ArrayList;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje generator pre Bezdotykove sudoku
  */
 public class UntouchableGenerator extends SuperGenerator {
 
@@ -11,6 +11,8 @@ public class UntouchableGenerator extends SuperGenerator {
         super(wrapped);
     }
 
+    /** Funkcia vygeneruje CNF pre bezdotykove sudoku: ziadne dve policka, ktore sa dotykaju rohmi, nesmu obsahovat
+     * rovnake cisla */
     private void generateUT() {
         for ( int x = 0; x < 9; x++ ) {
             for ( int y = 0; y < 9; y++ ) {

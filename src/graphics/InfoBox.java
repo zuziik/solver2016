@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 20.1.2016.
+ * Trieda reprezentuje textove pole na vypis informacii z generovania
  */
 public class InfoBox extends Label {
     private final List<String> info;
@@ -17,11 +17,13 @@ public class InfoBox extends Label {
         this.givens = "#Givens: 0\n";
     }
 
+    /** Funkcia aktualizuje pocet zadanych cisel v mriezke a vypise to do infoBoxu */
     public void changeGivens(int givens) {
         this.givens = "#Givens: "+givens+"\n";
         this.update();
     }
 
+    /** Funkcia aktualizuje infoBox a vypise jeho stav do hlavneho okna */
     public void update() {
         String text = "";
         for (String t : info) {
@@ -31,6 +33,7 @@ public class InfoBox extends Label {
         super.setText(text);
     }
 
+    /** Funkcia prida vystup generatora do interneho zoznamu a aktualizuje stav infoBoxu */
     public void addInfo(String text) {
         this.info.add(text);
         if (this.info.size() > 5) {

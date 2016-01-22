@@ -3,7 +3,7 @@ package generators;
 import java.util.ArrayList;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje generator pre Nesusledne sudoku
  */
 public class NonconsecutiveGenerator extends SuperGenerator {
 

@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
 import java.util.HashMap;
 
 /**
- * Created by Zuzka on 10.1.2016.
+ * Trieda reprezentuje vrstvu s parnymi/neparnymi polickami
  */
 public class ParityLayer extends GridPane {
 
@@ -30,41 +30,38 @@ public class ParityLayer extends GridPane {
                 super.add(cells[i][j], j, i);
             }
         }
-
         fillColors();
     }
 
+    /** Funkcia definuje farby pre parne a neparne policka */
     private void fillColors() {
         this.color = new HashMap<>(2);
         color.put('O', Color.RED);
         color.put('E', Color.BLUE);
     }
 
+    /** Funkcia nastavi policko na pozicii x, y na parne, resp. neparne */
     public void color(int x, int y, char c) {
         cells[x][y].setOpacity(1);
         cells[x][y].setStroke(color.get(Character.toUpperCase(c)));
     }
 
+    /** Funkcia zrusi policku na pozicii x, y akukolvek prislusnost k parite */
     public void setBlank(int x, int y) {
         cells[x][y].setOpacity(0);
     }
 
+    /** Funkcia vrati true, ak je policko na pozicii x, y parne */
     public boolean isEven(int x, int y) {
         return cells[x][y].getStroke().equals(color.get('E')) && cells[x][y].getOpacity() == 1;
     }
 
+    /** Funkcia vrati true, ak je policko na pozicii x, y neparne */
     public boolean isOdd(int x, int y) {
         return cells[x][y].getStroke().equals(color.get('O')) && cells[x][y].getOpacity() == 1;
     }
 
-    public void hideAll() {
-        for ( int i = 0; i < 9; i++ ) {
-            for ( int j = 0; j < 9; j++ ) {
-                setBlank(i,j);
-            }
-        }
-    }
-
+    /** Funkcia vrati klon vrstvy s parnymi a neparnymi polickami */
     @Override
     public ParityLayer clone() {
         ParityLayer cloned = new ParityLayer(size);

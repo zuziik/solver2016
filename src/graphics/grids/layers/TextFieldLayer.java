@@ -2,22 +2,17 @@ package graphics.grids.layers;
 
 import graphics.InfoBox;
 import graphics.grids.InputGrid;
-import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
-
 import java.util.Set;
 import java.util.TreeSet;
 
-
 /**
- * Created by Zuzka on 10.1.2016.
+ * Funkcia reprezentuje vrstvu s textovymi polami na zadavanie obsahu sudoku pouzivatelom
  */
 public class TextFieldLayer extends GridPane {
 
@@ -48,6 +43,12 @@ public class TextFieldLayer extends GridPane {
         this.setInputHandlers();
     }
 
+    /** Funkcia nastavi vrstve referenciu na infoBox */
+    public void setInfoBox(InfoBox infoBox) {
+        this.infoBox = infoBox;
+    }
+
+    /** Funkcia textovym poliam nastavi spravanie, ak je vrstva pouzita pri nastaveniach mriezky */
     public void setSettingsHandlers() {
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
@@ -57,10 +58,7 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
-    public void setInfoBox(InfoBox infoBox) {
-        this.infoBox = infoBox;
-    }
-
+    /** Funkcia nastavi textovemu polu na pozicii x, y spravanie pre konfigurovanie mriezky a nastavenie typov */
     private void setSettingsHandler(int x, int y) {
 
         textFields[x][y].setOnKeyPressed(event -> {
@@ -97,10 +95,9 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
-    public int getGivens() {
-        return this.givens;
-    }
-
+    /** Funkcia aktualizuje mriezku podla zadanych hodnot - prefarbi policka podla ich prislusnosti k regionom a oznaci
+     * ich kruzkami, ak boli oznacene ako parne ci neparne. Okrem toho funkcia zabezpeci, ze v textovych poliach budu
+     * len relevantne znaky (najviac jeden z 1-9, najviac jeden z A-D a najviac jeden z E,O */
     private void changeGrid(int x, int y) {
         TextField textField = textFields[x][y];
 
@@ -111,6 +108,7 @@ public class TextFieldLayer extends GridPane {
         textField.setText(irregular + extraRegion + parity);
     }
 
+    /** Funkcia nastavi textovym poliam spravanie pre pripad, ze vrstva je pouzita pri generovani sudoku */
     public void setInputHandlers() {
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
@@ -120,6 +118,7 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
+    /** Funkcia nastavi spravanie pri generovani pre konkretne textove pole */
     private void setInputHandler(int x, int y) {
         textFields[x][y].setOnKeyPressed(event -> {
             TextField up = textFields[(x+8)%9][y];
@@ -127,28 +126,27 @@ public class TextFieldLayer extends GridPane {
             TextField left = textFields[x][(y+8)%9];
             TextField right = textFields[x][(y+1)%9];
 
+            /** Umoznenie pohybu sipkami medzi jednotlivymi polickami (cylindricky) */
             if (event.getCode().equals(KeyCode.DOWN)) {
                 down.requestFocus();
                 updateGrid();
-                //filterText(x, y);
             } else if (event.getCode().equals(KeyCode.UP)) {
                 up.requestFocus();
                 updateGrid();
-                //filterText(x, y);
             } else if (event.getCode().equals(KeyCode.LEFT)) {
                 left.requestFocus();
                 updateGrid();
-                //filterText(x, y);
             } else if (event.getCode().equals(KeyCode.RIGHT)) {
                 right.requestFocus();
                 updateGrid();
-                //filterText(x, y);
             }
         });
 
         textFields[x][y].setOnMouseClicked(event -> updateGrid());
     }
 
+    /** Funkcia aktualizuje obsah mriezky tak, aby kazde policko obsahovalo maximalne jedno cislo. Pocet zadanych
+     * cisel sa vypise v infoBoxe */
     public void updateGrid() {
         this.givens = 0;
         for ( int i = 0; i < 9; i++ ) {
@@ -162,6 +160,7 @@ public class TextFieldLayer extends GridPane {
         this.infoBox.changeGivens(givens);
     }
 
+    /** Funkcia aktualizuje vrstvu nepravidelnych regionov podla obsahu policka */
     private String changeIrregular(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -181,6 +180,7 @@ public class TextFieldLayer extends GridPane {
         return irregular;
     }
 
+    /** Funkcia aktualizuje vrstvu extra regionov podla obsahu policka */
     private String changeRegions(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -200,6 +200,7 @@ public class TextFieldLayer extends GridPane {
         return extraRegions;
     }
 
+    /** Funkcia aktualizuje paritnu vrstvu podla obsahu policka */
     private String changeParity(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -220,8 +221,7 @@ public class TextFieldLayer extends GridPane {
         return parity;
     }
 
-
-
+    /** Funkcia zabezpeci, ze v policku sa bude nachadzat maximalne jedno z cisel 1-9 */
     private void filterText(int x, int y) {
         TextField text = textFields[x][y];
         String s = "";
@@ -233,6 +233,7 @@ public class TextFieldLayer extends GridPane {
         text.setText(s);
     }
 
+    /** Funkcia vrati zoznam moznosti v rozsahu 0-8 pre konkretne policko na pozicii x, y */
     public Set<Integer> getOptions(int x, int y) {
         Set<Integer> options = new TreeSet<>();
         String text = textFields[x][y].getText();
@@ -251,14 +252,17 @@ public class TextFieldLayer extends GridPane {
         return options;
     }
 
+    /** Funkcia vrati obsah policka na pozicii x, y */
     public String getText(int x, int y) {
         return textFields[x][y].getText();
     }
 
+    /** Funkcia nastavi policku na pozicii x, y prislusny text*/
     public void setText(int x, int y, String text) {
         this.textFields[x][y].setText(text);
     }
 
+    /** Funkcia vrati referenciu na zoznam textovych poli */
     public TextField[][] getTextFields() {
         return this.textFields;
     }

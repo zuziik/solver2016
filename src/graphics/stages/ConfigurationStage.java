@@ -16,14 +16,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sudoku.Type;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje okno na nastavenie typov sudoku
  */
 public class ConfigurationStage {
     private final BorderPane pane = new BorderPane();
@@ -78,6 +77,7 @@ public class ConfigurationStage {
         });
     }
 
+    /** Funkcia nastavi obsah informacneho textu */
     private void setInfo() {
         this.info.setText("IRREGULAR\n" +
                 "Mark cells with numbers 1-9 to create irregular regions. " +
@@ -95,6 +95,7 @@ public class ConfigurationStage {
         this.info.setPrefWidth(250);
     }
 
+    /** Funkcia sa postara o vytvorenie radio buttonov na vyber typov sudoku */
     private void createRadioButtons() {
         rButtons = new ArrayList<>();
 
@@ -140,10 +141,12 @@ public class ConfigurationStage {
 
     }
 
+    /** Funkcia zabezpeci spravanie tlacidlu btn */
     private void setUpdateActions(RadioButton b) {
         b.setOnMouseClicked(event -> inputGrid.getTextFieldLayer().changeGrid());
     }
 
+    /** Funkcia vrati region s viac ako 9 polickami alebo "", ak ziaden taky neexistuje */
     private String findWrongRegion() {
         Integer i = 1;
         for ( List<List<Integer>> region : this.irregulars ) {
@@ -164,6 +167,8 @@ public class ConfigurationStage {
         return "";
     }
 
+    /** Funkcia nastavi spravanie tlacidlu create - skontroluje, ci maju regiony spravny pocet policok a vytvori
+     * sudoku zodpovedajuce vybranym typom */
     private void addCreateHandlers() {
         create.setOnAction(event -> {
             inputGrid.getTextFieldLayer().changeGrid();
@@ -179,6 +184,7 @@ public class ConfigurationStage {
         });
     }
 
+    /** Funkcia nastavi spravanie tlacidlu restart - obnovi predvolene nastavenia sudoku */
     private void addRestartHandlers() {
         restart.setOnAction(event -> {
             ConfigurationStage configurationStage = new ConfigurationStage();
@@ -187,6 +193,7 @@ public class ConfigurationStage {
         });
     }
 
+    /** Funkcia vytvori zoznam typov sudoku a zoznam vsetkych extra regionov a parnych/neparnych policok */
     private void updateLists() {
         this.types = new HashSet<>();
 
@@ -239,6 +246,7 @@ public class ConfigurationStage {
 
     }
 
+    /** Funkcia zabezpeci zobrazenie okna s nastaveniami typov */
     public void show() {
         stage.show();
     }

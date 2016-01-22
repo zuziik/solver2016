@@ -6,7 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci ulozenie cisel zadanych pouzivatelom
+ * do struktury sudoku na dalsie spracovanie
  */
 public class InputToSudokuCommand implements Command {
 

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 17.1.2016.
+ * Trieda reprezentuje prikaz, ktory na zaklade zadanych parametrov vytvori nove sudoku
  */
 public class CreateCommand implements Command {
 
@@ -41,6 +41,7 @@ public class CreateCommand implements Command {
         this.file = file;
     }
 
+    /** Funkcia vytvori generator k sudoku na zaklade zvolenych typov */
     private Generator createGenerator(Sudoku sudoku) {
         Generator generator = new RowColGenerator(sudoku);
 
@@ -86,6 +87,8 @@ public class CreateCommand implements Command {
         return generator;
     }
 
+    /** Funkcia vytvori graficku reprezentaciu sudoku na zaklade zvolenych typov (farebne
+     * oznaci regiony a parne/neparne policka, okraje mriezky a diagonaly */
     private InputGrid createInputGrid() {
         InputGrid inputGrid = new InputGrid();
 

@@ -6,7 +6,7 @@ import sudoku.Sudoku;
 import java.util.Date;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory spocita riesenia konkretneho sudoku
  */
 public class CountSolutionsCommand implements Command {
 
@@ -19,7 +19,8 @@ public class CountSolutionsCommand implements Command {
     }
 
     /**
-     * Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou
+     * Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou. Pomocou generatora v sudoku
+     * vypocita pocet jeho rieseni a vypise o tom spravu do infoBoxu
      */
     @Override
     public void execute() {

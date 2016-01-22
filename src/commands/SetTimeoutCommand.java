@@ -4,7 +4,7 @@ import graphics.stages.SettingsStage;
 import sudoku.Sudoku;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory nastavi SAT solveru casovy limit vypoctu
  */
 public class SetTimeoutCommand implements Command{
 

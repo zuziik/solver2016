@@ -3,7 +3,7 @@ package graphics.grids;
 import graphics.grids.layers.*;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje vystupnu mriezku pre vystup generatora
  */
 public class OutputGrid extends Grid {
     private final LabelLayer labelLayer;
@@ -22,10 +22,7 @@ public class OutputGrid extends Grid {
         }
     }
 
-    public LabelLayer getLabelLayer() {
-        return this.labelLayer;
-    }
-
+    /** Funkcia nastavi text policku na pozicii x, y */
     public void setText(int x, int y, String text) {
         this.labelLayer.setText(x,y,text);
     }

@@ -16,7 +16,8 @@ import sudoku.Type;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje hlavne okno aplikacie, v ktorom pouzivatel generuje sudoku alebo kontroluje jednoznacnost jeho
+ * riesenia
  */
 public class MainStage {
 
@@ -56,6 +57,7 @@ public class MainStage {
         this.pane.setBottom(types);
     }
 
+    /** Funkcia zabezpeci zobrazenie hlavneho okna */
     public void start(){
         this.stage.setScene(scene);
         this.stage.setTitle("SUDOKU Solution Checker");

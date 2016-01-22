@@ -3,7 +3,7 @@ package commands;
 import javafx.stage.Stage;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci zatvorenie vybraneho okna
  */
 public class QuitCommand implements Command {
 

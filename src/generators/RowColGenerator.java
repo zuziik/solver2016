@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje zakladny generator pre sudoku
  */
 public class RowColGenerator extends Generator {
 

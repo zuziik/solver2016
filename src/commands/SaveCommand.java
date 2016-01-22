@@ -8,7 +8,8 @@ import java.io.PrintWriter;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 17.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci ulozenie sudoku do suboru, ktory je pren
+ * predvoleny (alebo do predvoleneho suboru, ak sudoku ziaden nastaveny nema)
  */
 public class SaveCommand implements Command {
 
@@ -18,6 +19,7 @@ public class SaveCommand implements Command {
         this.sudoku = sudoku;
     }
 
+    /** Funkcia vrati retazec reprezentujuci ciselny obsah mriezky  */
     private String sudokuToFile() {
         StringBuffer s = new StringBuffer();
         for (int i=0; i<9; i++){
@@ -35,6 +37,8 @@ public class SaveCommand implements Command {
         return new String(s);
     }
 
+    /** Funkcia vrati retazec, ktory reprezentuje typy ukladaneho sudoku spolu so zoznamami
+     * policok, ktore reprezentuju niektore z nich (napriklad zoznam parnych policok) */
     private String typesToString() {
         String t = "";
         Set<Type> types = sudoku.getTypes();

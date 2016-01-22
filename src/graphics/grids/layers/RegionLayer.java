@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.HashMap;
 
 /**
- * Created by Zuzka on 10.1.2016.
+ * Trieda reprezentuje vrstvu s extra regionmi
  */
 public class RegionLayer extends GridPane {
 
@@ -31,6 +31,7 @@ public class RegionLayer extends GridPane {
         fillColors();
     }
 
+    /** Funkcia definuje farby pre jednotlive extra regiony */
     private void fillColors() {
         this.color = new HashMap<>(4);
         color.put('A', Color.RED);
@@ -39,27 +40,23 @@ public class RegionLayer extends GridPane {
         color.put('D', Color.YELLOW);
     }
 
+    /** Funkcia nastavi policku na pozicii x, y region A-D */
     public void color(int x, int y, char c) {
         cells[x][y].setFill(color.get(Character.toUpperCase(c)));
         cells[x][y].setOpacity(0.25);
     }
 
+    /** Funkcia zrusi prislusnost policka na pozicii x, y k akemukolvek regionu */
     public void setBlank(int x, int y) {
         cells[x][y].setOpacity(0);
     }
 
-    public void hideAll() {
-        for ( int i = 0; i < 9; i++ ) {
-            for ( int j = 0; j < 9; j++ ) {
-                setBlank(i,j);
-            }
-        }
-    }
-
+    /** Funkcia vrati true, ak policko na pozicii x, y patri regionu c */
     public boolean isRegion(int x, int y, char c) {
         return cells[x][y].getFill().equals(color.get(c)) && cells[x][y].getOpacity() == 0.25;
     }
 
+    /** Funkcia vrati klon vrstvy s extra regionmi */
     @Override
     public RegionLayer clone() {
         RegionLayer cloned = new RegionLayer(size);

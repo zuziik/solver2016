@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje generator pre Neparne sudoku
  */
 public class OddGenerator extends SuperGenerator {
 

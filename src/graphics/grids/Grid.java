@@ -3,7 +3,7 @@ package graphics.grids;
 import javafx.scene.layout.StackPane;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda definuje rozhranie pre mriezku sudoku
  */
 public abstract class Grid extends StackPane {
     final int size = 40;

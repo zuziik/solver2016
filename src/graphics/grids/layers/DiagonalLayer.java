@@ -4,7 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
 /**
- * Created by Zuzka on 10.1.2016.
+ * Trieda reprezentuje vrstvu s hlavnymi diagonalami v mriezke
  */
 public class DiagonalLayer extends Pane {
     private final int size;
@@ -19,16 +19,19 @@ public class DiagonalLayer extends Pane {
         super.getChildren().addAll(l1,l2);
     }
 
+    /** Funkcia zobrazi hlavne diagonaly v mriezke */
     public void showDiagonals() {
         l1.setOpacity(1);
         l2.setOpacity(1);
     }
 
+    /** Funkcia skryje hlavne diagonaly v mriezke */
     public void hideDiagonals() {
         l1.setOpacity(0);
         l2.setOpacity(0);
     }
 
+    /** Funkcia vrati klon vrstvy s hlavnymi diagonalami */
     @Override
     public DiagonalLayer clone() {
         DiagonalLayer cloned = new DiagonalLayer(this.size);

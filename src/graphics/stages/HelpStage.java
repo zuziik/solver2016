@@ -19,7 +19,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje okno s informaciami o aplikacii
  */
 public class HelpStage {
     private final BorderPane pane = new BorderPane();
@@ -29,6 +29,7 @@ public class HelpStage {
     private final Button ok;
     private final Button lang;
 
+    /** Funkcia precita informacie o aplikacii zo suboru prislusneho jazyka */
     private String readHelp() {
         String file = "files/help"+lang.getText()+".txt";
         try {
@@ -85,6 +86,7 @@ public class HelpStage {
         pane.setBottom(ok);
     }
 
+    /** Funkcia zabezpeci zobrazenie okna s informaciami o aplikacii */
     public void show() {
         this.stage.show();
     }

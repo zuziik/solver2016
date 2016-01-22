@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 11.1.2016.
+ * Funkcia reprezentuje nadtriedu pre vsetky generatory podla navrhoveho vzoru Decorator
  */
 public abstract class SuperGenerator extends Generator {
 

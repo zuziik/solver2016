@@ -1,16 +1,13 @@
 package graphics;
 
 import commands.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje nastrojovu listu pre hlavne okno
  */
 public class ToolBar extends VBox {
     private final Stage root;
@@ -34,6 +31,7 @@ public class ToolBar extends VBox {
 
     }
 
+    /** Funkcia nastavi styl vsetkym tlacidlam */
     private void setStyles() {
         Style.setButtonStyle(clear, 150);
         Style.setButtonStyle(save, 150);
@@ -43,6 +41,7 @@ public class ToolBar extends VBox {
         Style.setButtonStyle(showProgress, 150);
     }
 
+    /** Funkcia nastavi spravanie vsetkym tlacidlam */
     private void setActions() {
         clear.setOnAction(event -> {
             Command command = new ClearCommand(sudoku);

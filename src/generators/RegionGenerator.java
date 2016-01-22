@@ -3,7 +3,7 @@ package generators;
 import java.util.List;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje generator pre Extra regionalne sudoku
  */
 public class RegionGenerator extends SuperGenerator {
 
@@ -15,6 +15,8 @@ public class RegionGenerator extends SuperGenerator {
         this.regions = regions;
     }
 
+    /** Funkcia vygeneruje CNF pre extra regionalne: pre kazdy region zo zoznamu zabezpeci, ze cisla v nom sa nebudu
+     * opakovat */
     private void generateRegions() {
         for ( List<List<Integer>> region : regions ) {
             super.generateRegion(region);

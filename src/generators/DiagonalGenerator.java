@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Funkcia reprezentuje generator pre Diagonalne sudoku
  */
 public class DiagonalGenerator extends SuperGenerator {
 

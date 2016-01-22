@@ -7,7 +7,8 @@ import sudoku.Sudoku;
 import java.io.File;
 
 /**
- * Created by Zuzka on 9.1.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci ulozenie sudoku do pouzivatelom vybraneho
+ * sudoku
  */
 public class SaveAsCommand implements Command {
 

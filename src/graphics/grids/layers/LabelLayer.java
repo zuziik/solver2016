@@ -8,7 +8,7 @@ import javafx.scene.text.Font;
 
 
 /**
- * Created by Zuzka on 11.1.2016.
+ * Trieda reprezentuje vrstvu s cislami
  */
 public class LabelLayer extends GridPane {
 
@@ -34,6 +34,7 @@ public class LabelLayer extends GridPane {
 
     }
 
+    /** Funkcia nastavi policku na pozicii x, y text s cislom alebo moznostami pre cislo */
     public void setText(int x, int y, String text) {
         Label label = labels[x][y];
         label.setText(text);
@@ -44,9 +45,5 @@ public class LabelLayer extends GridPane {
             label.setFont(new Font("Courier New", 10));
             label.setWrapText(true);
         }
-    }
-
-    public Label[][] getLabels() {
-        return this.labels;
     }
 }
