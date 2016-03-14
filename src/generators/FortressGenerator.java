@@ -20,7 +20,6 @@ public class FortressGenerator extends SuperGenerator {
         for ( List<Integer> cell : cells ) {
             int x = cell.get(0);
             int y = cell.get(1);
-            //System.out.println((x+1)+", "+(y+1));
 
             // VLAVO
             List<Integer> compTo = new ArrayList<>(Arrays.asList(x-1,y));

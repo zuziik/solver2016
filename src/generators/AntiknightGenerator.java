@@ -16,7 +16,7 @@ public class AntiknightGenerator extends SuperGenerator {
     private void generateAK() {
         for ( int x = 0; x < 9; x++ ) {
             for ( int y = 0; y < 9; y++ ) {
-                if ( x + 1 <= 8 && y + 2 <= 8 ) {
+                if ( (x + 1 <= 8) && (y + 2 <= 8) ) {
                     for ( int z = 0; z < 9; z++ ) {
                         ArrayList<Integer> list = new ArrayList<>();
                         list.add(-variableNo(x,y,z));
@@ -24,11 +24,27 @@ public class AntiknightGenerator extends SuperGenerator {
                         formulas.add(list);
                     }
                 }
-                if ( x + 2 >= 0 && y + 1 <= 8 ) {
+                if ( (x + 2 <= 8) && (y + 1 <= 8) ) {
                     for ( int z = 0; z < 9; z++ ) {
                         ArrayList<Integer> list = new ArrayList<>();
                         list.add(-variableNo(x,y,z));
                         list.add(-variableNo(x+2,y+1,z));
+                        formulas.add(list);
+                    }
+                }
+                if ( (x - 2 >= 0) && (y + 1 <= 8) ) {
+                    for ( int z = 0; z < 9; z++ ) {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(-variableNo(x,y,z));
+                        list.add(-variableNo(x-2,y+1,z));
+                        formulas.add(list);
+                    }
+                }
+                if ( (x - 1 >= 0) && (y + 2 <= 8) ) {
+                    for ( int z = 0; z < 9; z++ ) {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(-variableNo(x,y,z));
+                        list.add(-variableNo(x-1,y+2,z));
                         formulas.add(list);
                     }
                 }
