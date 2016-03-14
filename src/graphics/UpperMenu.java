@@ -29,6 +29,7 @@ public class UpperMenu extends MenuBar {
     private final Menu file = new Menu("File");
     private final Menu generate = new Menu("Generate");
     private final Menu settings = new Menu("Settings");
+    private final Menu export = new Menu("Export");
     private final MenuItem loadSudoku = new MenuItem("Open");
     private final MenuItem reloadSudoku = new MenuItem("Reload");
     private final MenuItem saveSudokuAs = new MenuItem("Save As");
@@ -39,18 +40,19 @@ public class UpperMenu extends MenuBar {
     private final MenuItem showProgress = new MenuItem("Show Progress");
     private final MenuItem countSolutions = new MenuItem("Count Solutions");
     private final MenuItem clear = new MenuItem("Clear Input");
-    /** Polozka menu na prepinanie medzi modmi s a bez vpisiek - initial je bez nich, ale text sa bude menit podla
-     * aktualneho modu*/
+    private final MenuItem print = new MenuItem("Print Sudoku");
+    private final MenuItem saveImg = new MenuItem("Save as Image");
     private final MenuItem setTimeout = new MenuItem("Set Timeout");
 
     public UpperMenu( Stage root, Sudoku sudoku, InfoBox infoBox ) {
         this.root = root;
         this.sudoku = sudoku;
         this.infoBox = infoBox;
-        this.getMenus().addAll(file, generate, settings);
+        this.getMenus().addAll(file, generate, settings, export);
         configureFileMenu();
         configureGenerateMenu();
         configureSettingsMenu();
+        configureExportMenu();
     }
 
     /** Funkcia nastavi spravanie polozkam menu File */
@@ -120,7 +122,7 @@ public class UpperMenu extends MenuBar {
             Command command = new ShowProgressCommand(sudoku, infoBox);
             command.execute();
         });
-        showProgress.setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN));
+        showProgress.setAccelerator(new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN));
     }
 
     /** Funkcia nastavi spravanie polozkam menu Settings */
@@ -132,5 +134,22 @@ public class UpperMenu extends MenuBar {
             command.execute();
         });
         setTimeout.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN));
+    }
+
+    /** Funkcia nastavi spravanie polozkam menu Export */
+    private void configureExportMenu() {
+        export.getItems().addAll(print, saveImg);
+
+        print.setOnAction(event -> {
+            Command command = new PrintCommand(root, sudoku);
+            command.execute();
+        });
+        print.setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN));
+
+        saveImg.setOnAction(event -> {
+            Command command = new ExportCommand(sudoku.getInputGrid(), root);
+            command.execute();
+        });
+        saveImg.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
     }
 }

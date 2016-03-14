@@ -36,7 +36,7 @@ public class MainStage {
         this.sudoku = sudoku;
         this.infoBox = new InfoBox();
         this.sudoku.setInfoBox(infoBox);
-        this.toolBar = new ToolBar(stage, this.sudoku, infoBox);
+        this.toolBar = new ToolBar(stage, sudoku, infoBox);
         this.menu = new UpperMenu(stage, this.sudoku, infoBox);
         this.inputGrid = sudoku.getInputGrid();
         this.outputGrid = sudoku.getOutputGrid();
@@ -45,14 +45,7 @@ public class MainStage {
         this.pane.setCenter(toolBar);
         this.pane.setTop(menu);
         this.types = new Label();
-        Set<Type> typeSet = sudoku.getTypes();
-        String text = "SUDOKU TYPES";
-        String div = ": ";
-        for (Type type : typeSet) {
-            text += div+type;
-            div = ", ";
-        }
-        this.types.setText(text);
+        this.types.setText(this.sudoku.getTypesText());
         this.types.setTextFill(Color.BLUE);
         this.pane.setBottom(types);
     }

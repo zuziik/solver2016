@@ -14,9 +14,10 @@ public class OutputGrid extends Grid {
         ParityLayer parityLayer = inputGrid.getParityLayer().clone();
         BorderLayer borderLayer = inputGrid.getBorderLayer().clone();
         DiagonalLayer diagonalLayer = inputGrid.getDiagonalLayer().clone();
+        FortressLayer fortressLayer = inputGrid.getFortressLayer().clone();
 
         this.labelLayer = new LabelLayer(size);
-        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, diagonalLayer, labelLayer);
+        super.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, diagonalLayer, labelLayer);
         if (borderLayer != null){
             super.getChildren().add(borderLayer);
         }

@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import java.util.Set;
 import java.util.TreeSet;
@@ -104,8 +105,9 @@ public class TextFieldLayer extends GridPane {
         String irregular = changeIrregular(x, y);
         String extraRegion = changeRegions(x, y);
         String parity = changeParity(x, y);
+        String fortress = changeFortress(x, y);
 
-        textField.setText(irregular + extraRegion + parity);
+        textField.setText(irregular + extraRegion + parity + fortress);
     }
 
     /** Funkcia nastavi textovym poliam spravanie pre pripad, ze vrstva je pouzita pri generovani sudoku */
@@ -221,6 +223,21 @@ public class TextFieldLayer extends GridPane {
         return parity;
     }
 
+    private String changeFortress(int x, int y) {
+        TextField textField = textFields[x][y];
+        String text = textField.getText();
+        String fortress = "";
+
+        if (text.contains("X") || text.contains("x")) {
+            inputGrid.getFortressLayer().color(x, y);
+            fortress = "X";
+        } else {
+            inputGrid.getParityLayer().setBlank(x, y);
+        }
+
+        return fortress;
+    }
+
     /** Funkcia zabezpeci, ze v policku sa bude nachadzat maximalne jedno z cisel 1-9 */
     private void filterText(int x, int y) {
         TextField text = textFields[x][y];
@@ -265,6 +282,17 @@ public class TextFieldLayer extends GridPane {
     /** Funkcia vrati referenciu na zoznam textovych poli */
     public TextField[][] getTextFields() {
         return this.textFields;
+    }
+
+    @Override
+    public TextFieldLayer clone() {
+        TextFieldLayer cloned = new TextFieldLayer(this.size, this.inputGrid);
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                cloned.getTextFields()[i][j].setText(this.getTextFields()[i][j].getText());
+            }
+        }
+        return cloned;
     }
 
 }

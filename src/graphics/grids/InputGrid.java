@@ -1,6 +1,9 @@
 package graphics.grids;
 
 import graphics.grids.layers.*;
+import javafx.geometry.Orientation;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +17,14 @@ public class InputGrid extends Grid {
 
     private final IrregularLayer irregularLayer = new IrregularLayer(size);
     private final RegionLayer regionLayer = new RegionLayer(size);
+    private final FortressLayer fortressLayer = new FortressLayer(size);
     private final ParityLayer parityLayer = new ParityLayer(size);
     private final BorderLayer borderLayer = new BorderLayer(3*size);
     private final DiagonalLayer diagonalLayer = new DiagonalLayer(9*size);
     private final TextFieldLayer textFieldLayer = new TextFieldLayer(size, this);
 
     public InputGrid() {
-        super.getChildren().addAll(irregularLayer, regionLayer, parityLayer, borderLayer, diagonalLayer, textFieldLayer);
+        super.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, borderLayer, diagonalLayer, textFieldLayer);
         this.textFieldLayer.setSettingsHandlers();
     }
 
@@ -32,6 +36,11 @@ public class InputGrid extends Grid {
     /** Funkcia vrati vrstvu hlavnych diagonal */
     public DiagonalLayer getDiagonalLayer() {
         return this.diagonalLayer;
+    }
+
+    /** Funkcia vrati vrstvu sedych policok pre pevnost */
+    public FortressLayer getFortressLayer() {
+        return this.fortressLayer;
     }
 
     /** Funkcia vrati vrstvu extra regionov */
@@ -84,6 +93,21 @@ public class InputGrid extends Grid {
             }
         }
         return odds;
+    }
+
+    public List<List<Integer>> getFortress() {
+        List<List<Integer>> fortress = new ArrayList<>();
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                if (this.fortressLayer.isFortress(i, j)) {
+                    List<Integer> pair = new ArrayList<>();
+                    pair.add(i);
+                    pair.add(j);
+                    fortress.add(pair);
+                }
+            }
+        }
+        return fortress;
     }
 
     /** Funkcia vrati zoznam nepravidelnych regionov */
@@ -151,5 +175,20 @@ public class InputGrid extends Grid {
         this.textFieldLayer.updateGrid();
     }
 
+    public StackPane printImage() {
+        StackPane image = new StackPane();
+        BorderLayer borderLayer = this.borderLayer.clone();
+        DiagonalLayer diagonalLayer = this.diagonalLayer.clone();
+        IrregularLayer irregularLayer = this.irregularLayer.clone();
+        ParityLayer parityLayer = this.parityLayer.clone();
+        RegionLayer regionLayer = this.regionLayer.clone();
+        FortressLayer fortressLayer = this.fortressLayer.clone();
+        TextFieldLayer textFieldLayer = this.textFieldLayer.clone();
+        image.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, diagonalLayer, textFieldLayer);
+        if (borderLayer != null) {
+            image.getChildren().add(borderLayer);
+        }
+        return image;
+    }
 
 }

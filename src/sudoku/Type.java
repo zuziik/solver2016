@@ -13,5 +13,6 @@ public enum Type {
     Odd,
     Irregular,
     ExtraRegion,
-    Untouchable
+    Untouchable,
+    Fortress
 }

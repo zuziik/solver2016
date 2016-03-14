@@ -22,6 +22,7 @@ public class ReloadCommand implements Command {
     private final List<List<Integer>> odds = new ArrayList<>();
     private final List<List<List<Integer>>> irregulars = new ArrayList<>();
     private final List<List<List<Integer>>> extras = new ArrayList<>();
+    private final List<List<Integer>> fortress = new ArrayList<>();
     private final File selectedFile;
 
     public ReloadCommand(Stage stage, File selectedFile){
@@ -73,6 +74,17 @@ public class ReloadCommand implements Command {
                         cell.add(Character.getNumericValue(arrays[i].charAt(1)));
                         cell.add(Character.getNumericValue(arrays[i + 1].charAt(0)));
                         odds.add(cell);
+                    }
+                }
+                else if ( row.equals(Type.Fortress.toString()) ) {
+                    row = br.readLine();
+                    this.types.add(Type.Fortress);
+                    String[] arrays = row.substring(1,row.length()-1).split(", ");
+                    for ( int i = 0; i < arrays.length; i += 2) {
+                        List<Integer> cell = new ArrayList<>();
+                        cell.add(Character.getNumericValue(arrays[i].charAt(1)));
+                        cell.add(Character.getNumericValue(arrays[i + 1].charAt(0)));
+                        fortress.add(cell);
                     }
                 }
                 else if ( row.equals(Type.Irregular.toString()) ) {
@@ -177,7 +189,7 @@ public class ReloadCommand implements Command {
 
     /** Funkcia vytvori nove sudoku na zaklade informacii precitanych zo suboru */
     private void createSudoku() {
-        Command command = new CreateCommand(numbers, stage, types, irregulars, extras, evens, odds, selectedFile);
+        Command command = new CreateCommand(numbers, stage, types, irregulars, extras, fortress, evens, odds, selectedFile);
         command.execute();
     }
 

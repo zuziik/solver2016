@@ -3,6 +3,7 @@ package commands;
 import generators.*;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
+import graphics.grids.layers.FortressLayer;
 import graphics.grids.layers.IrregularLayer;
 import graphics.grids.layers.ParityLayer;
 import graphics.grids.layers.RegionLayer;
@@ -22,6 +23,7 @@ public class CreateCommand implements Command {
 
     private final List<List<List<Integer>>> irregulars;
     private final List<List<List<Integer>>> extras;
+    private final List<List<Integer>> fortress;
     private final List<List<Integer>> evens;
     private final List<List<Integer>> odds;
     private final Set<Type> types;
@@ -30,10 +32,12 @@ public class CreateCommand implements Command {
     private final File file;
 
     public CreateCommand(List<List<Integer>> numbers, Stage stage, Set<Type> types, List<List<List<Integer>>> irregulars,
-                         List<List<List<Integer>>> extras, List<List<Integer>> evens, List<List<Integer>> odds, File file) {
+                         List<List<List<Integer>>> extras, List<List<Integer>> fortress, List<List<Integer>> evens,
+                         List<List<Integer>> odds, File file) {
         this.stage = stage;
         this.irregulars = irregulars;
         this.extras = extras;
+        this.fortress = fortress;
         this.evens = evens;
         this.odds = odds;
         this.types = types;
@@ -62,6 +66,11 @@ public class CreateCommand implements Command {
         }
         if (types.contains(Type.Antiknight)) {
             generator = new AntiknightGenerator(generator);
+        }
+
+        if (types.contains(Type.Fortress) && fortress.size() > 0) {
+            generator = new FortressGenerator(generator, fortress);
+            sudoku.setFortress(fortress);
         }
 
         if (types.contains(Type.Even) && evens.size() > 0) {
@@ -135,6 +144,13 @@ public class CreateCommand implements Command {
                     regionLayer.color(cell.get(0),cell.get(1),c);
                 }
                 c++;
+            }
+        }
+
+        if (types.contains(Type.Fortress)) {
+            FortressLayer fortressLayer = inputGrid.getFortressLayer();
+            for (List<Integer> cell : fortress) {
+                fortressLayer.color(cell.get(0), cell.get(1));
             }
         }
 

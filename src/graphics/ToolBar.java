@@ -19,9 +19,11 @@ public class ToolBar extends VBox {
     private final Button countSolutions = new Button("Count Solutions");
     private final  Button showSolution = new Button("Show Any Solution");
     private final Button showProgress = new Button("Show Progress");
+    private final Button printSudoku = new Button("Print Sudoku");
+    private final Button createImg = new Button("Create Image");
 
     public ToolBar( Stage root, Sudoku sudoku, InfoBox infoBox ) {
-        this.getChildren().addAll(clear, save, reload, countSolutions, showSolution, showProgress, infoBox);
+        this.getChildren().addAll(clear, save, reload, countSolutions, showSolution, showProgress, printSudoku, createImg, infoBox);
         this.sudoku = sudoku;
         this.root = root;
         this.infoBox = infoBox;
@@ -39,6 +41,8 @@ public class ToolBar extends VBox {
         Style.setButtonStyle(countSolutions, 150);
         Style.setButtonStyle(showSolution, 150);
         Style.setButtonStyle(showProgress, 150);
+        Style.setButtonStyle(printSudoku, 150);
+        Style.setButtonStyle(createImg, 150);
     }
 
     /** Funkcia nastavi spravanie vsetkym tlacidlam */
@@ -70,6 +74,16 @@ public class ToolBar extends VBox {
 
         showSolution.setOnAction(event -> {
             Command command = new ShowSolutionCommand(sudoku, infoBox);
+            command.execute();
+        });
+
+        printSudoku.setOnAction(event -> {
+            Command command = new PrintCommand(root, sudoku);
+            command.execute();
+        });
+
+        createImg.setOnAction(event -> {
+            Command command = new ExportCommand(sudoku.getInputGrid(), root);
             command.execute();
         });
     }

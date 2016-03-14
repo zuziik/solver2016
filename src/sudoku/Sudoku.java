@@ -23,6 +23,7 @@ public class Sudoku {
     private List<List<List<Integer>>> extras;
     private List<List<Integer>> odds;
     private List<List<Integer>> evens;
+    private List<List<Integer>> fortress;
     private InfoBox infoBox;
 
     public Sudoku(){
@@ -108,6 +109,16 @@ public class Sudoku {
         return this.types;
     }
 
+    public String getTypesText() {
+        StringBuffer text = new StringBuffer("SUDOKU TYPES");
+        String div = ": ";
+        for (Type type : this.types) {
+            text.append(div+type);
+            div = ", ";
+        }
+        return new String(text);
+    }
+
     /** Funkcia vrati zoznam parnych policok */
     public List<List<Integer>> getEvens() {
         return this.evens;
@@ -126,6 +137,14 @@ public class Sudoku {
     /** Funkcia nastavi sudoku zoznam parnych policok */
     public void setOdds(List<List<Integer>> odds) {
         this.odds = odds;
+    }
+
+    public List<List<Integer>> getFortress() {
+        return this.fortress;
+    }
+
+    public void setFortress(List<List<Integer>> fortress) {
+        this.fortress = fortress;
     }
 
     /** Funkcia vrati zoznam nepravidelnych regionov */

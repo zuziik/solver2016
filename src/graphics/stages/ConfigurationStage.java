@@ -5,9 +5,7 @@ import commands.CreateCommand;
 import graphics.Style;
 import graphics.grids.InputGrid;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -45,6 +43,7 @@ public class ConfigurationStage {
     private List<List<List<Integer>>> extras = new ArrayList<>();
     private List<List<Integer>> odds = new ArrayList<>();
     private List<List<Integer>> evens = new ArrayList<>();
+    private List<List<Integer>> fortress = new ArrayList<>();
     private Set<Type> types;
     private final int width = 250;
 
@@ -87,6 +86,8 @@ public class ConfigurationStage {
                 "Mark cells with letters A-D to create extra regions. " +
                 "Same letters belong to the same region. " +
                 "Regions A-D may not overlap each other but they can overlap regions 1-9.\n" +
+                "FORTRESS\n" +
+                "Write X into a cell to mark it a fortress. " +
                 "EVEN/ODD\n" +
                 "Write E/O into a cell to mark it EVEN/ODD.");
         this.info.setBackground(new Background(new BackgroundFill(Color.color(0.9062, 0.9297, 0.9453), null, null)));
@@ -175,11 +176,13 @@ public class ConfigurationStage {
             updateLists();
             String wrongRegion = findWrongRegion();
             if (wrongRegion.equals("")) {
-                Command command = new CreateCommand(null, stage, types, irregulars, extras, evens, odds, null);
+                Command command = new CreateCommand(null, stage, types, irregulars, extras, fortress, evens, odds, null);
                 command.execute();
             }
             else {
-                System.out.println("This region is wrong: "+wrongRegion);
+                Dialog alert = new Alert(Alert.AlertType.ERROR, "Wrong number of cells in region "+wrongRegion);
+                alert.showAndWait()
+                        .filter(response -> response == ButtonType.OK);
             }
         });
     }
@@ -228,6 +231,13 @@ public class ConfigurationStage {
         if (odds1.size() > 0) {
             types.add(Type.Odd);
             this.odds.addAll(odds1);
+        }
+
+        this.fortress.clear();
+        List<List<Integer>> fortress1 = inputGrid.getFortress();
+        if (fortress1.size() > 0) {
+            types.add(Type.Fortress);
+            this.fortress.addAll(fortress1);
         }
 
         this.irregulars.clear();

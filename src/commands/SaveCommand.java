@@ -53,6 +53,9 @@ public class SaveCommand implements Command {
             else if ( type.equals(Type.Irregular) ) {
                 t += sudoku.getIrregulars() + "\n";
             }
+            else if ( type.equals(Type.Fortress) ) {
+                t += sudoku.getFortress() + "\n";
+            }
             else if ( type.equals(Type.ExtraRegion) ) {
                 t += sudoku.getExtras() + "\n";
             }

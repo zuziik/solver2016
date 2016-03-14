@@ -125,7 +125,7 @@ public class Generator {
      * neexistuje, alebo TLE, ak casovy limit generatora vyprsal */
     public String generateOneSolution() {
         this.SAToutput = new ArrayList<>();
-        this.mode = "#1";
+        this.mode = "1";
         try {
             createFileWithCNF();
         } catch (IOException e) {
