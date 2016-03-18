@@ -3,6 +3,7 @@ package generators;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Trieda reprezentuje GENERATOR na pocitanie rieseni sudoku
@@ -19,12 +20,20 @@ public class Generator {
     private final String inputFile;            // vstupny subor s CNF vo formate DIMACS
     private double timeLimit;                  // casovy limit, ako dlho ma SAT solver bezat
     private String mode; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
+    private int seed;
+    private Random random;
     private ArrayList<String> SAToutput;    // cely vystup generatora
 
     Generator() {
         this.inputFile = "files/formulas.txt";
         this.outputFile = this.inputFile;
         this.timeLimit = 5;
+        this.random = new Random();
+        this.seed = 1;
+    }
+
+    public String getInputFile() {
+        return this.inputFile;
     }
 
     /** Funkcia vrati casovy limit generatora */
@@ -83,7 +92,7 @@ public class Generator {
     }
 
     /** Funkcia vygeneruje CNF pre aktualne sudoku a vytvori subor, do ktoreho ich vypise */
-    private void createFileWithCNF() throws IOException{
+    public void createFileWithCNF() throws IOException{
         this.generateCNF();
         this.printToFile();
     }
@@ -91,14 +100,14 @@ public class Generator {
     private boolean generate() {
         try {
             /** Vytvorenie a spustenie procesu pre generovanie CNF pomocou SAT solvera relsat */
-            Process p = Runtime.getRuntime().exec("cmd /C relsat.exe" + " -#" + mode + " -t" + timeLimit + " " + inputFile);
+            Process p = Runtime.getRuntime().exec("cmd /C relsat.exe" + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
 
             /** Vypis vystupu SAT solvera na vystup a ulozenie do premennej SAToutput*/
             String line;
             while ((line = in.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line);
                 if (line.charAt(0) != 'c'){
                     SAToutput.add(line);
                 }
@@ -126,6 +135,7 @@ public class Generator {
     public String generateOneSolution() {
         this.SAToutput = new ArrayList<>();
         this.mode = "1";
+        this.seed = Math.abs(this.random.nextInt());
         try {
             createFileWithCNF();
         } catch (IOException e) {
@@ -144,7 +154,7 @@ public class Generator {
     /** Funkcia vrati zoznam vsetkych rieseni sudoku. Tato funkcia je volana len v pripade, ze pocet rieseni je 1-5000*/
     public List<String> generateAllSolutions() {
         this.SAToutput = new ArrayList<>();
-        this.mode = "#5000";
+        this.mode = "5000";
         try {
             createFileWithCNF();
         } catch (IOException e) {
@@ -170,7 +180,7 @@ public class Generator {
         if (timeLimitExpired) {
             return -1;
         }
-        System.out.println(SAToutput);
+        //System.out.println(SAToutput);
         if (SAToutput.get(0).equals("UNSAT")) {
             return 0;
         }
@@ -178,4 +188,5 @@ public class Generator {
         int index = s.indexOf(":");
         return Integer.parseInt(s.substring(index+2));
     }
+
 }

@@ -9,6 +9,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -154,7 +157,8 @@ public class TextFieldLayer extends GridPane {
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
                 filterText(i,j);
-                if (!textFields[i][j].getText().equals("")) {
+                String txt = textFields[i][j].getText();
+                if (!txt.equals("") && !txt.equals("0")) {
                     givens++;
                 }
             }
@@ -242,7 +246,7 @@ public class TextFieldLayer extends GridPane {
     private void filterText(int x, int y) {
         TextField text = textFields[x][y];
         String s = "";
-        for (Integer i = 1; i <= 9; i++) {
+        for (Integer i = 0; i <= 9; i++) {
             if (text.getText().contains(i.toString())) {
                 s = i.toString();
             }
@@ -267,6 +271,22 @@ public class TextFieldLayer extends GridPane {
             }
         }
         return options;
+    }
+
+    public List<List<Integer>> getZeros() {
+        List<List<Integer>> zeros = new ArrayList<>();
+        for ( int i = 0; i < 9; i++ ) {
+            for ( int j = 0; j < 9; j++ ) {
+                TextField text = textFields[i][j];
+                if (text.getText().contains("0")) {
+                    List<Integer> cell = new ArrayList<>();
+                    cell.add(i);
+                    cell.add(j);
+                    zeros.add(cell);
+                }
+            }
+        }
+        return zeros;
     }
 
     /** Funkcia vrati obsah policka na pozicii x, y */

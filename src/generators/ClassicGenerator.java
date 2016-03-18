@@ -35,9 +35,6 @@ public class ClassicGenerator extends SuperGenerator {
     @Override
     public void generateCNF() {
         super.generateCNF();
-        System.out.println(super.formulas.size());
-        System.out.println("Idem generovat klasiku");
-        System.out.println(super.formulas.size());
         generateClassic();
     }
 }

@@ -39,8 +39,7 @@ public class ShowSolutionCommand implements Command {
         Command command = new InputToSudokuCommand(sudoku);
         command.execute();
 
-        Date date = new Date();
-        String text = date.toString().substring(11,19)+'\n';
+        String text = "";
 
         String solution = sudoku.getGenerator().generateOneSolution();
 
@@ -55,7 +54,6 @@ public class ShowSolutionCommand implements Command {
                 int index = solution.indexOf(":");
                 solution = solution.substring(index + 1);
                 String[] numbers = solution.split(" ");
-                System.out.println(solution);
                 for (String s : numbers) {
                     if (!s.equals("")) {
                         setNumber(s);

@@ -183,4 +183,26 @@ public class Sudoku {
             i++;
         }
     }
+
+    public List<List<Integer>> getZeros() {
+        return this.inputGrid.getTextFieldLayer().getZeros();
+    }
+
+    public void setNumber(int x, int y, Integer number) {
+        Set<Integer> set = this.options.get(x).get(y);
+        set.clear();
+        set.add(number);
+        number++;
+        String text = number.toString();
+        this.inputGrid.getTextFieldLayer().setText(x,y,text);
+    }
+
+    public void setZero(int x, int y) {
+        Set<Integer> set = this.options.get(x).get(y);
+        set.clear();
+        for (int i = 0; i < 9; i++ ) {
+            set.add(i);
+        }
+        this.inputGrid.getTextFieldLayer().setText(x,y,"0");
+    }
 }

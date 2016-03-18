@@ -102,8 +102,7 @@ public class ShowProgressCommand implements Command {
         Command command = new InputToSudokuCommand(sudoku);
         command.execute();
 
-        Date date = new Date();
-        String text = date.toString().substring(11, 19) + '\n';
+        String text = "";
 
         int count = sudoku.getGenerator().countSolutions();
         if (count == 0) {

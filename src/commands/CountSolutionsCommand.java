@@ -12,10 +12,15 @@ public class CountSolutionsCommand implements Command {
 
     private final InfoBox infoBox;
     private final Sudoku sudoku;
+    private int count;
 
     public CountSolutionsCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
+    }
+
+    public int getCount() {
+        return this.count;
     }
 
     /**
@@ -27,15 +32,15 @@ public class CountSolutionsCommand implements Command {
         Command command = new InputToSudokuCommand(sudoku);
         command.execute();
 
-        Date date = new Date();
-        int count = sudoku.getGenerator().countSolutions();
-        String text = date.toString().substring(11,19)+'\n';
+        this.count = sudoku.getGenerator().countSolutions();
+        String text = "";
+
         if (count >= 0) {
             text += "#Solutions: "+count+'\n';
         }
         else {
             text += "Time Limit Expired\n";
         }
-        this.infoBox.addInfo(text);
+        if (this.infoBox != null) this.infoBox.addInfo(text);
     }
 }

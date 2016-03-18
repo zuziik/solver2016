@@ -39,6 +39,7 @@ public class UpperMenu extends MenuBar {
     private final MenuItem showSolution = new MenuItem("Show Any Solution");
     private final MenuItem showProgress = new MenuItem("Show Progress");
     private final MenuItem countSolutions = new MenuItem("Count Solutions");
+    private final MenuItem generateSudoku = new MenuItem("Generate Sudoku");
     private final MenuItem clear = new MenuItem("Clear Input");
     private final MenuItem print = new MenuItem("Print Sudoku");
     private final MenuItem saveImg = new MenuItem("Save as Image");
@@ -104,7 +105,7 @@ public class UpperMenu extends MenuBar {
 
     /** Funkcia nastavi spravanie polozkam menu Generate */
     private void configureGenerateMenu() {
-        generate.getItems().addAll(countSolutions, showSolution, showProgress);
+        generate.getItems().addAll(countSolutions, showSolution, showProgress, generateSudoku);
 
         countSolutions.setOnAction(event -> {
             Command command = new CountSolutionsCommand(sudoku, infoBox);
@@ -119,10 +120,16 @@ public class UpperMenu extends MenuBar {
         showSolution.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
 
         showProgress.setOnAction(event -> {
-            Command command = new ShowProgressCommand(sudoku, infoBox);
+            Command command = new ShowProgressFast(sudoku, infoBox);
             command.execute();
         });
-        showProgress.setAccelerator(new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN));
+        showProgress.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));
+
+        generateSudoku.setOnAction(event -> {
+            Command command = new GenerateCommand(sudoku, infoBox);
+            command.execute();
+        });
+        generateSudoku.setAccelerator(new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN));
     }
 
     /** Funkcia nastavi spravanie polozkam menu Settings */

@@ -19,11 +19,12 @@ public class ToolBar extends VBox {
     private final Button countSolutions = new Button("Count Solutions");
     private final  Button showSolution = new Button("Show Any Solution");
     private final Button showProgress = new Button("Show Progress");
+    private final Button generateSudoku = new Button("Generate Sudoku");
     private final Button printSudoku = new Button("Print Sudoku");
     private final Button createImg = new Button("Create Image");
 
     public ToolBar( Stage root, Sudoku sudoku, InfoBox infoBox ) {
-        this.getChildren().addAll(clear, save, reload, countSolutions, showSolution, showProgress, printSudoku, createImg, infoBox);
+        this.getChildren().addAll(clear, save, reload, countSolutions, showSolution, showProgress, generateSudoku, printSudoku, createImg, infoBox);
         this.sudoku = sudoku;
         this.root = root;
         this.infoBox = infoBox;
@@ -41,6 +42,7 @@ public class ToolBar extends VBox {
         Style.setButtonStyle(countSolutions, 150);
         Style.setButtonStyle(showSolution, 150);
         Style.setButtonStyle(showProgress, 150);
+        Style.setButtonStyle(generateSudoku, 150);
         Style.setButtonStyle(printSudoku, 150);
         Style.setButtonStyle(createImg, 150);
     }
@@ -68,12 +70,17 @@ public class ToolBar extends VBox {
         });
 
         showProgress.setOnAction(event -> {
-            Command command = new ShowProgressCommand(sudoku, infoBox);
+            Command command = new ShowProgressFast(sudoku, infoBox);
             command.execute();
         });
 
         showSolution.setOnAction(event -> {
             Command command = new ShowSolutionCommand(sudoku, infoBox);
+            command.execute();
+        });
+
+        generateSudoku.setOnAction(event1 -> {
+            Command command = new GenerateCommand(sudoku, infoBox);
             command.execute();
         });
 

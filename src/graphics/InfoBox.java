@@ -3,6 +3,7 @@ package graphics;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,8 +36,11 @@ public class InfoBox extends Label {
 
     /** Funkcia prida vystup generatora do interneho zoznamu a aktualizuje stav infoBoxu */
     public void addInfo(String text) {
+        Date date = new Date();
+        text = date.toString().substring(11,19)+'\n'+text;
+
         this.info.add(text);
-        if (this.info.size() > 5) {
+        if (this.info.size() > 4) {
             this.info.remove(0);
         }
         this.update();
