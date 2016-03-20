@@ -19,6 +19,7 @@ public class Generator {
     /** Nastavenia pred generovanim */
     private final String inputFile;            // vstupny subor s CNF vo formate DIMACS
     private double timeLimit;                  // casovy limit, ako dlho ma SAT solver bezat
+    private int repetitionsLimit;              // kolko rieseni moze generator vyskusat pri generovani
     private String mode; //sposob generovania: 1 = lubovolne 1 riesenie, a = vsetky riesenia, c = pocet rieseni
     private int seed;
     private Random random;
@@ -28,6 +29,7 @@ public class Generator {
         this.inputFile = "files/formulas.txt";
         this.outputFile = this.inputFile;
         this.timeLimit = 5;
+        this.repetitionsLimit = 50;
         this.random = new Random();
         this.seed = 1;
     }
@@ -46,6 +48,13 @@ public class Generator {
         this.timeLimit = timeLimit;
     }
 
+    public void setRepetitionsLimit(int repetitionsLimit) {
+        this.repetitionsLimit = repetitionsLimit;
+    }
+
+    public int getRepetitionsLimit() {
+        return this.repetitionsLimit;
+    }
 
     /** Funkcia vygeneruje CNF podla typu sudoku - generatora a prida ich do zoznamu formulas */
     void generateCNF() {

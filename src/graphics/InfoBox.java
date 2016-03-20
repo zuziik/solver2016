@@ -45,4 +45,5 @@ public class InfoBox extends Label {
         }
         this.update();
     }
+
 }

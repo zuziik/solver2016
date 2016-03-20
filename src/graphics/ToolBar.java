@@ -80,7 +80,7 @@ public class ToolBar extends VBox {
         });
 
         generateSudoku.setOnAction(event1 -> {
-            Command command = new GenerateCommand(sudoku, infoBox);
+            Command command = new GenerateSudokuNew(sudoku, infoBox);
             command.execute();
         });
 

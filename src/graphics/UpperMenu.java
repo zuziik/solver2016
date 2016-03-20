@@ -126,7 +126,7 @@ public class UpperMenu extends MenuBar {
         showProgress.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));
 
         generateSudoku.setOnAction(event -> {
-            Command command = new GenerateCommand(sudoku, infoBox);
+            Command command = new GenerateSudokuNew(sudoku, infoBox);
             command.execute();
         });
         generateSudoku.setAccelerator(new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN));
