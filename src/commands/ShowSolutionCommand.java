@@ -45,10 +45,10 @@ public class ShowSolutionCommand implements Command {
 
         switch (solution) {
             case "TLE":
-                text += "Time Limit Expired\n";
+                text += "Time Limit Expired";
                 break;
             case "UNSAT":
-                text += "No Solutions Found\n";
+                text += "No Solutions Found";
                 break;
             default:
                 int index = solution.indexOf(":");
@@ -59,7 +59,7 @@ public class ShowSolutionCommand implements Command {
                         setNumber(s);
                     }
                 }
-                text += "Solution Displayed\n";
+                text += "Solution Displayed";
                 break;
         }
 

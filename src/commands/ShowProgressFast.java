@@ -123,11 +123,11 @@ public class ShowProgressFast implements Command {
 
         int count = sudoku.getGenerator().countSolutions();
         if (count == 0) {
-            text += "No Solutions Found\n";
+            text += "No Solutions Found";
         } else if (count < 0) {
-            text += "Time Limit Expired\n";
+            text += "Time Limit Expired";
         } else if (count >= 5000) {
-            text += "Too Many Solutions\n";
+            text += "Too Many Solutions";
         } else {
             try {
                 sudoku.getGenerator().createFileWithCNF();
@@ -135,7 +135,7 @@ public class ShowProgressFast implements Command {
                 System.err.println("Error while writing into file!");
             }
             process();
-            text += "Progress Displayed\n";
+            text += "Progress Displayed";
         }
         this.infoBox.addInfo(text);
     }

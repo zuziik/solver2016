@@ -236,7 +236,7 @@ public class TextFieldLayer extends GridPane {
             inputGrid.getFortressLayer().color(x, y);
             fortress = "X";
         } else {
-            inputGrid.getParityLayer().setBlank(x, y);
+            inputGrid.getFortressLayer().setBlank(x, y);
         }
 
         return fortress;

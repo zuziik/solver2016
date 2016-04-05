@@ -28,7 +28,7 @@ public class InfoBox extends Label {
     public void update() {
         String text = "";
         for (String t : info) {
-            text = t + text;
+            text = t + "\n" + text;
         }
         text = givens + text;
         super.setText(text);

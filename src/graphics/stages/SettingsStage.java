@@ -78,11 +78,19 @@ public class SettingsStage {
             this.updateInfo();
         });
 
+        slider1.setOnMouseReleased(event -> {
+            this.updateInfo();
+        });
+
         slider1.setOnKeyReleased(event -> {
             this.updateInfo();
         });
 
         slider2.setOnMouseClicked(event -> {
+            this.updateInfo();
+        });
+
+        slider2.setOnMouseReleased(event -> {
             this.updateInfo();
         });
 
@@ -105,7 +113,7 @@ public class SettingsStage {
         double limit = ((double) Math.round(this.slider1.getValue()*10))/10;
         double time = ((double) Math.round(this.slider1.getValue()*this.slider2.getValue()*10))/10;
         int minutes = (int) time/60;
-        double seconds = time - 60*minutes;
+        double seconds = ((double) Math.round((time - 60*minutes)*10))/10;
         this.infoTimeout.setText("Timeout: "+limit+" sec");
         this.infoRepetitions.setText("Repetitions: "+Math.round(this.slider2.getValue())+" solutions");
         this.infoGeneratingTime.setText("Generating time: "+time+" sec = "+minutes+" min "+seconds+" sec");

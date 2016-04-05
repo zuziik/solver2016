@@ -13,7 +13,7 @@ public class ParityLayer extends GridPane {
 
     private final int radius;
     private final int size;
-    private final Circle cells[][] = new Circle[9][9];
+    private Circle cells[][] = new Circle[9][9];
     private HashMap<Character,Color> color;
 
     public ParityLayer(int size) {

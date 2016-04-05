@@ -36,10 +36,10 @@ public class CountSolutionsCommand implements Command {
         String text = "";
 
         if (count >= 0) {
-            text += "#Solutions: "+count+'\n';
+            text += "#Solutions: "+count;
         }
         else {
-            text += "Time Limit Expired\n";
+            text += "Time Limit Expired";
         }
         if (this.infoBox != null) this.infoBox.addInfo(text);
     }

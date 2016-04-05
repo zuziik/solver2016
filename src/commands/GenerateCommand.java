@@ -45,7 +45,7 @@ public class GenerateCommand implements Command {
             if (solutions == 1) {
                 found = true;
                 System.out.println("Juchuu "+numbers);
-                this.infoBox.addInfo("Sudoku generated :)\n");
+                this.infoBox.addInfo("Sudoku generated :)");
                 break;
             }
 
@@ -60,7 +60,7 @@ public class GenerateCommand implements Command {
             }
             System.out.println(numbers);
             if (!changed) {
-                this.infoBox.addInfo("No solutions found!\n");
+                this.infoBox.addInfo("No solutions found!");
                 break;
             }
 
@@ -87,7 +87,7 @@ public class GenerateCommand implements Command {
         command.execute();
 
         if (this.zeros.size() == 0) {
-            this.infoBox.addInfo("No cells to generate!\n");
+            this.infoBox.addInfo("No cells to generate!");
             return;
         }
 
@@ -96,10 +96,10 @@ public class GenerateCommand implements Command {
         int count = countSolutionsCommand.getCount();
 
         if (count == 0) {
-            this.infoBox.addInfo("No solution!\n");
+            this.infoBox.addInfo("No solution!");
         }
         else if (count == 1) {
-            this.infoBox.addInfo("Already has 1 solution\n");
+            this.infoBox.addInfo("Already has 1 solution");
         }
         else {
             generateSudoku();

@@ -75,7 +75,7 @@ public class GenerateSudokuNew implements Command {
             }
         }
         if (this.bestSolution == null) {
-            this.infoBox.addInfo("Nothing found so far.\n");
+            this.infoBox.addInfo("Nothing found so far.");
             return;
         }
         for (List<Integer> cell : zeros) {
@@ -84,7 +84,12 @@ public class GenerateSudokuNew implements Command {
             int num = this.bestSolution.get(x).get(y);
             sudoku.setNumber(x, y, num);
         }
-        this.infoBox.addInfo("Best found: "+bestSolutionCount+" solutions\n");
+        if (bestSolutionCount == -1) {
+            this.infoBox.addInfo("Too many solutions");
+        }
+        else {
+            this.infoBox.addInfo("Best found: "+bestSolutionCount+" solutions");
+        }
     }
 
 
@@ -96,7 +101,7 @@ public class GenerateSudokuNew implements Command {
         this.zeros = sudoku.getZeros();
 
         if (this.zeros.size() == 0) {
-            this.infoBox.addInfo("No cells to generate!\n");
+            this.infoBox.addInfo("No cells to generate!");
             return;
         }
 
@@ -105,7 +110,7 @@ public class GenerateSudokuNew implements Command {
         int count = countSolutionsCommand.getCount();
 
         if (count == 0) {
-            this.infoBox.addInfo("No solution!\n");
+            this.infoBox.addInfo("No solution!");
         }
         else {
             generateSudoku();
