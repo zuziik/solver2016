@@ -1,8 +1,7 @@
 package graphics;
 
 import commands.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import graphics.stages.MainStage;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -22,12 +21,14 @@ public class UpperMenu extends MenuBar {
     /** Menu ma referenciu na hlavne okno, aby ho vedelo poskytnut prikazom, ktore ukoncuju aplikaciu alebo vytvaraju
      * nove sudoku - stare okno sa ma vtedy zavriet */
     private final Stage root;
+    private final MainStage mainStage;
     /** Odkaz na textove pole, do ktoreho sa vypisuje pocet rieseni - potrebny ako vystup pre prikaz, ktory pocita
      * riesenia*/
     private final InfoBox infoBox;
 
     private final Menu file = new Menu("File");
     private final Menu generate = new Menu("Generate");
+    private final Menu content = new Menu("Content");
     private final Menu settings = new Menu("Settings");
     private final Menu export = new Menu("Export");
     private final MenuItem loadSudoku = new MenuItem("Open");
@@ -40,18 +41,23 @@ public class UpperMenu extends MenuBar {
     private final MenuItem showProgress = new MenuItem("Show Progress");
     private final MenuItem countSolutions = new MenuItem("Count Solutions");
     private final MenuItem generateSudoku = new MenuItem("Generate Sudoku");
+    private final MenuItem createConsecutive = new MenuItem("Create Consecutive");
+    private final MenuItem deleteConsecutive = new MenuItem("Delete Consecutive");
+    private final MenuItem transfer = new MenuItem("Transfer <--");
     private final MenuItem clear = new MenuItem("Clear Input");
     private final MenuItem print = new MenuItem("Print Sudoku");
     private final MenuItem saveImg = new MenuItem("Save as Image");
     private final MenuItem setTimeout = new MenuItem("Set Timeout");
 
-    public UpperMenu( Stage root, Sudoku sudoku, InfoBox infoBox ) {
+    public UpperMenu( Stage root, MainStage mainStage, Sudoku sudoku, InfoBox infoBox ) {
         this.root = root;
+        this.mainStage = mainStage;
         this.sudoku = sudoku;
         this.infoBox = infoBox;
-        this.getMenus().addAll(file, generate, settings, export);
+        this.getMenus().addAll(file, generate, content, settings, export);
         configureFileMenu();
         configureGenerateMenu();
+        configureContentMenu();
         configureSettingsMenu();
         configureExportMenu();
     }
@@ -130,6 +136,26 @@ public class UpperMenu extends MenuBar {
             command.execute();
         });
         generateSudoku.setAccelerator(new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN));
+    }
+
+    private void configureContentMenu() {
+        createConsecutive.setOnAction(event -> {
+            Command command = new CreateConsecutiveCommand(sudoku, infoBox, mainStage);
+            command.execute();
+        });
+        createConsecutive.setAccelerator(new KeyCodeCombination(KeyCode.K, KeyCombination.CONTROL_DOWN));
+
+        deleteConsecutive.setOnAction(event -> {
+            Command command = new DeleteConsecutiveCommand(sudoku, infoBox, mainStage);
+            command.execute();
+        });
+        deleteConsecutive.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN));
+
+        transfer.setOnAction(event -> {
+            Command command = new OutputToInputCommand(sudoku);
+            command.execute();
+        });
+        transfer.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.CONTROL_DOWN));
     }
 
     /** Funkcia nastavi spravanie polozkam menu Settings */

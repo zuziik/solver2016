@@ -46,4 +46,8 @@ public class LabelLayer extends GridPane {
             label.setWrapText(true);
         }
     }
+
+    public String getText(int x, int y) {
+        return this.labels[x][y].getText();
+    }
 }

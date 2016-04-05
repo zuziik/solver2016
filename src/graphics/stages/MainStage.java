@@ -36,8 +36,8 @@ public class MainStage {
         this.sudoku = sudoku;
         this.infoBox = new InfoBox();
         this.sudoku.setInfoBox(infoBox);
-        this.toolBar = new ToolBar(stage, sudoku, infoBox);
-        this.menu = new UpperMenu(stage, this.sudoku, infoBox);
+        this.toolBar = new ToolBar(stage, this, this.sudoku, infoBox);
+        this.menu = new UpperMenu(stage, this, this.sudoku, infoBox);
         this.inputGrid = sudoku.getInputGrid();
         this.outputGrid = sudoku.getOutputGrid();
         this.pane.setLeft(inputGrid);
@@ -56,5 +56,9 @@ public class MainStage {
         this.stage.setTitle("SUDOKU Solution Checker");
         this.inputGrid.getTextFieldLayer().updateGrid();
         this.stage.show();
+    }
+
+    public void updateTypes() {
+        this.types.setText(this.sudoku.getTypesText());
     }
 }

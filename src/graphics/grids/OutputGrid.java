@@ -7,6 +7,7 @@ import graphics.grids.layers.*;
  */
 public class OutputGrid extends Grid {
     private final LabelLayer labelLayer;
+    private ConsecutiveLayer consecutiveLayer;
 
     public OutputGrid(InputGrid inputGrid) {
         IrregularLayer irregularLayer = inputGrid.getIrregularLayer().clone();
@@ -25,8 +26,21 @@ public class OutputGrid extends Grid {
 
     /** Funkcia nastavi text policku na pozicii x, y */
     public void setText(int x, int y, String text) {
-        this.labelLayer.setText(x,y,text);
+        this.labelLayer.setText(x, y, text);
     }
 
+    public String getText(int x, int y) {
+        return this.labelLayer.getText(x,y);
+    }
 
+    public void addConsecutiveLayer(ConsecutiveLayer consecutiveLayer) {
+        this.consecutiveLayer = consecutiveLayer;
+        super.getChildren().add(consecutiveLayer);
+    }
+
+    public void removeConsecutiveLayer() {
+        if (super.getChildren().contains(this.consecutiveLayer)) {
+            super.getChildren().remove(this.consecutiveLayer);
+        }
+    }
 }

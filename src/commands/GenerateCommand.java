@@ -66,10 +66,7 @@ public class GenerateCommand implements Command {
 
         }
 
-        if (found) {
-            //TODO: Vpisat cisla do sudoku
-        }
-        else {
+        if (!found) {
             for (List<Integer> cell : zeros) {
                 int x = cell.get(0);
                 int y = cell.get(1);

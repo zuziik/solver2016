@@ -10,6 +10,7 @@ public enum Type {
     DisjointGroups,
     Even,
     NonConsecutive,
+    Consecutive,
     Odd,
     Irregular,
     ExtraRegion,

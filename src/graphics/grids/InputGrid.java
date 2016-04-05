@@ -2,6 +2,7 @@ package graphics.grids;
 
 import graphics.grids.layers.*;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -20,12 +21,15 @@ public class InputGrid extends Grid {
     private final FortressLayer fortressLayer = new FortressLayer(size);
     private final ParityLayer parityLayer = new ParityLayer(size);
     private final BorderLayer borderLayer = new BorderLayer(3*size);
+    private final ConsecutiveLayer consecutiveLayer = new ConsecutiveLayer(size/8);
     private final DiagonalLayer diagonalLayer = new DiagonalLayer(9*size);
     private final TextFieldLayer textFieldLayer = new TextFieldLayer(size, this);
 
     public InputGrid() {
-        super.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, borderLayer, diagonalLayer, textFieldLayer);
+        super.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, borderLayer,
+                consecutiveLayer, diagonalLayer, textFieldLayer);
         this.textFieldLayer.setSettingsHandlers();
+        super.alignNode(consecutiveLayer);
     }
 
     /** Funkcia vrati vrstvu nepravidelnych regionov */
@@ -61,6 +65,10 @@ public class InputGrid extends Grid {
     /** Funkcia vrati vrstvu textovych poli */
     public TextFieldLayer getTextFieldLayer() {
         return this.textFieldLayer;
+    }
+
+    public ConsecutiveLayer getConsecutiveLayer() {
+        return this.consecutiveLayer;
     }
 
     /** Funkcia vrati zoznam policok s parnymi cislami */
@@ -170,6 +178,10 @@ public class InputGrid extends Grid {
         return this.textFieldLayer.getText(x, y);
     }
 
+    public void setText(int x, int y, String z) {
+        this.textFieldLayer.setText(x,y,z);
+    }
+
     /** Funkcia aktualizuje obsah mriezky */
     public void updateGrid() {
         this.textFieldLayer.updateGrid();
@@ -183,8 +195,9 @@ public class InputGrid extends Grid {
         ParityLayer parityLayer = this.parityLayer.clone();
         RegionLayer regionLayer = this.regionLayer.clone();
         FortressLayer fortressLayer = this.fortressLayer.clone();
+        ConsecutiveLayer consecutiveLayer = this.consecutiveLayer.clone();
         TextFieldLayer textFieldLayer = this.textFieldLayer.clone();
-        image.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, diagonalLayer, textFieldLayer);
+        image.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, consecutiveLayer, diagonalLayer, textFieldLayer);
         if (borderLayer != null) {
             image.getChildren().add(borderLayer);
         }

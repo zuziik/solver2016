@@ -16,6 +16,7 @@ public class Sudoku {
     private final List<List<Set<Integer>>> options;
     private Set<Type> types;
     private Generator generator;
+    private Generator generatorOriginal;
     private InputGrid inputGrid;
     private OutputGrid outputGrid;
     private File file;
@@ -44,6 +45,14 @@ public class Sudoku {
             }
         }
         this.file = new File("files/sudoku/default.txt");
+    }
+
+    public void setGeneratorOriginal(Generator generator) {
+        this.generatorOriginal = generator;
+    }
+
+    public Generator getGeneratorOriginal() {
+        return this.generatorOriginal;
     }
 
     /** Funkcia nastavi sudoku referenciu na informacny panel */
@@ -186,6 +195,10 @@ public class Sudoku {
 
     public List<List<Integer>> getZeros() {
         return this.inputGrid.getTextFieldLayer().getZeros();
+    }
+
+    public List<List<Integer>> getDots() {
+        return this.getInputGrid().getConsecutiveLayer().getDots();
     }
 
     public void setNumber(int x, int y, Integer number) {
