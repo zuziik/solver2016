@@ -24,6 +24,7 @@ public class Sudoku {
     private List<List<List<Integer>>> extras;
     private List<List<Integer>> odds;
     private List<List<Integer>> evens;
+    private List<List<Integer>> dots;
     private List<List<Integer>> fortress;
     private InfoBox infoBox;
 
@@ -154,6 +155,10 @@ public class Sudoku {
 
     public void setFortress(List<List<Integer>> fortress) {
         this.fortress = fortress;
+    }
+
+    public void setDots(List<List<Integer>> dots) {
+        this.dots = dots;
     }
 
     /** Funkcia vrati zoznam nepravidelnych regionov */

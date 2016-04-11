@@ -39,7 +39,7 @@ public class CountSolutionsCommand implements Command {
             text += "#Solutions: "+count;
         }
         else {
-            text += "Time Limit Expired";
+            text += "Time limit expired";
         }
         if (this.infoBox != null) this.infoBox.addInfo(text);
     }

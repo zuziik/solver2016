@@ -88,7 +88,6 @@ public class ConsecutiveLayer extends GridPane {
                 }
             }
         }
-        System.out.println(dots);
         return dots;
     }
 

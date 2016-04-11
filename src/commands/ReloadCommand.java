@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.InfoBox;
 import javafx.stage.Stage;
 import sudoku.Type;
 import java.io.BufferedReader;
@@ -23,11 +24,14 @@ public class ReloadCommand implements Command {
     private final List<List<List<Integer>>> irregulars = new ArrayList<>();
     private final List<List<List<Integer>>> extras = new ArrayList<>();
     private final List<List<Integer>> fortress = new ArrayList<>();
+    private final List<List<Integer>> dots = new ArrayList<>();
     private final File selectedFile;
+    private final InfoBox infoBox;
 
-    public ReloadCommand(Stage stage, File selectedFile){
+    public ReloadCommand(Stage stage, File selectedFile, InfoBox infoBox){
         this.stage = stage;
         this.selectedFile = selectedFile;
+        this.infoBox = infoBox;
     }
 
     /** Funkcia nacita informacie o typoch sudoku a cisel v nom a ulozi ich do samostatnych
@@ -159,6 +163,19 @@ public class ReloadCommand implements Command {
                         }
                     }
                 }
+                else if ( row.equals(Type.Consecutive.toString()) ) {
+                    row = br.readLine();
+                    this.types.add(Type.Consecutive);
+                    String[] arrays = row.substring(1,row.length()-1).split(", ");
+                    for ( int i = 0; i < arrays.length; i += 4) {
+                        List<Integer> dot = new ArrayList<>();
+                        dot.add(Character.getNumericValue(arrays[i].charAt(1)));
+                        dot.add(Character.getNumericValue(arrays[i+1].charAt(0)));
+                        dot.add(Character.getNumericValue(arrays[i+2].charAt(0)));
+                        dot.add(Character.getNumericValue(arrays[i+3].charAt(0)));
+                        dots.add(dot);
+                    }
+                }
                 else if ( row.equals(Type.Classic.toString()) ) {
                     this.types.add(Type.Classic);
                 }
@@ -189,8 +206,11 @@ public class ReloadCommand implements Command {
 
     /** Funkcia vytvori nove sudoku na zaklade informacii precitanych zo suboru */
     private void createSudoku() {
-        Command command = new CreateCommand(numbers, stage, types, irregulars, extras, fortress, evens, odds, selectedFile);
+        Command command = new CreateCommand(numbers, stage, types, irregulars, extras, fortress, evens, odds, dots, selectedFile);
         command.execute();
+        if (this.infoBox != null) {
+            this.infoBox.addInfo("Sudoku loaded");
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.InfoBox;
 import sudoku.Sudoku;
 import sudoku.Type;
 
@@ -14,9 +15,11 @@ import java.util.Set;
 public class SaveCommand implements Command {
 
     private final Sudoku sudoku;
+    private final InfoBox infoBox;
 
-    public SaveCommand(Sudoku sudoku) {
+    public SaveCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
+        this.infoBox = infoBox;
     }
 
     /** Funkcia vrati retazec reprezentujuci ciselny obsah mriezky  */
@@ -40,27 +43,30 @@ public class SaveCommand implements Command {
     /** Funkcia vrati retazec, ktory reprezentuje typy ukladaneho sudoku spolu so zoznamami
      * policok, ktore reprezentuju niektore z nich (napriklad zoznam parnych policok) */
     private String typesToString() {
-        String t = "";
+        StringBuffer t = new StringBuffer();
         Set<Type> types = sudoku.getTypes();
         for ( Type type : types ) {
-            t += type+"\n";
+            t.append(type+"\n");
             if ( type.equals(Type.Even) ) {
-                t += sudoku.getEvens() + "\n";
+                t.append(sudoku.getEvens() + "\n");
             }
             else if ( type.equals(Type.Odd) ) {
-                t += sudoku.getOdds() + "\n";
+                t.append(sudoku.getOdds() + "\n");
             }
             else if ( type.equals(Type.Irregular) ) {
-                t += sudoku.getIrregulars() + "\n";
+                t.append(sudoku.getIrregulars() + "\n");
             }
             else if ( type.equals(Type.Fortress) ) {
-                t += sudoku.getFortress() + "\n";
+                t.append(sudoku.getFortress() + "\n");
             }
             else if ( type.equals(Type.ExtraRegion) ) {
-                t += sudoku.getExtras() + "\n";
+                t.append(sudoku.getExtras() + "\n");
+            }
+            else if ( type.equals(Type.Consecutive) ) {
+                t.append(sudoku.getDots() + "\n");
             }
         }
-        return t;
+        return new String(t);
     }
 
     /**
@@ -74,6 +80,7 @@ public class SaveCommand implements Command {
             String text = sudokuToFile()+typesToString();
             out.print(text);
             out.close();
+            this.infoBox.addInfo("Sudoku saved");
         }
         catch(IOException e){
             System.err.println("File not found");

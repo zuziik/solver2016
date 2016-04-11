@@ -16,12 +16,14 @@ public class OutputGrid extends Grid {
         BorderLayer borderLayer = inputGrid.getBorderLayer().clone();
         DiagonalLayer diagonalLayer = inputGrid.getDiagonalLayer().clone();
         FortressLayer fortressLayer = inputGrid.getFortressLayer().clone();
+        consecutiveLayer = inputGrid.getConsecutiveLayer().clone();
 
         this.labelLayer = new LabelLayer(size);
-        super.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, diagonalLayer, labelLayer);
+        super.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer);
         if (borderLayer != null){
             super.getChildren().add(borderLayer);
         }
+        super.getChildren().addAll(consecutiveLayer, diagonalLayer, labelLayer);
     }
 
     /** Funkcia nastavi text policku na pozicii x, y */
@@ -33,14 +35,12 @@ public class OutputGrid extends Grid {
         return this.labelLayer.getText(x,y);
     }
 
-    public void addConsecutiveLayer(ConsecutiveLayer consecutiveLayer) {
+    public void setConsecutiveLayer(ConsecutiveLayer consecutiveLayer) {
         this.consecutiveLayer = consecutiveLayer;
         super.getChildren().add(consecutiveLayer);
     }
 
     public void removeConsecutiveLayer() {
-        if (super.getChildren().contains(this.consecutiveLayer)) {
-            super.getChildren().remove(this.consecutiveLayer);
-        }
+        super.getChildren().remove(consecutiveLayer);
     }
 }

@@ -36,6 +36,7 @@ public class UpperMenu extends MenuBar {
     private final MenuItem saveSudokuAs = new MenuItem("Save As");
     private final MenuItem saveSudoku = new MenuItem("Save");
     private final MenuItem newSudoku = new MenuItem("New");
+    private final MenuItem help = new MenuItem("Help");
     private final MenuItem quit = new MenuItem("Quit");
     private final MenuItem showSolution = new MenuItem("Show Any Solution");
     private final MenuItem showProgress = new MenuItem("Show Progress");
@@ -43,7 +44,7 @@ public class UpperMenu extends MenuBar {
     private final MenuItem generateSudoku = new MenuItem("Generate Sudoku");
     private final MenuItem createConsecutive = new MenuItem("Create Consecutive");
     private final MenuItem deleteConsecutive = new MenuItem("Delete Consecutive");
-    private final MenuItem transfer = new MenuItem("Transfer <--");
+    private final MenuItem transfer = new MenuItem("<< Transfer");
     private final MenuItem clear = new MenuItem("Clear Input");
     private final MenuItem print = new MenuItem("Print Sudoku");
     private final MenuItem saveImg = new MenuItem("Save as Image");
@@ -64,7 +65,7 @@ public class UpperMenu extends MenuBar {
 
     /** Funkcia nastavi spravanie polozkam menu File */
     private void configureFileMenu() {
-        file.getItems().addAll(newSudoku, clear, reloadSudoku, loadSudoku, saveSudoku, saveSudokuAs, quit);
+        file.getItems().addAll(newSudoku, clear, reloadSudoku, loadSudoku, saveSudoku, saveSudokuAs, help, quit);
 
         newSudoku.setOnAction(event -> {
             Command command = new NewSudokuCommand(root);
@@ -73,34 +74,40 @@ public class UpperMenu extends MenuBar {
         newSudoku.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
 
         reloadSudoku.setOnAction(event1 -> {
-            Command command = new ReloadCommand(root, sudoku.getFile());
+            Command command = new ReloadCommand(root, sudoku.getFile(), this.infoBox);
             command.execute();
         });
         reloadSudoku.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN));
 
         loadSudoku.setOnAction(event -> {
-            Command command = new OpenCommand(root);
+            Command command = new OpenCommand(root, this.infoBox);
             command.execute();
         });
         loadSudoku.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
 
         saveSudoku.setOnAction(event -> {
-            Command command = new SaveCommand(sudoku);
+            Command command = new SaveCommand(sudoku, this.infoBox);
             command.execute();
         });
         saveSudoku.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
         saveSudokuAs.setOnAction(event -> {
-            Command command = new SaveAsCommand(sudoku, root);
+            Command command = new SaveAsCommand(sudoku, root, this.infoBox);
             command.execute();
         });
         saveSudokuAs.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
 
         clear.setOnAction(event -> {
-            Command command = new ClearCommand(sudoku);
+            Command command = new ClearCommand(sudoku, this.infoBox);
             command.execute();
         });
         clear.setAccelerator(new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN));
+
+        help.setOnAction(event -> {
+            Command command = new HelpCommand();
+            command.execute();
+        });
+        help.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_DOWN));
 
         quit.setOnAction(event -> {
             Command command = new QuitCommand(root);
@@ -132,13 +139,15 @@ public class UpperMenu extends MenuBar {
         showProgress.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));
 
         generateSudoku.setOnAction(event -> {
-            Command command = new GenerateSudokuNew(sudoku, infoBox);
+            Command command = new GenerateSudoku(sudoku, infoBox);
             command.execute();
         });
         generateSudoku.setAccelerator(new KeyCodeCombination(KeyCode.G, KeyCombination.CONTROL_DOWN));
     }
 
     private void configureContentMenu() {
+        content.getItems().addAll(createConsecutive, deleteConsecutive, transfer);
+
         createConsecutive.setOnAction(event -> {
             Command command = new CreateConsecutiveCommand(sudoku, infoBox, mainStage);
             command.execute();
@@ -152,7 +161,7 @@ public class UpperMenu extends MenuBar {
         deleteConsecutive.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN));
 
         transfer.setOnAction(event -> {
-            Command command = new OutputToInputCommand(sudoku);
+            Command command = new OutputToInputCommand(sudoku, this.infoBox);
             command.execute();
         });
         transfer.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.CONTROL_DOWN));
@@ -174,13 +183,13 @@ public class UpperMenu extends MenuBar {
         export.getItems().addAll(print, saveImg);
 
         print.setOnAction(event -> {
-            Command command = new PrintCommand(root, sudoku);
+            Command command = new PrintCommand(root, sudoku, this.infoBox);
             command.execute();
         });
         print.setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN));
 
         saveImg.setOnAction(event -> {
-            Command command = new ExportCommand(sudoku.getInputGrid(), root);
+            Command command = new ExportCommand(sudoku.getInputGrid(), root, this.infoBox);
             command.execute();
         });
         saveImg.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));

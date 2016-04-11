@@ -66,7 +66,7 @@ public class Main extends Application {
     private Button createLoadSudokuButton() {
         Button button = new Button("Load Sudoku");
         button.setOnAction(event -> {
-            Command command = new OpenCommand(stage);
+            Command command = new OpenCommand(stage, null);
             command.execute();
         });
         setButtonStyle(button);

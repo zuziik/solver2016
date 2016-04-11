@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.InfoBox;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -17,15 +18,16 @@ import java.io.IOException;
 public class ExportCommand implements Command {
     Node node;
     Stage stage;
+    private final InfoBox infoBox;
 
-    public ExportCommand(Node node, Stage stage) {
+    public ExportCommand(Node node, Stage stage, InfoBox infoBox) {
         this.node = node;
         this.stage = stage;
+        this.infoBox = infoBox;
     }
 
     @Override
     public void execute() {
-        //File file = new File("files/image.png");
         WritableImage snapshot = node.snapshot(null, null);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("files/images"));
@@ -36,6 +38,7 @@ public class ExportCommand implements Command {
         if (selectedFile != null) {
             try {
                 ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", selectedFile);
+                this.infoBox.addInfo("Image created");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

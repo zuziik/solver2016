@@ -2,7 +2,6 @@ package graphics;
 
 import commands.*;
 import graphics.stages.MainStage;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,7 +29,7 @@ public class ToolBar extends HBox {
     private final Button createImg = new Button("Create Image");
     private final Button createConsecutive = new Button("Show Consecutive");
     private final Button deleteConsecutive = new Button("Remove Consecutive");
-    private final Button transfer = new Button("Transfer <--");
+    private final Button transfer = new Button("<< Transfer");
 
     public ToolBar( Stage root, MainStage mainStage, Sudoku sudoku, InfoBox infoBox ) {
         this.buttons.getChildren().addAll(clear, save, reload, countSolutions, showSolution, showProgress, generateSudoku,
@@ -64,17 +63,17 @@ public class ToolBar extends HBox {
     /** Funkcia nastavi spravanie vsetkym tlacidlam */
     private void setActions() {
         clear.setOnAction(event -> {
-            Command command = new ClearCommand(sudoku);
+            Command command = new ClearCommand(sudoku, this.infoBox);
             command.execute();
         });
 
         save.setOnAction(event1 -> {
-            Command command = new SaveCommand(sudoku);
+            Command command = new SaveCommand(sudoku, this.infoBox);
             command.execute();
         });
 
         reload.setOnAction(event -> {
-            Command command = new ReloadCommand(root, sudoku.getFile());
+            Command command = new ReloadCommand(root, sudoku.getFile(), this.infoBox);
             command.execute();
         });
 
@@ -94,17 +93,17 @@ public class ToolBar extends HBox {
         });
 
         generateSudoku.setOnAction(event1 -> {
-            Command command = new GenerateSudokuNew(sudoku, infoBox);
+            Command command = new GenerateSudoku(sudoku, infoBox);
             command.execute();
         });
 
         printSudoku.setOnAction(event -> {
-            Command command = new PrintCommand(root, sudoku);
+            Command command = new PrintCommand(root, sudoku, this.infoBox);
             command.execute();
         });
 
         createImg.setOnAction(event -> {
-            Command command = new ExportCommand(sudoku.getInputGrid(), root);
+            Command command = new ExportCommand(sudoku.getInputGrid(), root, this.infoBox);
             command.execute();
         });
 
@@ -119,7 +118,7 @@ public class ToolBar extends HBox {
         });
 
         transfer.setOnAction(event -> {
-            Command command = new OutputToInputCommand(sudoku);
+            Command command = new OutputToInputCommand(sudoku, this.infoBox);
             command.execute();
         });
     }

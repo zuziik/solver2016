@@ -197,10 +197,11 @@ public class InputGrid extends Grid {
         FortressLayer fortressLayer = this.fortressLayer.clone();
         ConsecutiveLayer consecutiveLayer = this.consecutiveLayer.clone();
         TextFieldLayer textFieldLayer = this.textFieldLayer.clone();
-        image.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, consecutiveLayer, diagonalLayer, textFieldLayer);
+        image.getChildren().addAll(irregularLayer, regionLayer, fortressLayer, parityLayer, diagonalLayer, textFieldLayer);
         if (borderLayer != null) {
             image.getChildren().add(borderLayer);
         }
+        image.getChildren().add(consecutiveLayer);
         return image;
     }
 

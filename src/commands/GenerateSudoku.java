@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Zuzka on 20.3.2016.
  */
-public class GenerateSudokuNew implements Command {
+public class GenerateSudoku implements Command {
     private Sudoku sudoku;
     private InfoBox infoBox;
     private List<List<Integer>> zeros;
@@ -18,7 +18,7 @@ public class GenerateSudokuNew implements Command {
     private int bestSolutionCount;
     private int repetitionsCount;    /** kolkokrat ma generator vyskusat nejake riesenie */
 
-    public GenerateSudokuNew(Sudoku sudoku, InfoBox infoBox) {
+    public GenerateSudoku(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
         this.bestSolutionCount = 0;

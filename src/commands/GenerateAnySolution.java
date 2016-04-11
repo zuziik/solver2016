@@ -50,10 +50,10 @@ public class GenerateAnySolution implements Command {
 
         switch (solution) {
             case "TLE":
-                text += "Time Limit Expired\n";
+                text += "Time limit expired\n";
                 break;
             case "UNSAT":
-                text += "No Solutions Found\n";
+                text += "No solutions found\n";
                 break;
             default:
                 this.solution = new ArrayList<>();
@@ -73,7 +73,7 @@ public class GenerateAnySolution implements Command {
                         insertIntoSolution(s);
                     }
                 }
-                text += "Solution Displayed\n";
+                text += "Solution displayed\n";
                 break;
         }
     }

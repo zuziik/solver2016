@@ -44,6 +44,7 @@ public class ConfigurationStage {
     private List<List<Integer>> odds = new ArrayList<>();
     private List<List<Integer>> evens = new ArrayList<>();
     private List<List<Integer>> fortress = new ArrayList<>();
+    private List<List<Integer>> dots = new ArrayList<>();
     private Set<Type> types;
     private final int width = 250;
 
@@ -176,7 +177,7 @@ public class ConfigurationStage {
             updateLists();
             String wrongRegion = findWrongRegion();
             if (wrongRegion.equals("")) {
-                Command command = new CreateCommand(null, stage, types, irregulars, extras, fortress, evens, odds, null);
+                Command command = new CreateCommand(null, stage, types, irregulars, extras, fortress, evens, odds, dots, null);
                 command.execute();
             }
             else {

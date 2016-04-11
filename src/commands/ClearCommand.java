@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.InfoBox;
 import graphics.grids.InputGrid;
 import graphics.grids.layers.TextFieldLayer;
 import sudoku.Sudoku;
@@ -10,9 +11,11 @@ import javafx.scene.control.TextField;
  */
 public class ClearCommand implements Command {
     private final Sudoku sudoku;
+    private final InfoBox infoBox;
 
-    public ClearCommand(Sudoku sudoku) {
+    public ClearCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
+        this.infoBox = infoBox;
     }
 
     /**
@@ -28,5 +31,6 @@ public class ClearCommand implements Command {
                 text.setText("");
             }
         }
+        this.infoBox.addInfo("Grid cleared");
     }
 }

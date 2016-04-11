@@ -3,10 +3,7 @@ package commands;
 import generators.*;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
-import graphics.grids.layers.FortressLayer;
-import graphics.grids.layers.IrregularLayer;
-import graphics.grids.layers.ParityLayer;
-import graphics.grids.layers.RegionLayer;
+import graphics.grids.layers.*;
 import graphics.stages.MainStage;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
@@ -26,6 +23,7 @@ public class CreateCommand implements Command {
     private final List<List<Integer>> fortress;
     private final List<List<Integer>> evens;
     private final List<List<Integer>> odds;
+    private final List<List<Integer>> dots;
     private final Set<Type> types;
     private final Stage stage;
     private final List<List<Integer>> numbers;
@@ -33,13 +31,14 @@ public class CreateCommand implements Command {
 
     public CreateCommand(List<List<Integer>> numbers, Stage stage, Set<Type> types, List<List<List<Integer>>> irregulars,
                          List<List<List<Integer>>> extras, List<List<Integer>> fortress, List<List<Integer>> evens,
-                         List<List<Integer>> odds, File file) {
+                         List<List<Integer>> odds, List<List<Integer>> dots, File file) {
         this.stage = stage;
         this.irregulars = irregulars;
         this.extras = extras;
         this.fortress = fortress;
         this.evens = evens;
         this.odds = odds;
+        this.dots = dots;
         this.types = types;
         this.numbers = numbers;
         this.file = file;
@@ -92,6 +91,15 @@ public class CreateCommand implements Command {
             generator = new RegionGenerator(generator, extras);
             sudoku.setExtras(extras);
         }
+
+        sudoku.setGeneratorOriginal(generator);
+
+        if (types.contains(Type.Consecutive)) {
+            generator = new ConsecutiveGenerator(generator, dots);
+            sudoku.setDots(dots);
+        }
+
+        sudoku.setGenerator(generator);
 
         return generator;
     }
@@ -158,18 +166,30 @@ public class CreateCommand implements Command {
         return inputGrid;
     }
 
+    private void setDots(InputGrid inputGrid) {
+        if (dots == null) return;
+        ConsecutiveLayer consecutiveLayer = inputGrid.getConsecutiveLayer();
+        for (List<Integer> dot : dots) {
+            int x1 = dot.get(0);
+            int y1 = dot.get(1);
+            int x2 = dot.get(2);
+            int y2 = dot.get(3);
+            consecutiveLayer.showDot(x1, y1, x2, y2);
+        }
+    }
+
     /** Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou*/
     @Override
     public void execute() {
         Sudoku sudoku = new Sudoku();
 
         InputGrid inputGrid = createInputGrid();
+        setDots(inputGrid);
         OutputGrid outputGrid = new OutputGrid(inputGrid);
-        Generator generator = createGenerator(sudoku);
+        createGenerator(sudoku);
 
         sudoku.setInputGrid(inputGrid);
         sudoku.setOutputGrid(outputGrid);
-        sudoku.setGenerator(generator);
         sudoku.setFile(file);
         sudoku.setTypes(types);
         if (numbers != null) sudoku.setNumbers(numbers);

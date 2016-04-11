@@ -19,7 +19,7 @@ public class InfoBox extends Label {
     }
 
     /** Funkcia aktualizuje pocet zadanych cisel v mriezke a vypise to do infoBoxu */
-    public void changeGivens(int givens) {
+    public void changeGivens(String givens) {
         this.givens = "#Givens: "+givens+"\n";
         this.update();
     }
@@ -40,7 +40,7 @@ public class InfoBox extends Label {
         text = date.toString().substring(11,19)+'\n'+text;
 
         this.info.add(text);
-        if (this.info.size() > 4) {
+        if (this.info.size() > 10) {
             this.info.remove(0);
         }
         this.update();

@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.InfoBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sudoku.Sudoku;
@@ -14,10 +15,12 @@ public class SaveAsCommand implements Command {
 
     private final Sudoku sudoku;
     private final Stage stage;
+    private final InfoBox infoBox;
 
-    public SaveAsCommand(Sudoku sudoku, Stage stage) {
+    public SaveAsCommand(Sudoku sudoku, Stage stage, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.stage = stage;
+        this.infoBox = infoBox;
     }
 
     /**
@@ -33,7 +36,7 @@ public class SaveAsCommand implements Command {
         File selectedFile = fileChooser.showSaveDialog(stage);
         if (selectedFile != null) {
             sudoku.setFile(selectedFile);
-            Command command = new SaveCommand(sudoku);
+            Command command = new SaveCommand(sudoku, infoBox);
             command.execute();
         }
     }

@@ -93,6 +93,5 @@ public class ConsecutiveGenerator extends SuperGenerator {
     public void generateCNF() {
         super.generateCNF();
         generateConsecutive();
-        System.out.println("GENERUJEM SUSLEDNE");
     }
 }

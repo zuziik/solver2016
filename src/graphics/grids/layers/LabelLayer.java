@@ -48,6 +48,10 @@ public class LabelLayer extends GridPane {
     }
 
     public String getText(int x, int y) {
-        return this.labels[x][y].getText();
+        String text = this.labels[x][y].getText();
+        if (text.length() == 1) {
+            return text;
+        }
+        return "";
     }
 }

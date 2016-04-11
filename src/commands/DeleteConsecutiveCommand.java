@@ -29,8 +29,8 @@ public class DeleteConsecutiveCommand implements Command {
         sudoku.getTypes().remove(Type.Consecutive);
         root.updateTypes();
         sudoku.getInputGrid().getConsecutiveLayer().hideAllDots();
+        sudoku.getOutputGrid().removeConsecutiveLayer();
         infoBox.addInfo("Consecutive removed");
         sudoku.setGenerator(sudoku.getGeneratorOriginal());
-        sudoku.getOutputGrid().removeConsecutiveLayer();
     }
 }

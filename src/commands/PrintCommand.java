@@ -1,5 +1,6 @@
 package commands;
 
+import graphics.InfoBox;
 import javafx.print.*;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -22,10 +23,12 @@ public class PrintCommand implements Command {
 
     private Stage stage;
     private Sudoku sudoku;
+    private InfoBox infoBox;
 
-    public PrintCommand(Stage stage, Sudoku sudoku) {
+    public PrintCommand(Stage stage, Sudoku sudoku, InfoBox infoBox) {
         this.stage = stage;
         this.sudoku = sudoku;
+        this.infoBox = infoBox;
     }
 
     private Node createNode() {
@@ -47,6 +50,7 @@ public class PrintCommand implements Command {
         Node node = this.createNode();
         if (job.showPrintDialog(stage.getOwner()) && job.printPage(node)) {
             job.endJob();
+            this.infoBox.addInfo("Sudoku printed");
         }
     }
 }

@@ -5,7 +5,6 @@ import generators.Generator;
 import graphics.InfoBox;
 import graphics.grids.layers.ConsecutiveLayer;
 import graphics.stages.MainStage;
-import javafx.stage.Stage;
 import sudoku.Sudoku;
 import sudoku.Type;
 
@@ -74,7 +73,7 @@ public class CreateConsecutiveCommand implements Command {
                 }
             }
 
-            this.infoBox.addInfo("Consecutive displayed.");
+            this.infoBox.addInfo("Consecutive displayed");
             this.sudoku.getTypes().add(Type.Consecutive);
             this.root.updateTypes();
 
@@ -83,7 +82,7 @@ public class CreateConsecutiveCommand implements Command {
             generator = new ConsecutiveGenerator(generator, consecutiveLayer.getDots());
             this.sudoku.setGenerator(generator);
 
-            this.sudoku.getOutputGrid().addConsecutiveLayer(sudoku.getInputGrid().getConsecutiveLayer().clone());
+            this.sudoku.getOutputGrid().setConsecutiveLayer(sudoku.getInputGrid().getConsecutiveLayer().clone());
         }
     }
 }

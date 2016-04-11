@@ -59,7 +59,7 @@ public class HelpStage {
         this.stage.initModality(Modality.APPLICATION_MODAL);
         this.stage.setAlwaysOnTop(true);
         this.help.setPrefWidth(600);
-        this.help.setPrefHeight(500);
+        this.help.setPrefHeight(650);
         this.help.setWrapText(true);
         this.ok = new Button("GOT IT!");
         this.ok.setOnAction( event -> {
