@@ -23,7 +23,7 @@ public class TextFieldLayer extends GridPane {
     private final int size;
     private final InputGrid inputGrid;
     private final TextField[][] textFields = new TextField[9][9];
-    private int givens;
+    private Integer givens;
     private InfoBox infoBox;
 
     public TextFieldLayer(int size, InputGrid inputGrid) {
@@ -154,6 +154,7 @@ public class TextFieldLayer extends GridPane {
      * cisel sa vypise v infoBoxe */
     public void updateGrid() {
         this.givens = 0;
+        int nulls = 0;
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
                 filterText(i,j);
@@ -161,9 +162,17 @@ public class TextFieldLayer extends GridPane {
                 if (!txt.equals("") && !txt.equals("0")) {
                     givens++;
                 }
+                else if (txt.equals("0")) {
+                    nulls++;
+                }
             }
         }
-        this.infoBox.changeGivens(givens);
+        if (nulls == 0) {
+            this.infoBox.changeGivens(givens.toString());
+        }
+        else {
+            this.infoBox.changeGivens(givens+" ("+(givens+nulls)+")");
+        }
     }
 
     /** Funkcia aktualizuje vrstvu nepravidelnych regionov podla obsahu policka */
