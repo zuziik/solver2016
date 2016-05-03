@@ -13,6 +13,9 @@ public class RowColGenerator extends Generator {
 
     private final Sudoku sudoku;
 
+    /**
+     * @param sudoku odkaz na aktualne sudoku
+     */
     public RowColGenerator(Sudoku sudoku) {
         this.sudoku = sudoku;
     }

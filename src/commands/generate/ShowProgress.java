@@ -1,5 +1,7 @@
-package commands;
+package commands.generate;
 
+import commands.Command;
+import commands.basic.InputToSudokuCommand;
 import graphics.InfoBox;
 import sudoku.Sudoku;
 
@@ -12,15 +14,17 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Created by Zuzka on 18.3.2016.
+ * Trieda reprezentuje prikaz, ktory zabezpeci zobrazenie vsetkych cisel, ktore sa do aktualneho sudoku daju napisat na
+ * istotu. Najprv overi pocet rieseni a ak ma sudoku aspon jedno a maximalne 5000 rieseni, prejde vsetky z nich a do
+ * vystupnej mriezky zapise pre kazde policko vsetky moznosti cisel, ktore sa v nom mozu objavit.
  */
-public class ShowProgressFast implements Command {
+public class ShowProgress implements Command {
 
     private final Sudoku sudoku;
     private final InfoBox infoBox;
     private final List<List<Set<Integer>>> numbers;
 
-    public ShowProgressFast(Sudoku sudoku, InfoBox infoBox) {
+    public ShowProgress(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
         this.numbers = new ArrayList<>(9);

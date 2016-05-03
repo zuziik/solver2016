@@ -1,5 +1,6 @@
-package commands;
+package commands.basic;
 
+import commands.Command;
 import graphics.stages.ConfigurationStage;
 import javafx.stage.Stage;
 
@@ -10,6 +11,9 @@ public class NewSudokuCommand implements Command {
 
     private final Stage oldStage;
 
+    /**
+     * @param stage odkaz na aktualne okno, ktore sa ma zamenit za pracovne okno so sudoku
+     */
     public NewSudokuCommand(Stage stage) {
         this.oldStage = stage;
     }

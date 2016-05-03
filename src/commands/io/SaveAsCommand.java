@@ -1,5 +1,6 @@
-package commands;
+package commands.io;
 
+import commands.Command;
 import graphics.InfoBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,6 +18,11 @@ public class SaveAsCommand implements Command {
     private final Stage stage;
     private final InfoBox infoBox;
 
+    /**
+     * @param sudoku odkaz na aktualne sudoku
+     * @param stage odkaz na aktualne okno
+     * @param infoBox odkaz na tabulu, na ktoru sa vypisuju spravy o priebehu programu
+     */
     public SaveAsCommand(Sudoku sudoku, Stage stage, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.stage = stage;

@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class DisjointGroupsGenerator extends SuperGenerator {
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     public DisjointGroupsGenerator(Generator wrapped){
         super(wrapped);
     }

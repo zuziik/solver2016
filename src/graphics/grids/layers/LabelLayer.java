@@ -15,6 +15,10 @@ public class LabelLayer extends GridPane {
     private final int size;
     private final Label[][] labels = new Label[9][9];
 
+    /**
+     * Konstruktor vytvori vrstvu na vykreslovanie cisel v sudoku - vo vystupnej mriezke.
+     * @param size velkost jedneho policka v sudoku
+     */
     public LabelLayer(int size) {
         this.size = size;
         super.setHgap(1);
@@ -34,7 +38,11 @@ public class LabelLayer extends GridPane {
 
     }
 
-    /** Funkcia nastavi policku na pozicii x, y text s cislom alebo moznostami pre cislo */
+    /** Funkcia nastavi policku na pozicii x, y text s cislom alebo moznostami pre cislo
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @param text text, ktory ma byt vpisany do policka - jedno alebo viac cisel
+     */
     public void setText(int x, int y, String text) {
         Label label = labels[x][y];
         label.setText(text);
@@ -47,6 +55,12 @@ public class LabelLayer extends GridPane {
         }
     }
 
+    /**
+     * Funkcia vrati text zapisany na prislusnom policku vystupnej mriezky
+     * @param x x-ova suradnica
+     * @param y y-ova suradnica
+     * @return vrati text zapisany na prislusnom policku vystupnej mriezky
+     */
     public String getText(int x, int y) {
         String text = this.labels[x][y].getText();
         if (text.length() == 1) {

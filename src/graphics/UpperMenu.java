@@ -1,6 +1,9 @@
 package graphics;
 
 import commands.*;
+import commands.basic.*;
+import commands.generate.*;
+import commands.io.*;
 import graphics.stages.MainStage;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -50,6 +53,13 @@ public class UpperMenu extends MenuBar {
     private final MenuItem saveImg = new MenuItem("Save as Image");
     private final MenuItem setTimeout = new MenuItem("Set Timeout");
 
+    /**
+     * Konstruktor vytvori hlavne menu do hlavneho okna
+     * @param root odkaz na aktualne okno
+     * @param mainStage odkaz na hlavne okno
+     * @param sudoku odkaz na aktualne sudoku
+     * @param infoBox odkaz na tabulu na vypis sprav o priebehu programu
+     */
     public UpperMenu( Stage root, MainStage mainStage, Sudoku sudoku, InfoBox infoBox ) {
         this.root = root;
         this.mainStage = mainStage;
@@ -133,7 +143,7 @@ public class UpperMenu extends MenuBar {
         showSolution.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
 
         showProgress.setOnAction(event -> {
-            Command command = new ShowProgressFast(sudoku, infoBox);
+            Command command = new ShowProgress(sudoku, infoBox);
             command.execute();
         });
         showProgress.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));

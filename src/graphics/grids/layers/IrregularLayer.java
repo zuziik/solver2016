@@ -15,6 +15,10 @@ public class IrregularLayer extends GridPane {
     private final Rectangle cells[][] = new Rectangle[9][9];
     private HashMap<Integer,Color> color;
 
+    /**
+     * Konstruktor vytvori vrstvu na zafarbovanie policok v mriezke podla prislusnosti k nepravidelnemu regionu.
+     * @param size velkost jedneho policka v sudoku
+     */
     public IrregularLayer(int size) {
         this.size = size;
 
@@ -45,22 +49,35 @@ public class IrregularLayer extends GridPane {
         color.put(9, Color.rgb(223, 255, 0));
     }
 
-    /** Funkcia zafarbi policko na pozicii x, y farbou regionu i */
+    /** Funkcia zafarbi policko na pozicii x, y farbou regionu i
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @param i poradove cislo regionu
+     */
     public void color(int x, int y, int i) {
         cells[x][y].setFill(color.get(i));
     }
 
-    /** Funkcia zrusi policku na pozicii x, y akukolvek prislusnost k regionu */
+    /** Funkcia zrusi policku na pozicii x, y akukolvek prislusnost k regionu
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     public void setBlank(int x, int y) {
         cells[x][y].setFill(Color.WHITE);
     }
 
-    /** Funkcia vrati true, ak je policko na pozicii x, y sucastou regionu s cislom number */
+    /** Funkcia vrati true, ak je policko na pozicii x, y sucastou regionu s cislom number
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return poradove cislo regionu
+     */
     public boolean isRegion(int x, int y, int number) {
         return cells[x][y].getFill().equals(color.get(number));
     }
 
-    /** Funkcia vrati klon vrstvy s nepravidelnymi regionmi */
+    /** Funkcia vrati klon vrstvy s nepravidelnymi regionmi
+     * @return vrati klon vrstvy s nepravidelnymi regionmi
+     * */
     @Override
     public IrregularLayer clone() {
         IrregularLayer cloned = new IrregularLayer(size);

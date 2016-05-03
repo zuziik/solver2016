@@ -1,5 +1,6 @@
-package commands;
+package commands.io;
 
+import commands.Command;
 import graphics.InfoBox;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
@@ -13,19 +14,27 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Zuzka on 7.3.2016.
+ * Trieda reprezentuje prikaz, ktory vytvori screenshot aktualnej mriezky a ulozi ho do suboru
  */
 public class ExportCommand implements Command {
     Node node;
     Stage stage;
     private final InfoBox infoBox;
 
+    /**
+     * @param node odkaz na aktualne sudoku ako graficky objekt
+     * @param stage odkaz na aktualne okno
+     * @param infoBox odkaz na tabulu, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public ExportCommand(Node node, Stage stage, InfoBox infoBox) {
         this.node = node;
         this.stage = stage;
         this.infoBox = infoBox;
     }
 
+    /**
+     * Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou
+     */
     @Override
     public void execute() {
         WritableImage snapshot = node.snapshot(null, null);

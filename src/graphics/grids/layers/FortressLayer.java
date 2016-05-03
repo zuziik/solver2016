@@ -15,6 +15,10 @@ public class FortressLayer extends GridPane {
     private final Rectangle cells[][] = new Rectangle[9][9];
     private final Color color = Color.GRAY;
 
+    /**
+     * Konstruktor vytvori vrstvu na vykreslovanie policok v pevnosti.
+     * @param size velkost jedneho policka v sudoku
+     */
     public FortressLayer(int size) {
         this.size = size;
 
@@ -29,23 +33,35 @@ public class FortressLayer extends GridPane {
         }
     }
 
-    /** Funkcia nastavi policku na pozicii x, y re gion A-D */
+    /** Funkcia nastavi policku na pozicii x, y region A-D
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     public void color(int x, int y) {
         cells[x][y].setFill(this.color);
         cells[x][y].setOpacity(0.25);
     }
 
-    /** Funkcia zrusi prislusnost policka na pozicii x, y k akemukolvek regionu */
+    /** Funkcia zrusi prislusnost policka na pozicii x, y k akemukolvek regionu
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     public void setBlank(int x, int y) {
         cells[x][y].setOpacity(0);
     }
 
-    /** Funkcia vrati true, ak policko na pozicii x, y patri regionu c */
+    /** Funkcia vrati true, ak policko na pozicii x, y je sucastou pevnosti
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati true, ak policko na pozicii x, y je sucastou pevnosti
+     */
     public boolean isFortress(int x, int y) {
         return cells[x][y].getFill().equals(this.color) && cells[x][y].getOpacity() == 0.25;
     }
 
-    /** Funkcia vrati klon vrstvy s extra regionmi */
+    /** Funkcia vrati klon vrstvy zobrazujucej pevnost
+     * @return vrati klon vrstvy zobrazujucej pevnost
+     */
     @Override
     public FortressLayer clone() {
         FortressLayer cloned = new FortressLayer(size);

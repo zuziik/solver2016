@@ -10,6 +10,9 @@ public abstract class SuperGenerator extends Generator {
 
     private final Generator wrapped;
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     SuperGenerator(Generator wrapped) {
         this.wrapped = wrapped;
     }

@@ -10,13 +10,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Zuzka on 5.4.2016.
+ * Trieda reprezentuje vrstvu mriezky zobrazujucu susledne bodky.
  */
 public class ConsecutiveLayer extends GridPane {
     private final int size;
     private final Circle cells[][] = new Circle[17][17];
     private final Rectangle padding;
 
+    /**
+     * Konstruktor vytvori vrstvu na vykreslovanie suslednych bodiek v sudoku.
+     * @param size velkost jedneho policka v sudoku
+     */
     public ConsecutiveLayer(int size) {
         this.size = size;
         super.setHgap(9.49);
@@ -38,6 +42,13 @@ public class ConsecutiveLayer extends GridPane {
         }
     }
 
+    /**
+     * Funkcia zobrazi bodku na pozicii medzi dvomi zadanymi polickami
+     * @param x1 x-ova suradnica prveho policka
+     * @param y1 y-ova suradnica prveho policka
+     * @param x2 x-ova suradnica druheho policka
+     * @param y2 y-ova suradnica druheho policka
+     */
     public void showDot(int x1, int y1, int x2, int y2) {
         if (x1 == x2) {
             setColor(2 * x1, 2 * y1 + 1);
@@ -47,14 +58,27 @@ public class ConsecutiveLayer extends GridPane {
         }
     }
 
+    /**
+     * Funkcia nastavi bodku na pozicii x, y ako viditelnu
+     * @param x x-ova suradnica bodky (0-16)
+     * @param y y-ova suradnica bodky (o-16)
+     */
     public void setColor(int x, int y) {
         this.cells[x][y].setOpacity(1);
     }
 
+    /**
+     * Funkcia nastavi bodku na pozicii x, y ako neviditelnu
+     * @param x x-ova suradnica bodky (0-16)
+     * @param y y-ova suradnica bodky (o-16)
+     */
     public void setBlank(int x, int y) {
         this.cells[x][y].setOpacity(0);
     }
 
+    /**
+     * Funkcia skryje vsetky bodky v mriezke
+     */
     public void hideAllDots() {
         for (int i = 0; i < 17; i++) {
             for (int j = 0; j < 17; j++) {
@@ -63,6 +87,14 @@ public class ConsecutiveLayer extends GridPane {
         }
     }
 
+    /**
+     * Funkcia skontroluje, ci je medzi dvomi polickami vykreslena bodka
+     * @param x1 x-ova suradnica prveho policka
+     * @param y1 y-ova suradnica prveho policka
+     * @param x2 x-ova suradnica druheho policka
+     * @param y2 y-ova suradnica druheho policka
+     * @return vrati true, ak je medzi zadanymi polickami vykreslena bodka
+     */
     public boolean isConsecutive(int x1, int y1, int x2, int y2) {
         if ((x1 < 0) || (y1 < 0)) return false;
         if (x1 == x2) {
@@ -74,6 +106,11 @@ public class ConsecutiveLayer extends GridPane {
         return false;
     }
 
+    /**
+     * Funkcia vrati zoznam vsetkych vykreslenych bodiek v mriezke.
+     * @return vrati zoznam dvojic policok, medzi ktorymi je nakreslena bodka, prve v dvojici je vzdy policko nalavo
+     * alebo hore
+     */
     public List<List<Integer>> getDots() {
         List<List<Integer>> dots = new ArrayList<>();
         for ( int x = 0; x < 9; x++ ) {
@@ -91,6 +128,9 @@ public class ConsecutiveLayer extends GridPane {
         return dots;
     }
 
+    /** Funkcia vrati klon vrstvy so suslednymi bodkami
+     * @return klon vrstvy so suslednymi bodkami
+     */
     @Override
     public ConsecutiveLayer clone() {
         ConsecutiveLayer cloned = new ConsecutiveLayer(size);

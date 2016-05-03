@@ -1,5 +1,6 @@
-package commands;
+package commands.basic;
 
+import commands.Command;
 import generators.*;
 import graphics.grids.InputGrid;
 import graphics.grids.OutputGrid;
@@ -29,6 +30,18 @@ public class CreateCommand implements Command {
     private final List<List<Integer>> numbers;
     private final File file;
 
+    /**
+     * @param numbers mnozina cisel vpisanych do sudoku
+     * @param stage aktualne okno, ktore sa ma zmenit na hlavne
+     * @param types mnozina typov vytvaraneho sudoku
+     * @param irregulars mnozina policok, ktore tvoria nepravidelne regiony
+     * @param extras mnozina policok, ktore tvoria extra regiony
+     * @param fortress mnozina policok, ktore su oznacene ako pevnost
+     * @param evens mnozina policok, ktore su oznacene ako parne
+     * @param odds mnozina policok, ktore su oznacene ako neparne
+     * @param dots mnozina policok, medzi ktorymi je susledna bodka
+     * @param file odkaz na subor, z ktoreho sa sudoku cita
+     */
     public CreateCommand(List<List<Integer>> numbers, Stage stage, Set<Type> types, List<List<List<Integer>>> irregulars,
                          List<List<List<Integer>>> extras, List<List<Integer>> fortress, List<List<Integer>> evens,
                          List<List<Integer>> odds, List<List<Integer>> dots, File file) {

@@ -10,6 +10,10 @@ public class EvenGenerator extends SuperGenerator {
 
     private final List<List<Integer>> cells;
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     * @param cells zoznam policok, ktore maju obsahovat parne cisla
+     */
     public EvenGenerator(Generator wrapped, List<List<Integer>> cells) {
         super(wrapped);
         this.cells = cells;

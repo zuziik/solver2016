@@ -1,6 +1,10 @@
 package main;
 
 import commands.*;
+import commands.basic.HelpCommand;
+import commands.basic.NewSudokuCommand;
+import commands.basic.QuitCommand;
+import commands.io.OpenCommand;
 import graphics.Style;
 import javafx.application.Application;
 import javafx.scene.Scene;

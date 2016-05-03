@@ -1,10 +1,8 @@
 package graphics.stages;
 
 import commands.Command;
-import commands.QuitCommand;
+import commands.basic.QuitCommand;
 import graphics.Style;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 /**
  * Trieda reprezentuje okno s informaciami o aplikacii

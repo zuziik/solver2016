@@ -1,5 +1,6 @@
-package commands;
+package commands.basic;
 
+import commands.Command;
 import graphics.stages.HelpStage;
 
 /**

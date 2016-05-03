@@ -11,6 +11,10 @@ public class DiagonalLayer extends Pane {
     private final Line l1;
     private final Line l2;
 
+    /**
+     * Konstruktor vytvori vrstvu na vykreslovanie dvoch hlavnych uhlopriecok v sudoku.
+     * @param size velkost jedneho policka v sudoku
+     */
     public DiagonalLayer(int size) {
         this.size = size;
         l1 = new Line(0,0,size+8,size+8);
@@ -31,7 +35,9 @@ public class DiagonalLayer extends Pane {
         l2.setOpacity(0);
     }
 
-    /** Funkcia vrati klon vrstvy s hlavnymi diagonalami */
+    /** Funkcia vrati klon vrstvy s hlavnymi diagonalami
+     * @return klon vrstvy s dvomi hlavnymi uhloprieckami
+     */
     @Override
     public DiagonalLayer clone() {
         DiagonalLayer cloned = new DiagonalLayer(this.size);

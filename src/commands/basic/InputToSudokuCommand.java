@@ -1,5 +1,6 @@
-package commands;
+package commands.basic;
 
+import commands.Command;
 import sudoku.Sudoku;
 
 import java.util.Set;
@@ -13,6 +14,9 @@ public class InputToSudokuCommand implements Command {
 
     private final Sudoku sudoku;
 
+    /**
+     * @param sudoku odkaz na aktualne sudoku
+     */
     public InputToSudokuCommand(Sudoku sudoku) {
         this.sudoku = sudoku;
     }

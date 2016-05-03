@@ -1,5 +1,6 @@
-package commands;
+package commands.io;
 
+import commands.Command;
 import graphics.InfoBox;
 import sudoku.Sudoku;
 import sudoku.Type;
@@ -17,6 +18,10 @@ public class SaveCommand implements Command {
     private final Sudoku sudoku;
     private final InfoBox infoBox;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public SaveCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
@@ -46,24 +51,31 @@ public class SaveCommand implements Command {
         StringBuffer t = new StringBuffer();
         Set<Type> types = sudoku.getTypes();
         for ( Type type : types ) {
-            t.append(type+"\n");
+            t.append(type);
+            t.append("\n");
             if ( type.equals(Type.Even) ) {
-                t.append(sudoku.getEvens() + "\n");
+                t.append(sudoku.getEvens());
+                t.append("\n");
             }
             else if ( type.equals(Type.Odd) ) {
-                t.append(sudoku.getOdds() + "\n");
+                t.append(sudoku.getOdds());
+                t.append("\n");
             }
             else if ( type.equals(Type.Irregular) ) {
-                t.append(sudoku.getIrregulars() + "\n");
+                t.append(sudoku.getIrregulars());
+                t.append("\n");
             }
             else if ( type.equals(Type.Fortress) ) {
-                t.append(sudoku.getFortress() + "\n");
+                t.append(sudoku.getFortress());
+                t.append("\n");
             }
             else if ( type.equals(Type.ExtraRegion) ) {
-                t.append(sudoku.getExtras() + "\n");
+                t.append(sudoku.getExtras());
+                t.append("\n");
             }
             else if ( type.equals(Type.Consecutive) ) {
-                t.append(sudoku.getDots() + "\n");
+                t.append(sudoku.getDots());
+                t.append("\n");
             }
         }
         return new String(t);

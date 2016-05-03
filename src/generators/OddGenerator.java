@@ -10,6 +10,10 @@ public class OddGenerator extends SuperGenerator {
 
     private final List<List<Integer>> cells;
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     * @param cells zoznam policok, ktore maju obsahovat neparne cisla
+     */
     public OddGenerator(Generator wrapped, List<List<Integer>> cells) {
         super(wrapped);
         this.cells = cells;

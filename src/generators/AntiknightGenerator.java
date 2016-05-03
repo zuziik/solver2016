@@ -7,6 +7,9 @@ import java.util.ArrayList;
  */
 public class AntiknightGenerator extends SuperGenerator {
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     public AntiknightGenerator(Generator wrapped){
         super(wrapped);
     }

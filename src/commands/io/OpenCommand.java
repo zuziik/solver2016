@@ -1,17 +1,12 @@
-package commands;
+package commands.io;
 
+import commands.Command;
 import graphics.InfoBox;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import sudoku.Sudoku;
-import sudoku.Type;
 
-import javax.sound.midi.MidiDevice;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.util.*;
 
 /**
  * Trieda reprezentuje prikaz, ktory zabezpeci otvorenie sudoku z pouzivatelom vybraneho
@@ -22,6 +17,10 @@ public class OpenCommand implements Command {
     private final Stage stage;
     private final InfoBox infoBox;
 
+    /**
+     * @param stage odkaz na aktualne okno
+     * @param infoBox odkaz na tabulu, na ktoru sa vypisuju spravy o priebehu programu
+     */
     public OpenCommand(Stage stage, InfoBox infoBox){
         this.stage = stage;
         this.infoBox = infoBox;

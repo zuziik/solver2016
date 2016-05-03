@@ -1,5 +1,7 @@
-package commands;
+package commands.generate;
 
+import commands.Command;
+import commands.basic.InputToSudokuCommand;
 import graphics.InfoBox;
 import sudoku.Sudoku;
 
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 20.3.2016.
+ * Trieda reprezentuje prikaz, ktory vygeneruje lubovolne riesenie, ktore splna vsetky podmienky aktualneho sudoku.
  */
 public class GenerateAnySolution implements Command {
 
@@ -16,21 +18,33 @@ public class GenerateAnySolution implements Command {
     private String text;
     private List<List<Integer>> solution;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public GenerateAnySolution(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
         this.text = "";
     }
 
+    /**
+     * Funkcia vrati hlasku o uspechu prikazu
+     * @return vrati retazec popisujuci uspech generovania
+     */
     public String getText() {
         return this.text;
     }
 
+    /**
+     * Funkcia vrati vygenerovane riesenie
+     * @return vrati 2D pole cisel zodpovedajuce rieseniu sudoku
+     */
     public List<List<Integer>> getSolution() {
         return this.solution;
     }
 
-    /** Do riesenia na poziciu x,y vlozi cislo z rozsahu 0-8 podla jedneho cisla premennej z vystupu SAT solvera */
+    /** Funkcia do riesenia na poziciu x,y vlozi cislo z rozsahu 0-8 podla jedneho cisla premennej z vystupu SAT solvera */
     private void insertIntoSolution(String s) {
         int n = Integer.parseInt(s) - 1;
         Integer z = n % 9;
@@ -41,6 +55,9 @@ public class GenerateAnySolution implements Command {
         this.solution.get(x).set(y, z);
     }
 
+    /**
+     * Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou
+     */
     @Override
     public void execute() {
         Command command = new InputToSudokuCommand(sudoku);

@@ -7,6 +7,9 @@ import java.util.ArrayList;
  */
 public class UntouchableGenerator extends SuperGenerator {
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     public UntouchableGenerator(Generator wrapped){
         super(wrapped);
     }

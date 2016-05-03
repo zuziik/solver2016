@@ -34,24 +34,39 @@ public class Generator {
         this.seed = 1;
     }
 
+    /** Funkcia vrati referenciu na vstupny subor, do ktoreho sa ukladaju CNF formuly
+     * @return vrati referenciu na vstupny subor, do ktoreho sa ukladaju CNF formuly
+     */
     public String getInputFile() {
         return this.inputFile;
     }
 
-    /** Funkcia vrati casovy limit generatora */
+    /** Funkcia vrati casovy limit generatora
+     * @return vrati casovy limit generatora
+     */
     public double getTimeLimit() {
         return this.timeLimit;
     }
 
-    /** Funkcia nastavi casovy limit generatora */
+    /** Funkcia nastavi casovy limit generatora
+     * @param timeLimit novy casovy limit generatora
+     * */
     public void setTimeLimit(double timeLimit) {
         this.timeLimit = timeLimit;
     }
 
+    /**
+     * Funkcia nastavi limit poctu opakovani generatora pri generovani noveho sudoku
+     * @param repetitionsLimit novy limit poctu opakovani generatora
+     */
     public void setRepetitionsLimit(int repetitionsLimit) {
         this.repetitionsLimit = repetitionsLimit;
     }
 
+    /**
+     * Funkcia vrati aktualny limit poctu opakovani generatora
+     * @return aktualny limit poctu opakovani generatora
+     */
     public int getRepetitionsLimit() {
         return this.repetitionsLimit;
     }
@@ -61,8 +76,13 @@ public class Generator {
         this.formulas = new ArrayList<>();
     }
 
-    /** Funkcia vrati poziciu policka v zozname 729 premennych (1-729) pre CNF
-     * Pozor, pri indexacii do pola (napriklad possibles) by sme chceli cislo o 1 mensie*/
+    /** Funkcia vrati poziciu policka v zozname 729 premennych (1-729) pre CNF.
+     * Pozor, pri indexacii do pola (napriklad possibles) by sme chceli cislo o 1 mensie
+     * @param x cislo riadku
+     * @param y cislo stlpca
+     * @param z cislo v policku
+     * @return vrati cislo premennej pre zadane parametre
+     */
     int variableNo(int x, int y, int z){
         return 81*x + 9*y + z + 1;
     }
@@ -100,7 +120,9 @@ public class Generator {
         }
     }
 
-    /** Funkcia vygeneruje CNF pre aktualne sudoku a vytvori subor, do ktoreho ich vypise */
+    /** Funkcia vygeneruje CNF pre aktualne sudoku a vytvori subor, do ktoreho ich vypise
+     * @throws IOException
+     */
     public void createFileWithCNF() throws IOException{
         this.generateCNF();
         this.printToFile();
@@ -140,7 +162,9 @@ public class Generator {
     }
 
     /** Funkcia vrati retazec reprezentujuci lubovolne riesenie prislusneho sudoku alebo UNSAT, ak ziadne riesenie
-     * neexistuje, alebo TLE, ak casovy limit generatora vyprsal */
+     * neexistuje, alebo TLE, ak casovy limit generatora vyprsal.
+     * @return vrati vysledok generovania: riesenie, TLE alebo UNSAT
+     */
     public String generateOneSolution() {
         this.SAToutput = new ArrayList<>();
         this.mode = "1";
@@ -160,7 +184,9 @@ public class Generator {
         return SAToutput.get(0);
     }
 
-    /** Funkcia vrati zoznam vsetkych rieseni sudoku. Tato funkcia je volana len v pripade, ze pocet rieseni je 1-5000*/
+    /** Funkcia vrati zoznam vsetkych rieseni sudoku. Tato funkcia je volana len v pripade, ze pocet rieseni je 1-5000
+     * @return vrati zoznam vsetkych rieseni sudoku
+     */
     public List<String> generateAllSolutions() {
         this.SAToutput = new ArrayList<>();
         this.mode = "5000";
@@ -176,7 +202,9 @@ public class Generator {
         return SAToutput;
     }
 
-    /** Funkcia vrati pocet rieseni prislusneho sudoku alebo -1, ak pocas vypoctu vyprsal casovy limit generatora */
+    /** Funkcia vrati pocet rieseni prislusneho sudoku alebo -1, ak pocas vypoctu vyprsal casovy limit generatora
+     * @return vrati pocet rieseni sudoku alebo -1 pri neuspechu
+     */
     public int countSolutions() {
         this.SAToutput = new ArrayList<>();
         this.mode = "c";

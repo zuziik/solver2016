@@ -10,6 +10,10 @@ public class RegionGenerator extends SuperGenerator {
     //zoznam regionov (teda zoznamov policok - dvojic suradnic)
     private final List<List<List<Integer>>> regions;
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     * @param regions zoznam regionov (skupin policok, v ktorych sa cisla nemaju opakovat)
+     */
     public RegionGenerator(Generator wrapped, List<List<List<Integer>>> regions) {
         super(wrapped);
         this.regions = regions;

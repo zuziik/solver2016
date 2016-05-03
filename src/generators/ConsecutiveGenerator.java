@@ -5,17 +5,23 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Zuzka on 5.4.2016.
+ * Trieda reprezentuje generator pre Susledne sudoku
  */
 public class ConsecutiveGenerator extends SuperGenerator {
 
     private final List<List<Integer>> dots;
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     * @param dots mnozina dvojic policok, medzi ktorymi ma byt susledna bodka
+     */
     public ConsecutiveGenerator(Generator wrapped, List<List<Integer>> dots) {
         super(wrapped);
         this.dots = dots;
     }
 
+    /** Funkcia prida do formul podmienku Susledneho sudoku: ak je medzi dvomi polickami vyznacena bodka, cisla v nich
+     * sa musia lisit presne o 1. Vsetky mozne bodky su uz vyznacene, t.j. inde tento pripad nenastane. */
     private void generateConsecutive() {
         for ( int x = 0; x < 9; x++ ) {
             for ( int y = 0; y < 9; y++ ) {
@@ -89,6 +95,9 @@ public class ConsecutiveGenerator extends SuperGenerator {
         }
     }
 
+    /**
+     * Funkcia vygeneruje CNF podla typu sudoku - generatora a prida ich do zoznamu formulas
+     */
     @Override
     public void generateCNF() {
         super.generateCNF();

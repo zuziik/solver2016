@@ -1,5 +1,6 @@
-package commands;
+package commands.basic;
 
+import commands.Command;
 import graphics.InfoBox;
 import graphics.grids.InputGrid;
 import graphics.grids.layers.TextFieldLayer;
@@ -13,6 +14,10 @@ public class ClearCommand implements Command {
     private final Sudoku sudoku;
     private final InfoBox infoBox;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public ClearCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;

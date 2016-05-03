@@ -18,7 +18,9 @@ public class InfoBox extends Label {
         this.givens = "#Givens: 0\n";
     }
 
-    /** Funkcia aktualizuje pocet zadanych cisel v mriezke a vypise to do infoBoxu */
+    /** Funkcia aktualizuje pocet zadanych cisel v mriezke a vypise to do infoBoxu
+     * @param givens pocet zadanych cisel v mriezke
+     */
     public void changeGivens(String givens) {
         this.givens = "#Givens: "+givens+"\n";
         this.update();
@@ -34,7 +36,9 @@ public class InfoBox extends Label {
         super.setText(text);
     }
 
-    /** Funkcia prida vystup generatora do interneho zoznamu a aktualizuje stav infoBoxu */
+    /** Funkcia prida vystup generatora do interneho zoznamu a aktualizuje stav infoBoxu
+     * @param text sprava o priebehu programu
+     */
     public void addInfo(String text) {
         Date date = new Date();
         text = date.toString().substring(11,19)+'\n'+text;

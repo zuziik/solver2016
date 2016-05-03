@@ -1,6 +1,13 @@
 package graphics;
 
 import commands.*;
+import commands.basic.ClearCommand;
+import commands.basic.OutputToInputCommand;
+import commands.generate.*;
+import commands.io.ExportCommand;
+import commands.io.PrintCommand;
+import commands.io.ReloadCommand;
+import commands.io.SaveCommand;
 import graphics.stages.MainStage;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -31,6 +38,13 @@ public class ToolBar extends HBox {
     private final Button deleteConsecutive = new Button("Remove Consecutive");
     private final Button transfer = new Button("<< Transfer");
 
+    /**
+     * Konstruktor vytvori obsluzny panel v hlavnom okne
+     * @param root odkaz na aktualne okno
+     * @param mainStage odkaz na hlavne okno
+     * @param sudoku odkaz na aktualne sudoku
+     * @param infoBox odkaz na tabulu na vypis sprav o priebehu programu
+     */
     public ToolBar( Stage root, MainStage mainStage, Sudoku sudoku, InfoBox infoBox ) {
         this.buttons.getChildren().addAll(clear, save, reload, countSolutions, showSolution, showProgress, generateSudoku,
                 printSudoku, createImg, createConsecutive, deleteConsecutive, transfer);
@@ -83,7 +97,7 @@ public class ToolBar extends HBox {
         });
 
         showProgress.setOnAction(event -> {
-            Command command = new ShowProgressFast(sudoku, infoBox);
+            Command command = new ShowProgress(sudoku, infoBox);
             command.execute();
         });
 

@@ -12,6 +12,10 @@ public class BorderLayer extends GridPane {
     private final int size;
     private final Rectangle[][] borders = new Rectangle[3][3];
 
+    /**
+     * Konstruktor vytvori vrstvu na vykreslovanie okrajov 3x3 stvorcov v sudoku.
+     * @param size velkost 3x3 stvorca v sudoku
+     */
     public BorderLayer(int size) {
         this.size = size;
         for ( int i = 0; i < 3; i++ ) {
@@ -43,7 +47,9 @@ public class BorderLayer extends GridPane {
         }
     }
 
-    /** Funkcia vrati klon vrstvy s okrajmi mriezky */
+    /** Funkcia vrati klon vrstvy s okrajmi mriezky
+     * @return klon vrstvy s okrajmi mriezky
+     */
     @Override
     public BorderLayer clone() {
         if (borders[0][0].getOpacity() == 0) {

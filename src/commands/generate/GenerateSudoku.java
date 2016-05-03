@@ -1,5 +1,7 @@
-package commands;
+package commands.generate;
 
+import commands.Command;
+import commands.basic.InputToSudokuCommand;
 import graphics.InfoBox;
 import sudoku.Sudoku;
 
@@ -7,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zuzka on 20.3.2016.
+ * Trieda reprezentuje prikaz, ktory vygeneruje sudoku s co najmensim poctom rieseni.
+ * Generator doplna cisla do policok oznacenych uzivatelom ako 0 a kontroluje pocet rieseni. Toto sa vykona maximalne
+ * tolko krat, kolko je povolene v konfiguracii a nakoniec vypise najlepsiu moznost (t.j. s najmensim poctom rieseni)
  */
 public class GenerateSudoku implements Command {
     private Sudoku sudoku;
@@ -18,6 +22,10 @@ public class GenerateSudoku implements Command {
     private int bestSolutionCount;
     private int repetitionsCount;    /** kolkokrat ma generator vyskusat nejake riesenie */
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public GenerateSudoku(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
@@ -39,6 +47,9 @@ public class GenerateSudoku implements Command {
         return cloned;
     }
 
+    /**
+     * Funkcia vygeneruje nahodne jedno riesenie aktualneho sudoku, vyskusa zadat len ziadane cisla a spocita riesenia.
+     */
     private void tryOneSolution() {
         /** Vygeneruje nejake riesenie. Ak nenajde ziadne, skonci, inak pokracuje */
         GenerateAnySolution command = new GenerateAnySolution(this.sudoku, null);
@@ -66,6 +77,11 @@ public class GenerateSudoku implements Command {
         }
     }
 
+    /**
+     * Funkcia vygeneruje sudoku s co najmensim poctom rieseni.
+     * Skontroluje, ci mriezka uz nema ziadne alebo jedine riesenie, ci su oznacene nejake cisla na generovanie.
+     * Ak je vsetko v poriadku, zacina generovat tolkokrat, kolko ma nastavene v konfiguracii.
+     */
     private void generateSudoku() {
         for ( int i = 0; i < this.repetitionsCount; i++ ) {
             System.out.println("Trying solution #"+(i+1));
@@ -92,7 +108,9 @@ public class GenerateSudoku implements Command {
         }
     }
 
-
+    /**
+     * Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou
+     */
     @Override
     public void execute() {
         Command command = new InputToSudokuCommand(sudoku);

@@ -32,46 +32,73 @@ public class InputGrid extends Grid {
         super.alignNode(consecutiveLayer);
     }
 
-    /** Funkcia vrati vrstvu nepravidelnych regionov */
+    /**
+     * Funkcia vrati vrstvu nepravidelnych regionov
+     * @return vrati odkaz na vrstvu nepravidelnych regionov
+     */
     public IrregularLayer getIrregularLayer() {
         return this.irregularLayer;
     }
 
-    /** Funkcia vrati vrstvu hlavnych diagonal */
+    /**
+     * Funkcia vrati vrstvu hlavnych diagonal
+     * @return vrati odkaz na vrstvu hlavnych diagonal
+     */
     public DiagonalLayer getDiagonalLayer() {
         return this.diagonalLayer;
     }
 
-    /** Funkcia vrati vrstvu sedych policok pre pevnost */
+    /**
+     * Funkcia vrati vrstvu policok predstavujucich pevnost
+     * @return vrati odkaz na vrstvu policok predstavujucich pevnost
+     */
     public FortressLayer getFortressLayer() {
         return this.fortressLayer;
     }
 
-    /** Funkcia vrati vrstvu extra regionov */
+    /**
+     * Funkcia vrati vrstvu extra regionov
+     * @return vrati odkaz na vrstvu extra regionov
+     */
     public RegionLayer getRegionLayer() {
         return this.regionLayer;
     }
 
-    /** Funkcia vrati paritnu vrstvu */
+    /**
+     * Funkcia vrati paritnu vrstvu
+     * @return vrati odkaz na paritnu vrstvu
+     */
     public ParityLayer getParityLayer() {
         return this.parityLayer;
     }
 
-    /** Funkcia vrati vrstvu okrajov 3x3 stvorcov */
+    /**
+     * Funkcia vrati vrstvu okrajov 3x3 stvorcov
+     * @return vrati odkaz na vrstvu okrajov 3x3 stvorcov
+     */
     public BorderLayer getBorderLayer() {
         return this.borderLayer;
     }
 
-    /** Funkcia vrati vrstvu textovych poli */
+    /**
+     * Funkcia vrati vrstvu textovych poli
+     * @return vrati odkaz na vrstvu textovych poli
+     */
     public TextFieldLayer getTextFieldLayer() {
         return this.textFieldLayer;
     }
 
+    /**
+     * Funkcia vrati odkaz na vrstvu so suslednymi bodkami
+     * @return vrati odkaz na vrstvu suslednych bodiek
+     */
     public ConsecutiveLayer getConsecutiveLayer() {
         return this.consecutiveLayer;
     }
 
-    /** Funkcia vrati zoznam policok s parnymi cislami */
+    /** Funkcia vrati zoznam policok s parnymi cislami
+     * @return vrati zoznam policok s parnymi cislami
+     */
     public List<List<Integer>> getEven() {
         List<List<Integer>> evens = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
@@ -87,7 +114,9 @@ public class InputGrid extends Grid {
         return evens;
     }
 
-    /** Funkcia vrati zoznam policok s neparnymi cislami */
+    /** Funkcia vrati zoznam policok s neparnymi cislami
+     * @return vrati zoznam policok s neparnymi cislami
+     */
     public List<List<Integer>> getOdd() {
         List<List<Integer>> odds = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
@@ -103,6 +132,10 @@ public class InputGrid extends Grid {
         return odds;
     }
 
+    /**
+     * Funkcia vrati zoznam policok, ktore patria pevnosti
+     * @return vrati zoznam policok, ktore su sucastou pevnosti
+     */
     public List<List<Integer>> getFortress() {
         List<List<Integer>> fortress = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
@@ -118,7 +151,9 @@ public class InputGrid extends Grid {
         return fortress;
     }
 
-    /** Funkcia vrati zoznam nepravidelnych regionov */
+    /** Funkcia vrati zoznam nepravidelnych regionov
+     * @return vrati zoznam nepravidelnych regionov (skupin policok, v ktorych sa nemaju opakovat cisla)
+     */
     public List<List<List<Integer>>> getIrregulars() {
         List<List<List<Integer>>> regions = new ArrayList<>();
         boolean empty = true;
@@ -143,7 +178,9 @@ public class InputGrid extends Grid {
         return regions;
     }
 
-    /** Funkcia vrati zoznam extra regionov */
+    /** Funkcia vrati zoznam extra regionov
+     * @return vrati zoznam extra regionov (skupin policok, v ktorych sa nemaju opakovat cisla)
+     */
     public List<List<List<Integer>>> getExtras() {
         List<List<List<Integer>>> regions = new ArrayList<>();
         boolean empty = true;
@@ -168,16 +205,30 @@ public class InputGrid extends Grid {
         return regions;
     }
 
-    /** Funkcia vrati moznosti pre policko na pozicii x, y */
+    /** Funkcia vrati moznosti pre policko na pozicii x, y
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati zoznam moznosti pre policko na pozicii x,y
+     */
     public Set<Integer> getOptions(int x, int y) {
         return this.textFieldLayer.getOptions(x, y);
     }
 
-    /** Funkcia vrati text policka na pozicii x, y */
+    /** Funkcia vrati text policka na pozicii x, y
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati text v policku na pozicii x,y
+     */
     public String getText(int x, int y) {
         return this.textFieldLayer.getText(x, y);
     }
 
+    /**
+     * Funkcia nastavi policku na pozicii x,y text z
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @param z text, ktory sa ma zapisat do policka
+     */
     public void setText(int x, int y, String z) {
         this.textFieldLayer.setText(x,y,z);
     }
@@ -187,6 +238,10 @@ public class InputGrid extends Grid {
         this.textFieldLayer.updateGrid();
     }
 
+    /**
+     * Funkcia vrati jeden graficky objekt reprezentujuci celu vstupnu mriezku
+     * @return vrati jeden graficky objekt reprezentujuci celu vstupnu mriezku
+     */
     public StackPane printImage() {
         StackPane image = new StackPane();
         BorderLayer borderLayer = this.borderLayer.clone();

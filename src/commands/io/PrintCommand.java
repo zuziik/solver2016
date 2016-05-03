@@ -1,5 +1,6 @@
-package commands;
+package commands.io;
 
+import commands.Command;
 import graphics.InfoBox;
 import javafx.print.*;
 import javafx.scene.Node;
@@ -17,7 +18,7 @@ import java.util.Date;
 import java.util.Stack;
 
 /**
- * Created by Zuzka on 7.3.2016.
+ * Trieda reprezentuje prikaz, ktory spusti dialogove okno na vytlacenie aktualnej mriezky sudoku.
  */
 public class PrintCommand implements Command {
 
@@ -25,12 +26,19 @@ public class PrintCommand implements Command {
     private Sudoku sudoku;
     private InfoBox infoBox;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public PrintCommand(Stage stage, Sudoku sudoku, InfoBox infoBox) {
         this.stage = stage;
         this.sudoku = sudoku;
         this.infoBox = infoBox;
     }
 
+    /**
+     * Funkcia vytvori jeden graficky objekt so vsetkymi informaciami urceny na tlac.
+     */
     private Node createNode() {
         VBox vBox = new VBox();
         Label timeStamp = new Label(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));

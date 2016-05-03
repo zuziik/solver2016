@@ -26,6 +26,10 @@ public class TextFieldLayer extends GridPane {
     private Integer givens;
     private InfoBox infoBox;
 
+    /**
+     * Konstruktor vytvori vrstvu na vykreslovanie cisel v sudoku - vo vstupnej mriezke.
+     * @param size velkost jedneho policka v sudoku
+     */
     public TextFieldLayer(int size, InputGrid inputGrid) {
         this.inputGrid = inputGrid;
         this.size = size;
@@ -47,7 +51,9 @@ public class TextFieldLayer extends GridPane {
         this.setInputHandlers();
     }
 
-    /** Funkcia nastavi vrstve referenciu na infoBox */
+    /** Funkcia nastavi vrstve referenciu na infoBox
+     * @param infoBox referencia na tabulu na vypis sprav o priebehu programu
+     */
     public void setInfoBox(InfoBox infoBox) {
         this.infoBox = infoBox;
     }
@@ -62,7 +68,10 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
-    /** Funkcia nastavi textovemu polu na pozicii x, y spravanie pre konfigurovanie mriezky a nastavenie typov */
+    /** Funkcia nastavi textovemu polu na pozicii x, y spravanie pre konfigurovanie mriezky a nastavenie typov
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     private void setSettingsHandler(int x, int y) {
 
         textFields[x][y].setOnKeyPressed(event -> {
@@ -101,7 +110,10 @@ public class TextFieldLayer extends GridPane {
 
     /** Funkcia aktualizuje mriezku podla zadanych hodnot - prefarbi policka podla ich prislusnosti k regionom a oznaci
      * ich kruzkami, ak boli oznacene ako parne ci neparne. Okrem toho funkcia zabezpeci, ze v textovych poliach budu
-     * len relevantne znaky (najviac jeden z 1-9, najviac jeden z A-D a najviac jeden z E,O */
+     * len relevantne znaky (najviac jeden z 1-9, najviac jeden z A-D a najviac jeden z E,O
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     private void changeGrid(int x, int y) {
         TextField textField = textFields[x][y];
 
@@ -123,7 +135,10 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
-    /** Funkcia nastavi spravanie pri generovani pre konkretne textove pole */
+    /** Funkcia nastavi spravanie pri generovani pre konkretne textove pole
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     private void setInputHandler(int x, int y) {
         textFields[x][y].setOnKeyPressed(event -> {
             TextField up = textFields[(x+8)%9][y];
@@ -157,7 +172,7 @@ public class TextFieldLayer extends GridPane {
         int nulls = 0;
         for ( int i = 0; i < 9; i++ ) {
             for ( int j = 0; j < 9; j++ ) {
-                filterText(i,j);
+                filterText(i, j);
                 String txt = textFields[i][j].getText();
                 if (!txt.equals("") && !txt.equals("0")) {
                     givens++;
@@ -175,7 +190,11 @@ public class TextFieldLayer extends GridPane {
         }
     }
 
-    /** Funkcia aktualizuje vrstvu nepravidelnych regionov podla obsahu policka */
+    /** Funkcia aktualizuje vrstvu nepravidelnych regionov podla obsahu policka
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati poradove cislo regionu, ktoremu policko prislucha, alebo "", ak ziadnemu
+     */
     private String changeIrregular(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -195,7 +214,11 @@ public class TextFieldLayer extends GridPane {
         return irregular;
     }
 
-    /** Funkcia aktualizuje vrstvu extra regionov podla obsahu policka */
+    /** Funkcia aktualizuje vrstvu extra regionov podla obsahu policka
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati poradove pismeno regionu, ktoremu policko prislucha, alebo "", ak ziadnemu
+     */
     private String changeRegions(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -215,7 +238,11 @@ public class TextFieldLayer extends GridPane {
         return extraRegions;
     }
 
-    /** Funkcia aktualizuje paritnu vrstvu podla obsahu policka */
+    /** Funkcia aktualizuje paritnu vrstvu podla obsahu policka
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati E/O, ak je policko parne/neparne, inak vrati ""
+     */
     private String changeParity(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -236,6 +263,12 @@ public class TextFieldLayer extends GridPane {
         return parity;
     }
 
+    /**
+     * Funkcia aktualizuje vrstvu predstavujucu pevnost podla obsahu policka
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati X, ak je policko sucastou pevnosti, inak vrati ""
+     */
     private String changeFortress(int x, int y) {
         TextField textField = textFields[x][y];
         String text = textField.getText();
@@ -251,7 +284,10 @@ public class TextFieldLayer extends GridPane {
         return fortress;
     }
 
-    /** Funkcia zabezpeci, ze v policku sa bude nachadzat maximalne jedno z cisel 1-9 */
+    /** Funkcia zabezpeci, ze v policku sa bude nachadzat maximalne jedno z cisel 1-9
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     */
     private void filterText(int x, int y) {
         TextField text = textFields[x][y];
         String s = "";
@@ -263,7 +299,11 @@ public class TextFieldLayer extends GridPane {
         text.setText(s);
     }
 
-    /** Funkcia vrati zoznam moznosti v rozsahu 0-8 pre konkretne policko na pozicii x, y */
+    /** Funkcia vrati zoznam moznosti v rozsahu 0-8 pre konkretne policko na pozicii x, y
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return vrati zoznam moznosti cisel pre zadane policko
+     */
     public Set<Integer> getOptions(int x, int y) {
         Set<Integer> options = new TreeSet<>();
         String text = textFields[x][y].getText();
@@ -282,6 +322,10 @@ public class TextFieldLayer extends GridPane {
         return options;
     }
 
+    /**
+     * Funkcia vrati zoznam policok, do ktorych pouzivatel vpisal cislo 0 - teda policok urcenych na generovanie
+     * @return vrati zoznam policok, do ktorych sa maju dogenerovat cisla
+     */
     public List<List<Integer>> getZeros() {
         List<List<Integer>> zeros = new ArrayList<>();
         for ( int i = 0; i < 9; i++ ) {
@@ -298,21 +342,34 @@ public class TextFieldLayer extends GridPane {
         return zeros;
     }
 
-    /** Funkcia vrati obsah policka na pozicii x, y */
+    /** Funkcia vrati obsah policka na pozicii x, y
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @return obsah policka na suradniciach x,y
+     */
     public String getText(int x, int y) {
         return textFields[x][y].getText();
     }
 
-    /** Funkcia nastavi policku na pozicii x, y prislusny text*/
+    /** Funkcia nastavi policku na pozicii x, y prislusny text
+     * @param x x-ova suradnica policka
+     * @param y y-ova suradnica policka
+     * @param text text, ktory sa ma zapisat do policka na suradniciach x,y
+     * */
     public void setText(int x, int y, String text) {
         this.textFields[x][y].setText(text);
     }
 
-    /** Funkcia vrati referenciu na zoznam textovych poli */
+    /** Funkcia vrati referenciu na zoznam textovych poli
+     * @return vrati referenciu na 2D zoznam textovych poli pre kazde policko vo vstupnej mriezke
+     */
     public TextField[][] getTextFields() {
         return this.textFields;
     }
 
+    /** Funkcia vrati klon vrstvy s cislami pre vstupnu mriezku
+     * @return klon vrstvy s cislami pre vstupnu mriezku
+     */
     @Override
     public TextFieldLayer clone() {
         TextFieldLayer cloned = new TextFieldLayer(this.size, this.inputGrid);

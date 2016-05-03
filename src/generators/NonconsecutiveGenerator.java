@@ -7,6 +7,9 @@ import java.util.ArrayList;
  */
 public class NonconsecutiveGenerator extends SuperGenerator {
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     public NonconsecutiveGenerator(Generator wrapped){
         super(wrapped);
     }

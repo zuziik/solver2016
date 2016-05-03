@@ -1,8 +1,9 @@
-package commands;
+package commands.generate;
 
+import commands.Command;
+import commands.basic.InputToSudokuCommand;
 import graphics.InfoBox;
 import sudoku.Sudoku;
-import java.util.Date;
 
 /**
  * Trieda reprezentuje prikaz, ktory zabezpeci zobrazenie lubovolneho riesenia aktualneho
@@ -13,6 +14,10 @@ public class ShowSolutionCommand implements Command {
     private final Sudoku sudoku;
     private final InfoBox infoBox;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public ShowSolutionCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;

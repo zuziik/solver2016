@@ -1,5 +1,7 @@
-package commands;
+package commands.generate;
 
+import commands.Command;
+import commands.basic.InputToSudokuCommand;
 import generators.ConsecutiveGenerator;
 import generators.Generator;
 import graphics.InfoBox;
@@ -12,7 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Zuzka on 5.4.2016.
+ * Trieda reprezentuje prikaz, ktory do existujuceho sudoku vykresli vsetky susledne bodkz (oznaci vsetky dvojice
+ * susediacich cisel, ktore sa lisia presne o 1)
  */
 public class CreateConsecutiveCommand implements Command {
 
@@ -21,6 +24,11 @@ public class CreateConsecutiveCommand implements Command {
     private List<List<Set<Integer>>> numbers;
     private MainStage root;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     * @param root odkaz na hlavne okno
+     */
     public CreateConsecutiveCommand(Sudoku sudoku, InfoBox infoBox, MainStage root) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
@@ -28,6 +36,10 @@ public class CreateConsecutiveCommand implements Command {
         this.root = root;
     }
 
+    /**
+     * Funkcia skontroluje, ci je aktualna mriezka celkom vyplnena.
+     * @return vrati true, ak su vyplnene vsetky policka aktualnej mriezky
+     */
     public boolean checkFullGrid() {
         for (List<Set<Integer>> row : numbers) {
             for (Set<Integer> cell : row) {
@@ -50,6 +62,9 @@ public class CreateConsecutiveCommand implements Command {
         return z;
     }
 
+    /**
+     * Funkcia zabezpeci vykonanie prikazu, ktory je reprezentovany danou triedou
+     */
     @Override
     public void execute() {
         Command command = new InputToSudokuCommand(sudoku);

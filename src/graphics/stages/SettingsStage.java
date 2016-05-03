@@ -1,7 +1,7 @@
 package graphics.stages;
 
 import commands.Command;
-import commands.QuitCommand;
+import commands.basic.QuitCommand;
 import graphics.Style;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -74,29 +74,17 @@ public class SettingsStage {
         });
         Style.setButtonStyle(ok, 420);
 
-        slider1.setOnMouseClicked(event -> {
-            this.updateInfo();
-        });
+        slider1.setOnMouseClicked(event -> this.updateInfo());
 
-        slider1.setOnMouseReleased(event -> {
-            this.updateInfo();
-        });
+        slider1.setOnMouseReleased(event -> this.updateInfo());
 
-        slider1.setOnKeyReleased(event -> {
-            this.updateInfo();
-        });
+        slider1.setOnKeyReleased(event -> this.updateInfo());
 
-        slider2.setOnMouseClicked(event -> {
-            this.updateInfo();
-        });
+        slider2.setOnMouseClicked(event -> this.updateInfo());
 
-        slider2.setOnMouseReleased(event -> {
-            this.updateInfo();
-        });
+        slider2.setOnMouseReleased(event -> this.updateInfo());
 
-        slider2.setOnKeyReleased(event -> {
-            this.updateInfo();
-        });
+        slider2.setOnKeyReleased(event -> this.updateInfo());
 
         pane.setTop(new Label("Set Timeout for the generator (in secs):"));
         pane.setCenter(this.vBox);

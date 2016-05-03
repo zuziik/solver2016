@@ -1,5 +1,7 @@
-package commands;
+package commands.io;
 
+import commands.Command;
+import commands.basic.CreateCommand;
 import graphics.InfoBox;
 import javafx.stage.Stage;
 import sudoku.Type;
@@ -28,6 +30,11 @@ public class ReloadCommand implements Command {
     private final File selectedFile;
     private final InfoBox infoBox;
 
+    /**
+     * @param stage odkaz na aktualne okno
+     * @param selectedFile odkaz na subor, z ktoreho sa ma nacitat sudoku
+     * @param infoBox odkaz na tabulu, na ktoru sa vypisuju spravy o priebehu programu
+     */
     public ReloadCommand(Stage stage, File selectedFile, InfoBox infoBox){
         this.stage = stage;
         this.selectedFile = selectedFile;

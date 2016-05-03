@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class DiagonalGenerator extends SuperGenerator {
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     public DiagonalGenerator(Generator wrapped){
         super(wrapped);
     }

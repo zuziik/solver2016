@@ -1,7 +1,7 @@
 package graphics.stages;
 
 import commands.Command;
-import commands.CreateCommand;
+import commands.basic.CreateCommand;
 import graphics.Style;
 import graphics.grids.InputGrid;
 import javafx.scene.Scene;

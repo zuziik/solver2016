@@ -1,9 +1,9 @@
-package commands;
+package commands.generate;
 
+import commands.Command;
+import commands.basic.InputToSudokuCommand;
 import graphics.InfoBox;
 import sudoku.Sudoku;
-
-import java.util.Date;
 
 /**
  * Trieda reprezentuje prikaz, ktory spocita riesenia konkretneho sudoku
@@ -14,11 +14,19 @@ public class CountSolutionsCommand implements Command {
     private final Sudoku sudoku;
     private int count;
 
+    /**
+     * @param sudoku aktualne sudoku
+     * @param infoBox tabula, na ktoru sa vypisuju hlasky o cinnosti
+     */
     public CountSolutionsCommand(Sudoku sudoku, InfoBox infoBox) {
         this.sudoku = sudoku;
         this.infoBox = infoBox;
     }
 
+    /**
+     * Funkcia vrati pocet rieseni sudoku
+     * @return pocet rieseni aktualneho sudoku
+     */
     public int getCount() {
         return this.count;
     }

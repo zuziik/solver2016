@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class ClassicGenerator extends SuperGenerator {
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     */
     public ClassicGenerator(Generator wrapped){
         super(wrapped);
     }

@@ -5,17 +5,23 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Zuzka on 8.3.2016.
+ * Trieda reprezentuje generator pre Fortress sudoku
  */
 public class FortressGenerator extends SuperGenerator {
 
     private final List<List<Integer>> cells;
 
+    /**
+     * @param wrapped odkaz na vnoreny generator
+     * @param cells zoznam policok, ktore su oznacene ako sucast pevnosti
+     */
     public FortressGenerator(Generator wrapped, List<List<Integer>> cells) {
         super(wrapped);
         this.cells = cells;
     }
 
+    /** Funkcia prida do formul podmienku Fortress sudoku: ak hocikde v mriezke ortogonalne susedi policko oznacene ako
+     * pevnost (sede) a policko mimo pevnosti (biele), potom cislo v sedom policku musi byt vacsie */
     private void generateFortress() {
         for ( List<Integer> cell : cells ) {
             int x = cell.get(0);
