@@ -94,8 +94,11 @@ public class SaveCommand implements Command {
             out.close();
             this.infoBox.addInfo("Sudoku saved");
         }
+        catch (NullPointerException e) {
+            this.infoBox.addInfo("Default file not set");
+        }
         catch(IOException e){
-            System.err.println("File not found");
+            this.infoBox.addInfo("File not found");
         }
 
     }

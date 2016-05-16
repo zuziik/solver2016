@@ -159,7 +159,6 @@ public class Generator {
             /** Vytvorenie a spustenie procesu pre generovanie CNF pomocou SAT solvera relsat */
 
             String OS = System.getProperty("os.name").toLowerCase();
-            System.out.println(OS);
             String relsat = "";
             Process p = null;
             if (OS.contains("windows")) {

@@ -225,6 +225,11 @@ public class ReloadCommand implements Command {
      */
     @Override
     public void execute() {
-        createLists(selectedFile);
+        if (selectedFile == null) {
+            this.infoBox.addInfo("Default file not set");
+        }
+        else {
+            createLists(selectedFile);
+        }
     }
 }
