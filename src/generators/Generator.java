@@ -26,7 +26,8 @@ public class Generator {
     private ArrayList<String> SAToutput;    // cely vystup generatora
 
     Generator() {
-        this.inputFile = "files/formulas.txt";
+        this.inputFile = "formulas.txt";
+        //this.inputFile = "files/formulas.txt";
         this.outputFile = this.inputFile;
         this.timeLimit = 5;
         this.repetitionsLimit = 50;
@@ -128,21 +129,68 @@ public class Generator {
         this.printToFile();
     }
 
+    private void copyRelsat(String fileName) {
+        //gets program.exe from inside the JAR file as an input stream
+        InputStream is = null;
+        try {
+            //is = getClass().getResource("/relsat.exe").openStream();
+            is = getClass().getResource("/" + fileName).openStream();
+
+            //sets the output stream to a system folder
+            OutputStream os = new FileOutputStream(fileName);
+
+            byte[] b = new byte[2048];
+            int length;
+
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+
+            is.close();
+            os.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private boolean generate() {
         try {
             /** Vytvorenie a spustenie procesu pre generovanie CNF pomocou SAT solvera relsat */
-            Process p = Runtime.getRuntime().exec("cmd /C relsat.exe" + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
+
+            String OS = System.getProperty("os.name").toLowerCase();
+            System.out.println(OS);
+            String relsat = "";
+            Process p = null;
+            if (OS.contains("windows")) {
+                relsat = "relsat.exe";
+                this.copyRelsat(relsat);
+                p = Runtime.getRuntime().exec("cmd /C " + relsat + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
+            } else if (OS.contains("linux")) {
+                relsat = "relsat";
+                this.copyRelsat(relsat);
+                Process chmod = Runtime.getRuntime().exec("cmd chmod u+x relsat");
+                p = Runtime.getRuntime().exec(relsat + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
+            }
+
+            //Process p = Runtime.getRuntime().exec("cmd /C relsat.exe" + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
+            //Process p = Runtime.getRuntime().exec("cmd /C " + relsat + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
 
             /** Vypis vystupu SAT solvera na vystup a ulozenie do premennej SAToutput*/
+            PrintWriter os = new PrintWriter("output.txt");
+
             String line;
             while ((line = in.readLine()) != null) {
                 //System.out.println(line);
+                os.write(line);
                 if (line.charAt(0) != 'c'){
                     SAToutput.add(line);
                 }
             }
+
+            os.close();
             return SAToutput.get(SAToutput.size()-1).equals("TIME LIMIT EXPIRED");
         } catch (IOException e) {
             e.printStackTrace();

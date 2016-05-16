@@ -32,7 +32,9 @@ public class OpenCommand implements Command {
     @Override
     public void execute() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("files/sudoku"));
+        String path = getClass().getResource("/files").getPath();
+        //fileChooser.setInitialDirectory(new File(path));
+        //fileChooser.setInitialDirectory(new File("files/sudoku"));
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().add(
                 new ExtensionFilter("Text Files", "*.txt"));

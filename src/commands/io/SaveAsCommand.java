@@ -35,7 +35,9 @@ public class SaveAsCommand implements Command {
     @Override
     public void execute() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("files/sudoku"));
+        String path = getClass().getResource("/files").getPath();
+        //fileChooser.setInitialDirectory(new File(path));
+        //fileChooser.setInitialDirectory(new File("files/sudoku"));
         fileChooser.setTitle("Save File As");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"));

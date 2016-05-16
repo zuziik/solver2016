@@ -41,7 +41,7 @@ public class Main extends Application {
         pane.setPrefHeight(width);
         pane.setPrefWidth(width);
 
-        Image image = new Image(getClass().getResourceAsStream("../images/sudoku.png"));
+        Image image = new Image(getClass().getResourceAsStream("/sudoku.png"));
         BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         Background background = new Background(backgroundImage);
         pane.setBackground(background);

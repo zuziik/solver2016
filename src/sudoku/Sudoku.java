@@ -45,7 +45,8 @@ public class Sudoku {
                 }
             }
         }
-        this.file = new File("files/sudoku/default.txt");
+        this.file = new File(getClass().getResource("/files/default.txt").getPath());
+        //this.file = new File("files/sudoku/default.txt");
     }
 
     public void setGeneratorOriginal(Generator generator) {
