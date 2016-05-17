@@ -40,9 +40,6 @@ public class ExportCommand implements Command {
         WritableImage snapshot = node.snapshot(null, null);
         FileChooser fileChooser = new FileChooser();
 
-        String path = getClass().getResource("/images").getPath();
-        //fileChooser.setInitialDirectory(new File(path));
-        //fileChooser.setInitialDirectory(new File("files/images"));
         fileChooser.setTitle("Save Image As");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));

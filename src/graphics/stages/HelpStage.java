@@ -28,7 +28,8 @@ public class HelpStage {
 
     /** Funkcia precita informacie o aplikacii zo suboru prislusneho jazyka */
     private String readHelp() {
-        String file = "files/help"+lang.getText()+".txt";
+        //String file = "help"+lang.getText()+".txt";
+        String file = getClass().getResource("/help" + lang.getText() + ".txt").getPath();
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(file)));
             String content = "";

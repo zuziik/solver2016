@@ -268,6 +268,7 @@ public class Generator {
         if (SAToutput.get(0).equals("UNSAT")) {
             return 0;
         }
+
         String s = SAToutput.get(SAToutput.size()-2);
         int index = s.indexOf(":");
         return Integer.parseInt(s.substring(index+2));
