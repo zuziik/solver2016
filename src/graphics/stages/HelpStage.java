@@ -10,10 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 
 /**
  * Trieda reprezentuje okno s informaciami o aplikacii
@@ -28,10 +25,15 @@ public class HelpStage {
 
     /** Funkcia precita informacie o aplikacii zo suboru prislusneho jazyka */
     private String readHelp() {
-        //String file = "help"+lang.getText()+".txt";
-        String file = getClass().getResource("/help" + lang.getText() + ".txt").getPath();
+        String file = "/help"+lang.getText()+".txt";
+        //String file = getClass().getResource("/help" + lang.getText() + ".txt").getPath();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(file)));
+            //BufferedReader br = new BufferedReader(new FileReader(new File(file)));
+
+            InputStream is = getClass().getResourceAsStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+
             String content = "";
             String row = br.readLine();
             while (row != null) {

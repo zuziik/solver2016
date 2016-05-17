@@ -37,5 +37,6 @@ public class ClearCommand implements Command {
             }
         }
         this.infoBox.addInfo("Grid cleared");
+        this.infoBox.changeGivens("0");
     }
 }

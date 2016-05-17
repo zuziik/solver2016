@@ -168,12 +168,11 @@ public class Generator {
             } else if (OS.contains("linux")) {
                 relsat = "relsat";
                 this.copyRelsat(relsat);
-                Process chmod = Runtime.getRuntime().exec("cmd chmod u+x relsat");
-                p = Runtime.getRuntime().exec(relsat + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
+                Process chmod = Runtime.getRuntime().exec("chmod u+x ./relsat");
+                p = Runtime.getRuntime().exec("./" + relsat + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
             }
 
             //Process p = Runtime.getRuntime().exec("cmd /C relsat.exe" + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
-            //Process p = Runtime.getRuntime().exec("cmd /C " + relsat + " -#" + mode + " -s" + seed + " -t" + timeLimit + " " + inputFile);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
 
