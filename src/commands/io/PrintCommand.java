@@ -42,7 +42,10 @@ public class PrintCommand implements Command {
     private Node createNode() {
         VBox vBox = new VBox();
         Label timeStamp = new Label(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        Label filePath = new Label(this.sudoku.getFile().getPath());
+        Label filePath = new Label();
+        if (this.sudoku.getFile() != null) {
+            filePath = new Label(this.sudoku.getFile().getPath());
+        }
         Label types = new Label(this.sudoku.getTypesText());
         Node node = sudoku.getInputGrid().printImage();
         vBox.getChildren().addAll(types, timeStamp, filePath, node);
