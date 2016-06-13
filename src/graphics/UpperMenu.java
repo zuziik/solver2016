@@ -45,8 +45,8 @@ public class UpperMenu extends MenuBar {
     private final MenuItem showProgress = new MenuItem("Show Progress");
     private final MenuItem countSolutions = new MenuItem("Count Solutions");
     private final MenuItem generateSudoku = new MenuItem("Generate Sudoku");
-    private final MenuItem createConsecutive = new MenuItem("Create Consecutive");
-    private final MenuItem deleteConsecutive = new MenuItem("Delete Consecutive");
+    private final MenuItem createConsecutive = new MenuItem("Show Consecutive");
+    private final MenuItem deleteConsecutive = new MenuItem("Remove Consecutive");
     private final MenuItem transfer = new MenuItem("<< Transfer");
     private final MenuItem clear = new MenuItem("Clear Input");
     private final MenuItem print = new MenuItem("Print Sudoku");
@@ -123,7 +123,7 @@ public class UpperMenu extends MenuBar {
             Command command = new QuitCommand(root);
             command.execute();
         });
-        quit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
+        quit.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN));
     }
 
     /** Funkcia nastavi spravanie polozkam menu Generate */
